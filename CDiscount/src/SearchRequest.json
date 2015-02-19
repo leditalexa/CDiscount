@@ -1,0 +1,25 @@
+{
+	"ApiKey": "353d5767-ead3-415d-81ee-d4bb5454bc5f",
+	"SearchRequest":
+	{
+		"Filters":
+		{
+			"Brands": [],
+			"Condition": null,
+			"IncludeMarketPlace": false,
+			"Navigation": null,
+			"Price":
+			{
+				"Max": 0,
+				"Min": 0
+			}
+		},
+		"Keyword": "",
+		"Pagination":
+		{
+			"ItemsPerPage": 10,
+			"PageNumber": 0
+		},
+		"SortBy": "relevance"
+	}
+}
