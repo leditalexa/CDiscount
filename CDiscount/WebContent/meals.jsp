@@ -35,10 +35,12 @@
 				
 				<input type="button" value="{{locale_string.SEARCH_ACTION}}" 
 					ng-click="search()"/>
+					
+				
 			</p>	
 			
 			<div id="mealideas">
-		
+				{{mymeal}}
 			</div>
 		
 
@@ -56,11 +58,15 @@
 					{{meal.title}}<br/>
 					{{meal.desc}}
 				</p>
+				<p>
+				<img src="{{meal.pictures[0].url}}" />
+				</p>
 				<p ng-click="goToWines($index)">
 					{{locale_string.SEE_WINES}}
 				</p>
 				<p>
-					{{locale_string.GO_TO_RECIPE}} <a href="{{meal.url}}">{{locale_string.URL_RECIPE}}</a>
+					{{locale_string.GO_TO_RECIPE}}
+					 <a ng-click="goToRecipe(meal)">{{locale_string.URL_RECIPE}}</a>
 				</p>
 			
 				

@@ -57,19 +57,39 @@ var app = angular.module("BestWinesApp", ["ngResource"])
 	$scope.rows = 2;
 	$scope.mealsByRow = 4;
 	
+	$scope.getTrials = function(url){
+		$http.get(url).success(function(data){
+			console.log("data.data.items : ");
+			console.log(data.data.items);
+			$scope.trials = data.data.items;
+		}).error(function (data){
+			
+		});
+	};	
 	
 	translationService.getTranslation($scope, lang); 
 	
-	$scope.mymeal = $location.search().search;
+	//$scope.mymeal = $location.search().search;
 	
-
+	$scope.mymeal = encodeURIComponent("rouge sec");
 	$scope.meals = [];
-	$scope.trials = $scope.exemples;
+	$scope.trials = [];   //encodeURIComponent($scope.mymeal));
 		
+	$scope.goToRecipe = function(meal){
+		$window.location.href = "http://www.marmiton.org/recettes/recette_"+(meal.title.replace(" ","_"))+"_"+meal.id+".aspx";
+	};
 	
 	
 	$scope.search = function(){
-		$scope.meals = $scope.trial;
+		
+		
+		
+		$scope.getTrials(home_url+"rest/recipe/find/"+$scope.mymeal) ;
+		console.log("tutut:");
+		console.log($scope.trials);
+		
+		
+		console.log("trials :"+$scope.trials); 
 	};
 	
 	
