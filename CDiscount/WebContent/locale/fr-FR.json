@@ -1,0 +1,22 @@
+{
+	"APP_NAME"         : "BestWines",
+	"HOME"             : "Accueil",
+	"LOGIN"            : "Identifiant",
+	"PASSWORD"         : "Mot de passe",
+	"PASSWORD_CONFIRM" : "Confirmer le mot de passe",
+	"TO_LOG_IN"        : "Se connecter",
+	"TO_SIGN_UP"       : "S'inscrire",
+	"CANCEL"           : "Annuler",
+	"YOUR_AGE"         : "Votre age",
+	"ZIP_CODE"         : "Code postal",
+	"SEARCH_MEAL"      : "Quel plat recherchez-vous ?",
+	"SEARCH_ACTION"     : "Rechercher",
+	"GO_TO_RECIPE"     : "Voir la recette sur",
+	"URL_RECIPE"       : "Marmiton.org",
+	"SEE_WINES"        : "Voir les vins pour cette recette.",
+	
+	
+	"YOUR_MEAL_IDEA"  : "Vous avez un plat en tête ?",
+	"MEALS_TRIALS"     : "Votre plat",
+	"MEALS_HIGHLISTS"  : "Avez-vous essayé ces plats ?"
+}

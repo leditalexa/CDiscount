@@ -1,0 +1,60 @@
+body{
+	background-color: white;
+	heigth : 100%;
+	width : 100%;
+}
+
+
+form .text{
+	width: 49%;
+	float: right;
+}
+
+form .buttons{
+	width : 100%;
+	padding : auto;
+	margin : auto; 
+	display : inline-block;
+	text-align : center;
+}
+
+
+.meal{
+	width : 300px;
+	height : 150px;
+	border:2px dotted black;
+	margin : 1%;
+	float:left;
+}
+
+
+
+
+
+
+
+#login_layout{
+	width:300px;
+	
+	margin-top : 10%;
+	margin-left: 15%;
+	
+	padding : 2%;
+
+	border: 1px solid black;
+	
+}
+
+#signup_layout{
+	width:400px;
+	
+	margin-top : 10%;
+	margin-left: 15%;
+	
+	padding : 1%;
+
+	border: 1px solid black;
+	
+}
+
+
