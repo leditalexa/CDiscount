@@ -18,16 +18,69 @@ form .buttons{
 	text-align : center;
 }
 
-
-.meal{
-	width : 300px;
-	height : 150px;
-	border:2px dotted black;
-	margin : 1%;
-	float:left;
+.title{
+	text-align: center;
 }
 
+.meal{
+	/* position: relative; */
+/* 	margin: 1px;
+ 	height: 250px;
+	border: 1px solid grey; */
+}
+.img-ico{
 
+	position :relative;
+	/* -webkit-filter: blur(1px);
+           -moz-filter: blur(1px);
+            -ms-filter: blur(1px);
+             -o-filter: blur(1px);
+                filter: blur(1px); */
+}
+
+.img-ico img{
+	width: 195px; /* 162 , 188 , 239*/
+}
+
+.description{
+	display: none;
+}
+
+.img-ico:hover .description{
+  background:rgba(0,0,0,0.8);
+  width: 195px;
+  height: 145px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	color: white;
+	display: block;
+}
+
+.desc{
+	padding: 5px;
+	text-align: center;
+}
+
+.cutlery{
+	margin: 2px;
+}
+
+.block{
+	display: inline-block;
+}
+
+.no-padding{
+	padding: 0px !important;
+}
+
+.head{
+	padding-bottom: 10px;
+}
+
+.content{
+	padding-top: 5%;
+}
 
 
 
@@ -56,5 +109,22 @@ form .buttons{
 	border: 1px solid black;
 	
 }
+
+.ico-button{
+	border-radius: 50%;
+}
+
+.ico-button .fa:hover{
+	font-height: 30px;
+}
+
+
+
+.rounded-input{
+	border-radius: 40px;
+}
+
+
+
 
 
