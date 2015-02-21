@@ -10,13 +10,16 @@
 	"YOUR_AGE"         : "Votre age",
 	"ZIP_CODE"         : "Code postal",
 	"SEARCH_MEAL"      : "Quel plat recherchez-vous ?",
-	"SEARCH_ACTION"     : "Rechercher",
+	"SEARCH_ACTION"    : "Rechercher",
 	"GO_TO_RECIPE"     : "Voir la recette sur",
 	"URL_RECIPE"       : "Marmiton.org",
 	"SEE_WINES"        : "Voir les vins pour cette recette.",
 	
 	
-	"YOUR_MEAL_IDEA"  : "Vous avez un plat en tête ?",
+	"YOUR_MEAL_IDEA"   : "Vous avez un plat en tête ?",
 	"MEALS_TRIALS"     : "Votre plat",
-	"MEALS_HIGHLISTS"  : "Avez-vous essayé ces plats ?"
+	"MEALS_HIGHLISTS"  : "Avez-vous essayé ces plats ?",
+	
+	"MEAL_DIFFICULTY"  : "Difficult� de la recette",
+	"MEAL_PRICE"       : "Prix de la recette"
 }

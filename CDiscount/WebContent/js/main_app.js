@@ -42,6 +42,7 @@ var app = angular.module("BestWinesApp", ["ngResource"])
 
 .controller("MealsCtrl", ["$scope", "$window", "$location", "$http", "translationService", function($scope, $window, $location, $http, translationService) {	
 	
+	translationService.getTranslation($scope, lang);
 	
 	$scope.exemples = [
 		        		{title:"Lasagnes � la cr�me",desc:"Lasagnes classiques avec une pointe de creme",url:"http://www.marmiton.org/lasagnes_a_la_creme"},
@@ -50,30 +51,47 @@ var app = angular.module("BestWinesApp", ["ngResource"])
 		        		{title:"Lasagnes cr�meuses",desc:"Lasagnes � la cr�me avec plus de creme",url:"http://www.marmiton.org/lasagnes_cremeuses"},
 		        		{title:"Lasagnes champ�tres",desc:"Lasagnes de champis magiques",url:"http://www.marmiton.org/lasagnes_champetres"},
 		        		{title:"Lasagnes aux �pines",desc:"Une recette de lasagne pour vos masos",url:"http://www.marmiton.org/lasagnes_aux_epines"},	
-		        		{title:"Lasagnes Tagada",desc:"Parce que Haribo quoi",url:"http://www.marmiton.org/lasagnes_tagada"},
+		        		{title:"Lasagnes Tagada",desc:"Parce que Haribo quoi",url:"http://www.marmiton.org/lasagnes_tagada"}
 		        	];
-
 	
-	$scope.rows = 2;
-	$scope.mealsByRow = 4;
 	
-	$scope.getTrials = function(url){
+	$scope.getHighListMealsFrom = function(url){
 		$http.get(url).success(function(data){
-			console.log("data.data.items : ");
-			console.log(data.data.items);
-			$scope.trials = data.data.items;
+			$scope.highlist = data.data.items;
 		}).error(function (data){
 			
 		});
-	};	
+	};
+
+	$scope.getIdeasMealsFrom = function(url){
+		$http.get(url).success(function(data){
+			$scope.ideas = data.data.items;
+		}).error(function (data){
+			
+		});
+	};
 	
-	translationService.getTranslation($scope, lang); 
+	$scope.mymealSearch = "";
+	
+	$scope.rowsIdeas = 2;
+	$scope.mealsByRowIdeas = 4;
+	$scope.ideas = [];
+	
+	$scope.rowsHighlist = 2;
+	$scope.mealsByRowHighlist = 4;
+	$scope.highlist = [];
+	$scope.getHighListMealsFrom(home_url+"rest/recipe/find/rouge");
+	
+	 
 	
 	//$scope.mymeal = $location.search().search;
 	
-	$scope.mymeal = encodeURIComponent("tarte");
-	$scope.meals = [];
-	$scope.trials = [];   //encodeURIComponent($scope.mymeal));
+	
+	
+	
+	
+
+	   //encodeURIComponent($scope.mymeal));
 		
 	$scope.goToRecipe = function(meal){
 		$window.location.href = "http://www.marmiton.org/recettes/recette_"+(meal.title.replace(" ","_"))+"_"+meal.id+".aspx";
@@ -81,15 +99,7 @@ var app = angular.module("BestWinesApp", ["ngResource"])
 	
 	
 	$scope.search = function(){
-		
-		
-		
-		$scope.getTrials(home_url+"rest/recipe/find/"+$scope.mymeal) ;
-		console.log("tutut:");
-		console.log($scope.trials);
-		
-		
-		console.log("trials :"+$scope.trials); 
+		$scope.ideas = $scope.getIdeasMealsFrom(home_url+"rest/recipe/find/"+encodeURIComponent($scope.mymealSearch));
 	};
 	
 	
@@ -108,6 +118,10 @@ var app = angular.module("BestWinesApp", ["ngResource"])
 	$scope.getPrice = function(meal){
 		return new Array(meal.cost);
 	};
+	
+	
+		
+	
 	
 	
 }]);

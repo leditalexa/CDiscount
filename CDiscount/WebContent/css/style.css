@@ -18,28 +18,77 @@ form .buttons{
 	text-align : center;
 }
 
+
+.productRow{
+	margin: 0 auto;
+	width : 1200px;
+}
+
+.meal{
+	display:block;
+	margin : 1%;
+	width: 250px;
+	height: 250px;
+	text-align: center;
+	border : 1px dotted green;
+	float: left;
+}
+
+
+.mealTitle{
+	height:20%;
+	font-weight:bold;
+}
+
+.mealCenter{
+	height:60%;
+}
+
+.mealIcon{
+	text-align: left;
+	width:80%;
+}
+
+.mealIcon img{
+	width:100%;
+	height:100%;
+}
+
+.mealInfos{
+	width:20%;
+	height:100%;
+	float:right;
+	background-color:pink;
+}
+
+.mealRating{
+	height:15%;
+	text-align: center;
+	color:#FFDE26;
+	
+}
+
+
+
 .title{
 	text-align: center;
 }
 
-.meal{
-	/* position: relative; */
-/* 	margin: 1px;
- 	height: 250px;
-	border: 1px solid grey; */
-}
-.img-ico{
 
+.img-ico{
+	
 	position :relative;
 	/* -webkit-filter: blur(1px);
            -moz-filter: blur(1px);
             -ms-filter: blur(1px);
              -o-filter: blur(1px);
                 filter: blur(1px); */
+    width: 195px;
 }
 
 .img-ico img{
-	width: 195px; /* 162 , 188 , 239*/
+	width: 195px;
+	height: 145px;
 }
 
 .description{
@@ -48,8 +97,8 @@ form .buttons{
 
 .img-ico:hover .description{
   background:rgba(0,0,0,0.8);
-  width: 195px;
-  height: 145px;
+ 
+  
 	position: absolute;
 	top: 0px;
 	left: 0px;
