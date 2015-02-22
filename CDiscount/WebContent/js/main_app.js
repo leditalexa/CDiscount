@@ -76,6 +76,7 @@ var app = angular.module("BestWinesApp", ["ngResource"])
 	$scope.rowsIdeas = 2;
 	$scope.mealsByRowIdeas = 4;
 	$scope.ideas = [];
+	$scope.getIdeasMealsFrom(home_url+"rest/recipe/find/thon");
 	
 	$scope.rowsHighlist = 2;
 	$scope.mealsByRowHighlist = 4;

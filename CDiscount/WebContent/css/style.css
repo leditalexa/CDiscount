@@ -19,10 +19,12 @@ form .buttons{
 }
 
 
-.productRow{
+.productGrid{
 	margin: 0 auto;
-	width : 1200px;
+	width : 1090px;
+	overflow: hidden;
 }
+
 
 .meal{
 	display:block;
@@ -30,13 +32,13 @@ form .buttons{
 	width: 250px;
 	height: 250px;
 	text-align: center;
-	border : 1px dotted green;
 	float: left;
+	position:relative;
 }
 
 
 .mealTitle{
-	height:20%;
+	height:10%;
 	font-weight:bold;
 }
 
@@ -65,9 +67,24 @@ form .buttons{
 	height:15%;
 	text-align: center;
 	color:#FFDE26;
-	
 }
 
+.mealExtras{
+	display:none;
+}
+
+.meal:hover .mealExtras{
+ 	background:rgba(0,0,0,0.8);
+	top: 0px;
+	left: 0px;
+	color: white;
+	display: block;
+	height:100%;
+	position:absolute;
+	font-weight:bold;
+	height:100%;
+	width:100%;
+}
 
 
 .title{
