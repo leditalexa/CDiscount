@@ -53,11 +53,13 @@
 		
 		
 		
-		<hr/>
 		
 		
 		<!-- BEGIN My Meal Search Results -->	
-		<div id="mealResults">
+		<div id="mealResults" ng-show="showMealResult()">
+
+		<hr/>
+
 
 			<h2>{{locale_string.MEALS_IDEAS}}</h2>	
 			
@@ -67,72 +69,78 @@
 					<!-- BEGIN Meal Element -->
 					<div class="meal" 
 						ng-repeat="meal in ideas | limitTo : 8" 
-						ng-show="meal.pictures[2]">
+						>
 						
 						<div class="mealExtras">
 							<p>
-								{{locale_string.GO_TO_RECIPE}} <a ng-click="goToRecipe(meal)">{{locale_string.URL_RECIPE}}</a>
+								"{{meal.title}}" <br/> {{locale_string.HAVE_INTEREST}}
 							</p>
-							<p ng-click="goToWines($index)">
-								{{locale_string.SEE_WINES}}
+							<p>
+								{{locale_string.GO_TO_RECIPE}} <br/>
+								<a ng-click="goToRecipe(meal)">
+									<i class="fa fa-file-text-o cutlery" title="{{locale_string.GO_TO_RECIPE}}"></i>
+								</a>
 							</p>
-						</div>
+							<p>
+								{{locale_string.SEE_WINES}} <br/>
+								<a ng-click="goToWines($index)">
+									<i class="fa fa-glass cutlery" title="{{locale_string.SEE_WINES}}"></i>
+								</a>
+							</p>
+						</div>	
 		
 						<div class="mealTitle">{{meal.title}}</div>
 						
 						<div class="mealCenter">
 							<div class="mealInfos">
 									<i class="fa fa-cutlery cutlery" title="{{locale_string.MEAL_DIFFICULTY}}"
-										 ng-repeat="t in getDifficulty(meal) track by $index"></i><br />
+										 ng-repeat="t in getMealDifficulty(meal) track by $index"></i><br />
 									<i class="fa fa-eur cutlery" title="{{locale_string.MEAL_PRICE}}"
-										ng-repeat="t in getPrice(meal) track by $index"></i>
+										ng-repeat="t in getMealPrice(meal) track by $index"></i>
 							</div>
 							
 							<div class="mealIcon">
-								<img src="{{meal.pictures[2].url}}"/>
+								<img src="{{getMealIcon(meal)}}"/>
 							</div>
 						</div>
 						
 						<div class="mealRating">
-							<i class="fa fa-star cutlery" ng-repeat="t in getRating(meal) track by $index"></i>
+							<i class="fa fa-star cutlery" ng-repeat="t in getMealRating(meal) track by $index"></i>
 						</div>
 						
 					</div><!-- END Meal Element -->	
 				</div>
 		</div><!-- END My Meal Search Results -->	
 						
-						<!-- 
-						<div class="description">
-							<div class="desc">
-								<h4>{{meal.title}}</h4>
-								<i class="fa fa-star cutlery" ng-repeat="t in getRating(meal) track by $index"></i><br />
-								<i class="fa fa-cutlery cutlery" ng-repeat="t in getDifficulty(meal) track by $index"></i><br />
-								<i class="fa fa-eur cutlery" ng-repeat="t in getPrice(meal) track by $index"></i><br />
-								{{locale_string.GO_TO_RECIPE}} <a ng-click="goToRecipe(meal)">{{locale_string.URL_RECIPE}}</a>
-								<span ng-click="goToWines($index)">{{locale_string.SEE_WINES}}</span>
-							</div>
-						</div>
-						 -->	
 				
 		<hr/>
 	
-		<!-- BEGIN Meals Highlist class="col-md-1 col-sm-3 col-xs-4 no-padding" -->
+		<!-- BEGIN Meals Highlist -->
 		<div id="mealHighlist">
 
 			<h2>{{locale_string.MEALS_HIGHLISTS}}</h2>			
 			<div class="productGrid">
 			
 				<!-- BEGIN Meal Element -->
-				<div class="meal {{($index==0) ? '' : 'floating'}}" 
-					ng-repeat="meal in highlist | limitTo : 10" 
-					ng-show="meal.pictures[2]" >
+				<div class="meal" 
+					ng-repeat="meal in highlist | limitTo : 4" 
+					 >
 						
 					<div class="mealExtras">
 						<p>
-							{{locale_string.GO_TO_RECIPE}} <a ng-click="goToRecipe(meal)">{{locale_string.URL_RECIPE}}</a>
+							"{{meal.title}}" <br/> {{locale_string.HAVE_INTEREST}}
 						</p>
-						<p ng-click="goToWines($index)">
-							{{locale_string.SEE_WINES}}
+						<p>
+							{{locale_string.GO_TO_RECIPE}} <br/>
+							<a ng-click="goToRecipe(meal)">
+								<i class="fa fa-file-text-o cutlery" title="{{locale_string.GO_TO_RECIPE}}"></i>
+							</a>
+						</p>
+						<p>
+							{{locale_string.SEE_WINES}} <br/>
+							<a ng-click="goToWines($index)">
+								<i class="fa fa-glass cutlery" title="{{locale_string.SEE_WINES}}"></i>
+							</a>
 						</p>
 					</div>		
 						
@@ -143,20 +151,20 @@
 					<div class="mealCenter">
 						<div class="mealInfos">
 								<i class="fa fa-cutlery cutlery" title="{{locale_string.MEAL_DIFFICULTY}}"
-									 ng-repeat="t in getDifficulty(meal) track by $index"></i>
+									 ng-repeat="t in getMealDifficulty(meal) track by $index"></i>
 								<br/>
 								<i class="fa fa-eur cutlery" title="{{locale_string.MEAL_PRICE}}"
-									ng-repeat="t in getPrice(meal) track by $index"></i>
+									ng-repeat="t in getMealPrice(meal) track by $index"></i>
 						</div>
 						
 						<div class="mealIcon">
-							<img src="{{meal.pictures[2].url}}"/>
+							<img src="{{getMealIcon(meal)}}"/>
 						</div>
 					</div>
 					
 					<div class="mealRating">
 						
-						<i class="fa fa-star cutlery" ng-repeat="t in getRating(meal) track by $index"></i>
+						<i class="cutlery fa fa-star " ng-repeat="t in getMealRating(meal) track by $index"></i>
 					</div>
 					
 				

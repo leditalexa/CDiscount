@@ -85,6 +85,10 @@ var app = angular.module("BestWinesApp", ["ngResource"])
 	
 	 
 	
+	$scope.showMealResult = function(){
+		return $scope.ideas.length != 0;
+	};
+	
 	//$scope.mymeal = $location.search().search;
 	
 	
@@ -108,19 +112,26 @@ var app = angular.module("BestWinesApp", ["ngResource"])
 		$window.location.href = home_url+"wines.jsp?meal="+url;
 	};
 	
-	$scope.getRating = function(meal){
+	$scope.getMealRating = function(meal){
 		return new Array(meal.rating);
 	};
 	
-	$scope.getDifficulty = function(meal){
+	$scope.getMealDifficulty = function(meal){
 		return new Array(meal.difficulty);
 	};
 	
-	$scope.getPrice = function(meal){
+	$scope.getMealPrice = function(meal){
 		return new Array(meal.cost);
 	};
 	
-	
+	$scope.getMealIcon = function(meal){
+		if(meal.pictures && meal.pictures[2]){
+			return meal.pictures[2].url; 
+		}else{
+			return home_url+"img/not_available_icon.jpg";
+		}
+		
+	};
 		
 	
 	

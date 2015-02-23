@@ -49,6 +49,7 @@ form .buttons{
 .mealIcon{
 	text-align: left;
 	width:80%;
+	height:100%;
 }
 
 .mealIcon img{
@@ -67,6 +68,7 @@ form .buttons{
 	height:15%;
 	text-align: center;
 	color:#FFDE26;
+	
 }
 
 .mealExtras{
@@ -130,6 +132,7 @@ form .buttons{
 
 .cutlery{
 	margin: 2px;
+	display:inline !important;
 }
 
 .block{
