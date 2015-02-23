@@ -22,5 +22,10 @@
 	"MEAL_DIFFICULTY"  : "Difficulté de la recette",
 	"MEAL_PRICE"       : "Prix de la recette",
 	
-	"HAVE_INTEREST"    : "vous intéresse ?"
+	"HAVE_INTEREST"    : "vous intéresse ?",
+	
+	"LOAD_MORE_MEALS"  : "Afficher plus de plats",
+	
+	"GO_UP"            : "Retour en haut"
+	
 }

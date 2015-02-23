@@ -20,6 +20,12 @@ var app = angular.module("BestWinesApp", ["ngResource"])
     };
 })
 
+.filter('slice', function() {
+   return function(arr, start, end) {
+   return arr.slice(start, end);
+  };
+})
+
 
 .controller("LoginCtrl", ["$scope", "$window", "translationService", function($scope, $window, translationService) {
 		
@@ -75,8 +81,10 @@ var app = angular.module("BestWinesApp", ["ngResource"])
 	
 	$scope.rowsIdeas = 2;
 	$scope.mealsByRowIdeas = 4;
+	$scope.mealsIdeasLength = 8;
 	$scope.ideas = [];
 	$scope.getIdeasMealsFrom(home_url+"rest/recipe/find/thon");
+	
 	
 	$scope.rowsHighlist = 2;
 	$scope.mealsByRowHighlist = 4;
@@ -104,6 +112,7 @@ var app = angular.module("BestWinesApp", ["ngResource"])
 	
 	
 	$scope.search = function(){
+		$scope.mealsIdeasLength = 8;
 		$scope.ideas = $scope.getIdeasMealsFrom(home_url+"rest/recipe/find/"+encodeURIComponent($scope.mymealSearch));
 	};
 	
@@ -125,7 +134,7 @@ var app = angular.module("BestWinesApp", ["ngResource"])
 	};
 	
 	$scope.getMealIcon = function(meal){
-		if(meal.pictures && meal.pictures[2]){
+		if(meal.pictures && meal.pictures[2] && meal.pictures[2].url){
 			return meal.pictures[2].url; 
 		}else{
 			return home_url+"img/not_available_icon.jpg";
@@ -133,8 +142,34 @@ var app = angular.module("BestWinesApp", ["ngResource"])
 		
 	};
 		
+	$scope.loadMoreIdeas = function(){
+		$scope.mealsIdeasLength+=4;
+	};
 	
+	$scope.loadMoreIdeasIsDisabled = function(){
+		return $scope.mealsIdeasLength>=$scope.ideas.length;
+	};
 	
+	$scope.highlistStart = 0;
+	$scope.highlistEnd = 4;
+	
+	$scope.loadMoreHighlistIsDisabled = function(){
+		return ($scope.highlistEnd + 1)>$scope.highlist.length;
+	};
+	
+	$scope.loadLessHighlistIsDisabled = function(){
+		return ($scope.highlistStart - 1)<0;
+	};
+	
+	$scope.loadMoreHighlist = function(){
+		$scope.highlistStart += 1;
+		$scope.highlistEnd += 1;
+	};
+	
+	$scope.loadLessHighlist = function(){
+		$scope.highlistStart -= 1;
+		$scope.highlistEnd -= 1;
+	};
 	
 }]);
 

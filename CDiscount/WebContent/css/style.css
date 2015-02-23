@@ -4,7 +4,7 @@ body{
 	width : 100%;
 }
 
-
+/*
 form .text{
 	width: 49%;
 	float: right;
@@ -16,6 +16,24 @@ form .buttons{
 	margin : auto; 
 	display : inline-block;
 	text-align : center;
+}
+*/
+
+.mealHighlistRow{
+	width:1238px;
+	margin:auto;
+	
+	
+}
+
+.navButtons{
+	width:73px;
+	height:150px;
+	margin-top:36px;
+}
+
+.navButtons img{
+	height:100%;
 }
 
 
