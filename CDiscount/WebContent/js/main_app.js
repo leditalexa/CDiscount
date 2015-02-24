@@ -11,6 +11,60 @@ var app = angular.module("BestWinesApp", ["ngResource"])
     $locationProvider.html5Mode(true); 
   })
 
+    
+.controller("WinesCtrl", ["$scope", "$location", "$http", function($scope, $location, $http) {
+	 
+
+	$scope.nom_marmiton = $location.search().name;
+	$scope.id_marmiton = $location.search().id;
+	
+	$scope.request = home_url+"rest/wine/find/"+$scope.nom_marmiton+"_"+$scope.id_marmiton;
+	
+	$scope.result = [];	
+	$scope.error = "";
+	
+	$scope.sendRequest = function(request){
+		$http.get(request).success(function(data){
+			$scope.result = data;
+		}).error(function (data){
+			$scope.error = data;
+		});
+	};
+
+	
+	$scope.onclickSendRequest = function(){
+		$scope.result = [];
+		$scope.error = "";
+		$scope.sendRequest($scope.request);
+	};
+	
+}])
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 .service("translationService", function ($http) {  
     this.getTranslation = function($scope, language) {
         var languageFilePath = lang_dir + language + '.json';
@@ -25,6 +79,22 @@ var app = angular.module("BestWinesApp", ["ngResource"])
    return arr.slice(start, end);
   };
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 .controller("LoginCtrl", ["$scope", "$window", "translationService", function($scope, $window, translationService) {
@@ -280,9 +350,4 @@ var app = angular.module("BestWinesApp", ["ngResource"])
 	};
 	
 }]);
-
-
-
-
-
 
