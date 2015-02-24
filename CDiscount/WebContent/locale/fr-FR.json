@@ -15,8 +15,8 @@
 	"SEE_WINES"        : "Voir les vins pour cette recette.",
 	
 	
-	"YOUR_MEAL_IDEA"   : "Vous avez un plat en tête ?",
-	"MEALS_IDEAS"     : "Votre plat",
+	"MEAL_RESULT"      : "Vous avez un plat en tête ?",
+	"MEALS_IDEAS"      : "Votre plat",
 	"MEALS_HIGHLISTS"  : "Avez-vous essayé ces plats ?",
 	
 	"MEAL_DIFFICULTY"  : "Difficult� de la recette",
@@ -27,5 +27,7 @@
 	"LOAD_MORE_MEALS"  : "Afficher plus de plats",
 	
 	"GO_UP"            : "Retour en haut"
+	
+	
 	
 }

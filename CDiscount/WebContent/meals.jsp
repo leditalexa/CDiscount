@@ -9,10 +9,10 @@
 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	
-	<link href='css/style.css' rel='stylesheet'>
+	
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link rel="stylesheet"	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-	
+	<link href='css/style.css' rel='stylesheet'>
 
 	<script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
 	<script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular-resource.min.js"></script>
@@ -28,95 +28,106 @@
 	<div id="central" ng-controller="MealsCtrl">
 	
 	
-			<hr/>
 	
-		<!-- BEGIN Meals Highlist -->
-		<div id="mealHighlist">
+		<!-- BEGIN Meals Carrousel -->
+		<div id="mealCarrousel">
 
-			<h2>{{locale_string.MEALS_HIGHLISTS}}</h2>	
+
 			
-			<div class="mealHighlistRow">	
+			<!-- BEGIN Meals Carrousel Row -->
+			<div class="mealCarrouselRow">	
 		
-				
-				<button type="button" class="navButtons" style="float:left;"
-					 ng-click="loadLessHighlist()"
-					 ng-disabled="loadLessHighlistIsDisabled()">
+				<!-- BEGIN Buttons navigation - to navigate in the displayed list -->
+				<button type="button" class="navCarrouselButtons" style="float:left;"
+					 ng-click="loadLessMealCarrousel()"
+					 ng-disabled="loadLessMealCarrouselIsDisabled()">
 					<img src="img/arrow_prev.jpg">
 				</button>
-				<button type="button" class="navButtons" style="float:right"
-					ng-click="loadMoreHighlist()"
-					ng-disabled="loadMoreHighlistIsDisabled()">
+				<button type="button" class="navCarrouselButtons" style="float:right"
+					ng-click="loadMoreMealCarrousel()"
+					ng-disabled="loadMoreMealCarrouselIsDisabled()">
 					<img src="img/arrow_next.jpg">
-				</button>		
+				</button><!-- END Buttons navigation  -->		
 					
-					
-					
-					
-					
-				<div class="productGrid">
+				<!-- BEGIN Block of Products -->			
+				<div class="productCarrouselGrid">
+							
 				
-				
-					
-				
-					<!-- BEGIN Meal Element -->
-					<div class="meal" 
-						ng-repeat="meal in highlist | slice:highlistStart:highlistEnd" 
-						 >
+					<!-- BEGIN product Element -->
+					<div class="productCarrousel" ng-repeat="product in mealCarrousel | slice:mealCarrouselStart:mealCarrouselEnd" >
+												
+												
 							
-						<div class="mealExtras">
-							<p>
-								"{{meal.title}}" <br/> {{locale_string.HAVE_INTEREST}}
-							</p>
-							<p>
-								{{locale_string.GO_TO_RECIPE}} <br/>
-								<a ng-click="goToRecipe(meal)">
-									<i class="fa fa-file-text-o cutlery" title="{{locale_string.GO_TO_RECIPE}}"></i>
-								</a>
-							</p>
-							<p>
-								{{locale_string.SEE_WINES}} <br/>
-								<a ng-click="goToWines($index)">
-									<i class="fa fa-glass cutlery" title="{{locale_string.SEE_WINES}}"></i>
-								</a>
-							</p>
-						</div>		
+							<!-- BEGIN product Element - center -->
+							<div class="productCarrouselCenter">
 							
-						
-							
-						<div class="mealTitle">{{meal.title}}</div>
-						
-						<div class="mealCenter">
-							<div class="mealInfos">
-									<i class="fa fa-cutlery cutlery" title="{{locale_string.MEAL_DIFFICULTY}}"
-										 ng-repeat="t in getMealDifficulty(meal) track by $index"></i>
-									<br/>
-									<i class="fa fa-eur cutlery" title="{{locale_string.MEAL_PRICE}}"
-										ng-repeat="t in getMealPrice(meal) track by $index"></i>
-							</div>
-							
-							<div class="mealIcon">
-								<img src="{{getMealIcon(meal)}}"/>
-							</div>
-						</div>
-						
-						<div class="mealRating">
-							
-							<i class="cutlery fa fa-star " ng-repeat="t in getMealRating(meal) track by $index"></i>
-						</div>
-						
-					
+										<!-- BEGIN product Element icon - for meals -->
+									<div class="productCarrouselIcon">
+										<img src="{{getMealIcon(product)}}"/>
+									</div><!-- END product Element icon - for meals -->
 									
-					</div><!-- END Meal Element -->
-				</div>	
+									<div class="productCarrouselExtras">
+										<div class="productCarrouselTitle" title="{{product.title}}">
+											{{product.title}}
+										</div>	
+								
+								
+										<!-- BEGIN product Element infos - for meals -->
+										<div class="productCarrouselInfos">
+										
+										
+												<i class="cutlery fa fa-star " title="Avis"
+													 ng-repeat="t in getMealRating(product) track by $index"></i>
+												<br/>
+												<i class="fa fa-cutlery cutlery" title="{{locale_string.MEAL_DIFFICULTY}}"
+													 ng-repeat="t in getMealDifficulty(product) track by $index"></i>
+												<br/>
+												<i class="fa fa-eur cutlery" title="{{locale_string.MEAL_PRICE}}"
+													 ng-repeat="t in getMealPrice(product) track by $index"></i>
+						
 				
+										</div><!-- END product Element infos - for meals -->
+										
+									</div>	
+										
+									
+							</div><!-- END product Element - center -->
+							
+							
+							<!-- BEGIN product Element - footer -->
+							<div class="productCarrouselFooter">
+							
+								
+									<a ng-click="goToRecipe(product)">
+										<i class="fa fa-file-text-o cutlery" title="{{locale_string.GO_TO_RECIPE}}"></i>
+									</a>
+									
+									<a ng-click="goToWine(product)">
+										<i class="fa fa-glass cutlery" title="{{locale_string.SEE_WINES}}"></i>
+									 </a>
+								 
+								
+							</div><!-- END product Element - footer -->
+							
+							
+						
+					</div><!-- END product Element -->		
 					
-				
+						
 					
-			</div>
-		</div><!-- END Meals Highlist -->
-	
-	
-	
+				</div><!-- BEGIN Block of products -->	
+		
+			</div><!-- END Meals Carrousel Row -->
+			
+		</div><!-- END Meals Carrousel -->
+
+
+
+
+
+
+
+
 	
 	
 		<hr/>
@@ -138,13 +149,13 @@
 			<div class="row">
 				<div class="col-md-6 col-md-offset-3">
 						<div class="form-inline input-group">
-							<form ng-submit="search()" novalidate>
+							<form ng-submit="doMealSearch()" novalidate>
 								<input type="text" class="form-control rounded-input" 
 									id="Meal" 
 									name="Meal"
-									ng-model="mymealSearch"
+									ng-model="mealSearch"
 								 />		
-								 <div class="input-group-addon rounded-input" ng-click="search()"><i class="fa fa-search"></i></div>
+								 <div class="input-group-addon rounded-input" ng-click="doMealSearch()"><i class="fa fa-search"></i></div>
 							 </form>
 							
 								
@@ -155,76 +166,100 @@
 		</div><!-- END My Meal Search Toolbar -->
 		
 		
-		
-		
-		
-		<!-- BEGIN My Meal Search Results -->	
-		<div id="mealResults" ng-show="showMealResult()">
-
 		<hr/>
+		
+		
+	
+		<!-- BEGIN Meals Search Result -->
+		<div id="mealSearchResult" ng-show="showMealSearchResult()">
 
-
-			<h2>{{locale_string.MEALS_IDEAS}}</h2>	
-			
-
+									
+				<!-- BEGIN Block of Products -->			
 				<div class="productGrid">
-				
-					<!-- BEGIN Meal Element -->
-					<div class="meal" 
-						ng-repeat="meal in ideas | limitTo : mealsIdeasLength" 
-						>
-						
-						<div class="mealExtras">
-							<p>
-								"{{meal.title}}" <br/> {{locale_string.HAVE_INTEREST}}
-							</p>
-							<p>
-								{{locale_string.GO_TO_RECIPE}} <br/>
-								<a ng-click="goToRecipe(meal)">
-									<i class="fa fa-file-text-o cutlery" title="{{locale_string.GO_TO_RECIPE}}"></i>
-								</a>
-							</p>
-							<p>
-								{{locale_string.SEE_WINES}} <br/>
-								<a ng-click="goToWines($index)">
-									<i class="fa fa-glass cutlery" title="{{locale_string.SEE_WINES}}"></i>
-								</a>
-							</p>
-						</div>	
-		
-						<div class="mealTitle">{{meal.title}}</div>
-						
-						<div class="mealCenter">
-							<div class="mealInfos">
-									<i class="fa fa-cutlery cutlery" title="{{locale_string.MEAL_DIFFICULTY}}"
-										 ng-repeat="t in getMealDifficulty(meal) track by $index"></i><br />
-									<i class="fa fa-eur cutlery" title="{{locale_string.MEAL_PRICE}}"
-										ng-repeat="t in getMealPrice(meal) track by $index"></i>
-							</div>
 							
-							<div class="mealIcon">
-								<img src="{{getMealIcon(meal)}}"/>
-							</div>
-						</div>
-						
-						<div class="mealRating">
-							<i class="fa fa-star cutlery" ng-repeat="t in getMealRating(meal) track by $index"></i>
-						</div>
-						
-					</div><!-- END Meal Element -->	
-					
-					<div>
-						<input type="button" value="{{locale_string.LOAD_MORE_MEALS}}" style="width:100%"
-							 ng-click="loadMoreIdeas()"
-							 ng-disabled="loadMoreIdeasIsDisabled()"/>
-					</div>	
-					
-				</div>
+				
+					<!-- BEGIN product Element -->
+					<div class="product" ng-repeat="product in mealSearchResult | limitTo:mealSearchNumber" >
+												
+												
+							<!-- BEGIN product Element - header -->
+							<div class="productHeader">
+									
+								
+										<!-- BEGIN product Element icon - for meals -->
+									<div class="productIcon">
+										<img src="{{getMealIcon(product)}}"/>
+									</div><!-- END product Element icon - for meals -->
+										
+							</div><!-- END product Element - header -->
+							
+							<!-- BEGIN product Element - center -->
+							<div class="productCenter">
+							
+									<div class="productTitle">
+										{{product.title}}
+									</div>	
+									
+							
+									<!-- BEGIN product Element infos - for meals -->
+									<div class="productInfos">
+									
+
+											<i class="cutlery fa fa-star productRating" ng-repeat="t in getMealRating(product) track by $index"></i>
+											
+											<br/>	
+									
+											<i class="fa fa-cutlery cutlery" title="{{locale_string.MEAL_DIFFICULTY}}"
+												 ng-repeat="t in getMealDifficulty(product) track by $index"></i>
+												 
+											<br/>
+											
+											<i class="fa fa-eur cutlery" title="{{locale_string.MEAL_PRICE}}"
+												ng-repeat="t in getMealPrice(product) track by $index"></i>
+												
+											<br/>	
+											
+											<a ng-click="goToRecipe(product)">
+												<i class="fa fa-file-text-o cutlery" title="{{locale_string.GO_TO_RECIPE}}"></i>
+											</a>
+							
+										
+									</div><!-- END product Element infos - for meals -->
+									
+								
+									
+							</div><!-- END product Element - center -->
+							
+							<!-- BEGIN product Element - footer -->
+							<div class="productFooter">
+								
+								La sélection des vins 
+								<a ng-click="goToWine(product)">
+									<i class="fa fa-glass cutlery" title="{{locale_string.SEE_WINES}}"></i>
+								</a>	
+									
 			
-		</div><!-- END My Meal Search Results -->	
+							</div><!-- END product Element - footer -->
+							
+							
 						
+					</div><!-- END product Element -->		
+					
+						<input type="button" value="load more" style="width:100%"
+							ng-show="showLoadMoreMealSearchResult()"
+							ng-click="loadMoreMealSearchResult()" />
+								
+							
+				</div><!-- BEGIN Block of products -->	
 		
-		<a href="meals.jsp" style="position:fixed;bottom:0px">{{locale_string.GO_UP}}</a>		
+		
+			
+			
+		</div><!-- END Meals SearchResult -->
+	
+					
+		
+		<a href="#hautdepage" style="position:fixed;bottom:0px">{{locale_string.GO_UP}}</a>		
 	
 		
 	

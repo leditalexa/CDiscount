@@ -19,81 +19,50 @@ form .buttons{
 }
 */
 
-.mealHighlistRow{
-	width:1238px;
-	margin:auto;
-	
-	
+
+.mealCarrouselRow{
+	width:1500px;
+	margin:1% auto;	
 }
 
-.navButtons{
+.navCarrouselButtons{
 	width:73px;
 	height:150px;
-	margin-top:36px;
+	background-color : white;
 }
 
-.navButtons img{
+.navCarrouselButtons img{
 	height:100%;
 }
 
-
-.productGrid{
+.productCarrouselGrid{
 	margin: 0 auto;
-	width : 1090px;
+	width : 90%;
 	overflow: hidden;
 }
 
-
-.meal{
+.productCarrousel{
 	display:block;
 	margin : 1%;
-	width: 250px;
-	height: 250px;
+	margin-top : 0px;
+	margin-bottom : 0px;
+	width: 10%;
+	height: 150px;
 	text-align: center;
 	float: left;
 	position:relative;
 }
 
-
-.mealTitle{
-	height:10%;
-	font-weight:bold;
+.productCarrouselCenter{
+	height:70%;
+	position:relative;
 }
 
-.mealCenter{
-	height:60%;
-}
-
-.mealIcon{
-	text-align: left;
-	width:80%;
-	height:100%;
-}
-
-.mealIcon img{
-	width:100%;
-	height:100%;
-}
-
-.mealInfos{
-	width:20%;
-	height:100%;
-	float:right;
-	background-color:pink;
-}
-
-.mealRating{
-	height:15%;
-	text-align: center;
-	color:#FFDE26;
-	
-}
-
-.mealExtras{
+.productCarrouselExtras{
 	display:none;
 }
 
-.meal:hover .mealExtras{
+.productCarrousel:hover .productCarrouselExtras{
  	background:rgba(0,0,0,0.8);
 	top: 0px;
 	left: 0px;
@@ -105,6 +74,139 @@ form .buttons{
 	height:100%;
 	width:100%;
 }
+
+.productCarrouselIcon{
+	width:100%;
+	height:100%;
+}
+
+.productCarrouselIcon img{
+	width:100%;
+	height:100%;
+}
+
+.productCarrouselTitle{
+  	width: 100%;   
+	height:30%;
+	
+	font-weight:bold;
+	
+	
+	padding-left:5%;
+	padding-right:5%;
+	padding-top:5%;
+	
+	
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow:ellipsis;
+}
+
+.productCarrouselInfos{
+	width:100%;
+	height:70%;
+	
+	text-align:center;
+		
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow:ellipsis;
+}
+
+.productCarrouselFooter{
+	height:30%;
+	background-color:#E4184B;
+
+}
+
+.productCarrouselFooter a{
+	text-decoration:none;
+	color:black;
+	cursor:pointer;
+}
+
+.productCarrouselRating{
+	height:15%;
+	text-align: center;
+	color:#FFDE26;
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+.productGrid{
+	margin: 0 auto;
+	width : 1090px;
+	overflow: hidden;
+}
+
+
+.product{
+	display:block;
+	margin : 1%;
+	width: 250px;
+	height: 300px;
+	text-align: center;
+	float: left;
+	position:relative;
+	border:1px solid blue;
+}
+
+.productHeader{
+	height:50%;
+}
+
+.productCenter{
+	height:35%;
+}
+
+.productFooter{
+	height:15%;
+	background-color:#E4184B;
+}
+
+.productTitle{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	
+	height:30%;
+	font-weight:bold;
+}
+
+.productIcon{
+	text-align: left;
+	width:100%;
+	height:100%;
+}
+
+.productIcon img{
+	width:100%;
+	height:100%;
+}
+
+.productInfos{
+
+}
+
+.productRating{
+	color:#FFDE26;
+	
+}
+
+
+
+
+
+
 
 
 .title{
