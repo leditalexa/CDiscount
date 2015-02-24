@@ -12,6 +12,33 @@ var app = angular.module("BestWinesApp", ["ngResource"])
   })
 
     
+  
+  
+  
+  
+  
+  
+.service("translationService", function ($http) {  
+    this.getTranslation = function($scope, language) {
+        var languageFilePath = lang_dir + language + '.json';
+        $http.get(home_url+languageFilePath).success(function(data) {
+            $scope.locale_string = data;     
+        });
+    };
+})
+
+.filter('slice', function() {
+   return function(arr, start, end) {
+   return arr.slice(start, end);
+  };
+})
+
+
+
+
+
+  
+  
 .controller("WinesCtrl", ["$scope", "$location", "$http", function($scope, $location, $http) {
 	 
 
@@ -60,30 +87,6 @@ var app = angular.module("BestWinesApp", ["ngResource"])
   
   
   
-  
-  
-  
-  
-  
-.service("translationService", function ($http) {  
-    this.getTranslation = function($scope, language) {
-        var languageFilePath = lang_dir + language + '.json';
-        $http.get(home_url+languageFilePath).success(function(data) {
-            $scope.locale_string = data;     
-        });
-    };
-})
-
-.filter('slice', function() {
-   return function(arr, start, end) {
-   return arr.slice(start, end);
-  };
-})
-
-
-
-
-
 
 
 
@@ -302,15 +305,15 @@ var app = angular.module("BestWinesApp", ["ngResource"])
 	
 	
 	$scope.goToRecipe = function(meal){
-		$window.location.href = "http://www.marmiton.org/recettes/recette_"+(meal.title.replace(" ","_"))+"_"+meal.id+".aspx";
+		$window.location.href = "http://www.marmiton.org/recettes/recette_"+(meal.title.replace(" ","-"))+"_"+meal.id+".aspx";
 	};
 	
 	
 	
 	
 	
-	$scope.goToWines = function(url){
-		$window.location.href = home_url+"wines.jsp?meal="+url;
+	$scope.goToWines = function(meal){
+		$window.location.href = home_url+"wines.jsp?name="+encodeURIComponent(meal.title)+"&id="+meal.id;
 	};
 	
 	

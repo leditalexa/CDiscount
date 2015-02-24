@@ -30,7 +30,7 @@
 	id_marmiton : {{id_marmiton}}  <br/>
 	nom_marmiton : {{nom_marmiton}} <br/>
 	
-	request : <input type="text" ng-model="request" /> <br/>
+	request : <input style="width:500px;" type="text" ng-model="request" /> <br/>
 	final_request : {{request}}    <br/>
 	
 	

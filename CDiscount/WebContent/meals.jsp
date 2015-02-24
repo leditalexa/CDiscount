@@ -102,7 +102,7 @@
 										<i class="fa fa-file-text-o cutlery" title="{{locale_string.GO_TO_RECIPE}}"></i>
 									</a>
 									
-									<a ng-click="goToWine(product)">
+									<a ng-click="goToWines(product)">
 										<i class="fa fa-glass cutlery" title="{{locale_string.SEE_WINES}}"></i>
 									 </a>
 								 
@@ -234,7 +234,7 @@
 							<div class="productFooter">
 								
 								La sélection des vins 
-								<a ng-click="goToWine(product)">
+								<a ng-click="goToWines(product)">
 									<i class="fa fa-glass cutlery" title="{{locale_string.SEE_WINES}}"></i>
 								</a>	
 									
