@@ -11,13 +11,6 @@ var app = angular.module("BestWinesApp", ["ngResource"])
     $locationProvider.html5Mode(true); 
   })
 
-    
-  
-  
-  
-  
-  
-  
 .service("translationService", function ($http) {  
     this.getTranslation = function($scope, language) {
         var languageFilePath = lang_dir + language + '.json';
@@ -32,72 +25,6 @@ var app = angular.module("BestWinesApp", ["ngResource"])
    return arr.slice(start, end);
   };
 })
-
-
-
-
-
-  
-  
-.controller("WinesCtrl", ["$scope", "$location", "$http", function($scope, $location, $http) {
-	 
-
-	$scope.nom_marmiton = $location.search().name;
-	$scope.id_marmiton = $location.search().id;
-	
-	$scope.request = home_url+"rest/wine/find/"+$scope.nom_marmiton+"_"+$scope.id_marmiton;
-	
-	$scope.result = [];	
-	$scope.error = "";
-	
-	$scope.sendRequest = function(request){
-		$http.get(request).success(function(data){
-			$scope.result = data;
-		}).error(function (data){
-			$scope.error = data;
-		});
-	};
-
-	
-	$scope.onclickSendRequest = function(){
-		$scope.result = [];
-		$scope.error = "";
-		$scope.sendRequest($scope.request);
-	};
-	
-}])
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-
-
-
-
-
-
-
-
-
 
 
 .controller("LoginCtrl", ["$scope", "$window", "translationService", function($scope, $window, translationService) {
@@ -134,143 +61,6 @@ var app = angular.module("BestWinesApp", ["ngResource"])
 		        	];
 	
 	
-	
-	
-	/* Meal Functions */
-	
-	$scope.getMealDifficulty = function(meal){
-		return new Array(meal.difficulty);
-	};
-	
-	$scope.getMealPrice = function(meal){
-		return new Array(meal.cost);
-	};
-	
-	$scope.getMealIcon = function(meal){
-		if(meal.pictures && meal.pictures[2] && meal.pictures[2].url){
-			return meal.pictures[2].url; 
-		}else{
-			return home_url+"img/not_available_icon.jpg";
-		}
-		
-	};
-	
-	$scope.getMealRating = function(meal){
-		return new Array(meal.rating);
-	};
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/* Meal Carrousel */
-	
-	
-	$scope.mealCarrouselSearch = home_url+"rest/recipe/find/thon";
-	
-	$scope.mealCarrousel = [];
-	
-	$scope.mealCarrouselStart = 0;
-	
-	$scope.mealCarrouselEnd = 8;
-	
-	$scope.getMealCarrouselFrom = function(url){
-		$http.get(url).success(function(data){
-			$scope.mealCarrousel = data.data.items;
-		}).error(function (data){
-			
-		});
-	};
-		
-	$scope.loadMoreMealCarrouselIsDisabled = function(){
-		return ($scope.mealCarrouselEnd + 1)>$scope.mealCarrousel.length;
-	};
-	
-	$scope.loadLessMealCarrouselIsDisabled = function(){
-		return ($scope.mealCarrouselStart - 1)<0;
-	};
-	
-	$scope.loadMoreMealCarrousel = function(){
-		$scope.mealCarrouselStart += 1;
-		$scope.mealCarrouselEnd += 1;
-	};
-	
-	$scope.loadLessMealCarrousel = function(){
-		$scope.mealCarrouselStart -= 1;
-		$scope.mealCarrouselEnd -= 1;
-	};
-		
-	$scope.getMealCarrouselFrom($scope.mealCarrouselSearch);
-	
-	
-	
-	
-		
-	
-	
-	
-	
-	/* My meal search result */
-	
-	$scope.mealSearch = "";
-	
-	$scope.mealSearchNumber = 4;
-	
-	
-	$scope.mealSearchResult = [];
-	
-	
-	$scope.doMealSearch = function(){
-		$scope.mealSearchNumber = 4;
-		$scope.getMealSearchResultFrom(home_url+"rest/recipe/find/"+encodeURIComponent($scope.mealSearch));
-	};
-	
-	
-	$scope.getMealSearchResultFrom = function(url){
-		$http.get(url).success(function(data){
-			$scope.mealSearchResult = data.data.items;
-		}).error(function (data){
-			
-		});
-	};
-		
-	$scope.mealSearchNumberIncrement = 4;
-	
-	$scope.loadMoreMealSearchResult = function(){
-		$scope.mealSearchNumber += $scope.mealSearchNumberIncrement;
-	};
-	
-	$scope.showMealSearchResult = function(){
-		return ($scope.mealSearchResult.length!=0);	
-	};
-	
-	
-	$scope.showLoadMoreMealSearchResult = function(){
-		return ($scope.mealSearchNumber < $scope.mealSearchResult.length);	
-	};
-	
-	$scope.getMealSearchResultFrom(home_url+"rest/recipe/find/thon");
-	
-	
-	
-	
-	
-	
-	
-	/*
-	$scope.rowsIdeas = 2;
-	$scope.mealsByRowIdeas = 4;
-	$scope.mealsIdeasLength = 8;
-	$scope.ideas = [];
-	$scope.getIdeasMealsFrom(home_url+"rest/recipe/find/thon");
-	
-	*/
-	
-
 	$scope.getHighListMealsFrom = function(url){
 		$http.get(url).success(function(data){
 			$scope.highlist = data.data.items;
@@ -278,6 +68,24 @@ var app = angular.module("BestWinesApp", ["ngResource"])
 			
 		});
 	};
+
+	$scope.getIdeasMealsFrom = function(url){
+		$http.get(url).success(function(data){
+			$scope.ideas = data.data.items;
+		}).error(function (data){
+			
+		});
+	};
+	
+	$scope.mymealSearch = "";
+	
+	$scope.rowsIdeas = 2;
+	$scope.mealsByRowIdeas = 4;
+	$scope.mealsIdeasLength = 8;
+	$scope.ideas = [];
+	$scope.getIdeasMealsFrom(home_url+"rest/recipe/find/thon");
+	
+	
 	$scope.rowsHighlist = 2;
 	$scope.mealsByRowHighlist = 4;
 	$scope.highlist = [];
@@ -298,26 +106,41 @@ var app = angular.module("BestWinesApp", ["ngResource"])
 
 	   //encodeURIComponent($scope.mymeal));
 		
-	
-	
-	
-	
-	
-	
 	$scope.goToRecipe = function(meal){
-		$window.location.href = "http://www.marmiton.org/recettes/recette_"+(meal.title.replace(" ","-"))+"_"+meal.id+".aspx";
+		$window.location.href = "http://www.marmiton.org/recettes/recette_"+(meal.title.replace(" ","_"))+"_"+meal.id+".aspx";
 	};
 	
 	
-	
-	
-	
-	$scope.goToWines = function(meal){
-		$window.location.href = home_url+"wines.jsp?name="+encodeURIComponent(meal.title)+"&id="+meal.id;
+	$scope.search = function(){
+		$scope.mealsIdeasLength = 8;
+		$scope.ideas = $scope.getIdeasMealsFrom(home_url+"rest/recipe/find/"+encodeURIComponent($scope.mymealSearch));
 	};
 	
 	
-
+	$scope.goToWines = function(url){
+		$window.location.href = home_url+"wines.jsp?meal="+url;
+	};
+	
+	$scope.getMealRating = function(meal){
+		return new Array(meal.rating);
+	};
+	
+	$scope.getMealDifficulty = function(meal){
+		return new Array(meal.difficulty);
+	};
+	
+	$scope.getMealPrice = function(meal){
+		return new Array(meal.cost);
+	};
+	
+	$scope.getMealIcon = function(meal){
+		if(meal.pictures && meal.pictures[2] && meal.pictures[2].url){
+			return meal.pictures[2].url; 
+		}else{
+			return home_url+"img/not_available_icon.jpg";
+		}
+		
+	};
 		
 	$scope.loadMoreIdeas = function(){
 		$scope.mealsIdeasLength+=4;
@@ -326,10 +149,6 @@ var app = angular.module("BestWinesApp", ["ngResource"])
 	$scope.loadMoreIdeasIsDisabled = function(){
 		return $scope.mealsIdeasLength>=$scope.ideas.length;
 	};
-	
-	
-	
-
 	
 	$scope.highlistStart = 0;
 	$scope.highlistEnd = 4;
@@ -353,4 +172,9 @@ var app = angular.module("BestWinesApp", ["ngResource"])
 	};
 	
 }]);
+
+
+
+
+
 
