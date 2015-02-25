@@ -5,9 +5,7 @@ import java.net.UnknownHostException;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 
-import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
-import com.mongodb.ServerAddress;
 
 public class CDiscountDatastore {
 
