@@ -1,4 +1,4 @@
-package fr.eisit.pau.cdiscount.services;
+package fr.eisti.pau.cdiscount.services;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
