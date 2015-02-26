@@ -22,7 +22,7 @@ import fr.eisti.pau.cdiscount.exception.UserAlreadyExistsException;
 import fr.eisti.pau.cdiscount.exception.WrongPasswordException;
 import fr.eisti.pau.cdiscount.exception.WrongUserException;
 import fr.eisti.pau.cdiscount.services.UserService;
-import fr.eisti.pau.cdiscount.util.ResponseEntity;
+import fr.eisti.pau.cdiscount.util.CDiscountResponse;
 
 @Path("/user")
 public class UserRestService {
@@ -46,11 +46,11 @@ public class UserRestService {
 		
 		try{
 			usr = userService.signUp(usr);
-			return buildResponse("User "+usr.getIdentifiant()+ " created", usr, 0);
+			return CDiscountResponse.build("User "+usr.getIdentifiant()+ " created", usr, 0);
 		}catch(WrongUserException e){
-			return buildResponse("Worng request content", null, 1);
+			return CDiscountResponse.build("Worng request content", null, 1);
 		}catch(UserAlreadyExistsException e){
-			return buildResponse("User already exist", null, 1);
+			return CDiscountResponse.build("User already exist", null, 1);
 		}
 	}
 
@@ -66,25 +66,11 @@ public class UserRestService {
 			String password = obj.getString("passwd");
 			
 			User usr = userService.login(identifiant, password);
-			return buildResponse("log in successful", usr, 0);
+			return CDiscountResponse.build("log in successful", usr, 0);
 		}catch(JSONException e){
-			return buildResponse("worng request content", null, 1);
+			return CDiscountResponse.build("worng request content", null, 1);
 		}catch(WrongUserException|WrongPasswordException e){
-			return buildResponse("Wrong user or password",	null, 1);
+			return CDiscountResponse.build("Wrong user or password",	null, 1);
 		}
-	}
-
-	
-	private Response buildResponse(String message, Object content, int code){
-		ResponseBuilder build = new ResponseBuilderImpl();
-		ResponseEntity.Builder entity = new ResponseEntity.Builder();
-
-		return build.entity(
-				entity
-				.message(message)
-				.content(content)
-				.code(code)
-				.build()
-				).build();
 	}
 }

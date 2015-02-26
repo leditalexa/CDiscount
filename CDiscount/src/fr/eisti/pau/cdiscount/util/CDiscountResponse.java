@@ -1,23 +1,28 @@
 package fr.eisti.pau.cdiscount.util;
 
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 
-public class ResponseEntity {
+import com.sun.jersey.core.spi.factory.ResponseBuilderImpl;
+
+
+public class CDiscountResponse {
 
 	private String message;
 	private Object content;
 	private int code;
 	
-	public ResponseEntity() {
+	public CDiscountResponse() {
 		super();
 	}
 
-	public ResponseEntity(String message, Object content, int code) {
+	public CDiscountResponse(String message, Object content, int code) {
 		this.message = message;
 		this.content = content;
 		this.code = code;
 	}
 	
-	public ResponseEntity(Builder b){
+	public CDiscountResponse(Builder b){
 		this.message = b.message;
 		this.content = b.content;
 		this.code = b.code;
@@ -47,6 +52,19 @@ public class ResponseEntity {
 		this.code = code;
 	}
 	
+	public static Response build(String message, Object content, int code){
+		ResponseBuilder build = new ResponseBuilderImpl();
+		CDiscountResponse.Builder entity = new CDiscountResponse.Builder();
+
+		return build.entity(
+				entity
+				.message(message)
+				.content(content)
+				.code(code)
+				.build()
+				).build();
+	}
+	
 	public static class Builder{
 		private String message;
 		private Object content;
@@ -70,8 +88,8 @@ public class ResponseEntity {
 			return this;
 		}
 		
-		public ResponseEntity build(){
-			return new ResponseEntity(this);
+		public CDiscountResponse build(){
+			return new CDiscountResponse(this);
 		}
 	}
 	
