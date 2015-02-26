@@ -1,4 +1,4 @@
-package fr.eisti.pau.cdiscount.services;
+package fr.eisti.pau.cdiscount.rest;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -19,7 +19,7 @@ import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
 @Path("/wine")
-public class WineService {
+public class WineRestService {
 
 
 	@GET

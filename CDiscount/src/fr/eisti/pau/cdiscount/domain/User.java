@@ -76,4 +76,11 @@ public class User {
 		this.age = age;
 	}
 	
+	public boolean checkUser(){
+		return this.firstname!=null &&
+				this.identifiant!=null &&
+				this.lastname!=null &&
+				this.passwd!=null;
+	}
+	
 }

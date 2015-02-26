@@ -1,4 +1,4 @@
-package fr.eisti.pau.cdiscount.services;
+package fr.eisti.pau.cdiscount.rest;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
@@ -17,7 +17,7 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 @Path("/recipe")
-public class RecipeService {
+public class RecipeRestService {
 	
 	@GET
 	@Path("/find/{keyword}")
