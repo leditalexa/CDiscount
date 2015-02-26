@@ -63,7 +63,7 @@ public class UserRestService {
 		try{
 			JSONObject obj = new JSONObject(json);
 			String identifiant = obj.getString("identifiant");
-			String password = obj.getString("passwd");
+			String password = obj.getString("password");
 			
 			User usr = userService.login(identifiant, password);
 			return CDiscountResponse.build("log in successful", usr, 0);

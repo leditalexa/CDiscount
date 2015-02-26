@@ -10,7 +10,7 @@ public class User {
 	private String identifiant;
 	private String firstname;
 	private String lastname;
-	private String passwd;
+	private String password;
 	private int age;
 	
 	public User(){
@@ -18,11 +18,11 @@ public class User {
 	}
 	
 	public User(String firstname, String lastname, String identifiant,
-			String passwd, int age) {
+			String password, int age) {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.identifiant = identifiant;
-		this.passwd = passwd;
+		this.password = password;
 		this.age = age;
 	}
 
@@ -57,13 +57,13 @@ public class User {
 	}
 
 
-	public String getPasswd() {
-		return passwd;
+	public String getPassword() {
+		return password;
 	}
 
 
-	public void setPasswd(String passwd) {
-		this.passwd = passwd;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 
@@ -80,7 +80,7 @@ public class User {
 		return this.firstname!=null &&
 				this.identifiant!=null &&
 				this.lastname!=null &&
-				this.passwd!=null;
+				this.password!=null;
 	}
 	
 }

@@ -18,8 +18,12 @@ public class UserService {
 	}
 
 	public User signUp(User user)throws WrongUserException, UserAlreadyExistsException{
-		user.setPasswd(generateHash(user.getPasswd()));
-		return userDao.create(user);
+		if(user.getPassword()!=null){
+			user.setPassword(generateHash(user.getPassword()));
+			return userDao.create(user);
+		}else{
+			throw new WrongUserException();
+		}
 	}
 
 	public User login(String identifiant, String password) throws WrongPasswordException, WrongUserException{
@@ -27,7 +31,7 @@ public class UserService {
 		User usr = userDao.get(identifiant);
 
 		if(usr != null){
-			if(generateHash(password).equals(usr.getPasswd())){
+			if(generateHash(password).equals(usr.getPassword())){
 				return usr;
 			}else{
 				throw new WrongPasswordException();
