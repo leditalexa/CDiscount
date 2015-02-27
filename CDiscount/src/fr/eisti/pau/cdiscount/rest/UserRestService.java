@@ -9,13 +9,11 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.ResponseBuilder;
 
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
 import com.google.gson.Gson;
-import com.sun.jersey.core.spi.factory.ResponseBuilderImpl;
 
 import fr.eisti.pau.cdiscount.domain.User;
 import fr.eisti.pau.cdiscount.exception.UserAlreadyExistsException;
@@ -32,7 +30,7 @@ public class UserRestService {
 	@GET
 	@Path("/{identifiant}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public User get(@PathParam("identifiant") String identifiant){	
+	public User get(@PathParam("identifiant") String identifiant){
 		return userService.get(identifiant);
 	}
 
