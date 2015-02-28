@@ -11,12 +11,6 @@ var app = angular.module("BestWinesApp", ["ngResource"])
     $locationProvider.html5Mode(true); 
   })
 
-    
-  
-  
-  
-  
-  
   
 .service("translationService", function ($http) {  
     this.getTranslation = function($scope, language) {
@@ -26,6 +20,96 @@ var app = angular.module("BestWinesApp", ["ngResource"])
         });
     };
 })
+
+ 
+  
+  
+ .service("carrouselService", function ($http) {  
+    this.getCarrouselUtils = function($scope) {
+    	
+    	
+    	$scope.carrousel_url = home_url+"rest/recipe/find/";
+    	$scope.carrouselSearch = "";
+    	$scope.carrousel_request = $scope.carrousel_url+$scope.carrouselSearch;
+    	
+    	
+    	$scope.carrousel = [];
+    	
+    	$scope.carrouselStart = 0;
+    	
+    	$scope.carrouselEnd = 6;
+    	
+    	
+    	$scope.getCarrouselFrom = function(url){
+    		$http.get(url).success(function(data){
+    			$scope.carrousel = data.data.items;
+    		}).error(function (data){
+    			
+    		});
+    	};
+    		
+    	$scope.loadMoreCarrousel = function(){
+    		if($scope.carrouselEnd+1<$scope.carrousel.length){
+    			$scope.carrouselStart += 1;
+    			$scope.carrouselEnd += 1;
+    		}
+    	};
+    	
+    	$scope.loadLessCarrousel = function(){
+    		if($scope.carrouselStart>0){
+    			$scope.carrouselStart -= 1;
+    			$scope.carrouselEnd -= 1;
+    		}
+    	};
+    		
+    	$scope.showCarrouselResult = function(){
+    		return ($scope.carrousel.length>0);	
+    	};  	
+
+    };
+}) 
+  
+  
+
+.factory("Meals", function ($http, $window) {  
+	/* Meal Functions */
+	var Meal = {};
+	
+	Meal.getMealDifficulty = function(meal){
+		return new Array(meal.difficulty);
+	};
+	
+	Meal.getMealPrice = function(meal){
+		return new Array(meal.cost);
+	};
+	
+	Meal.getMealIcon = function(meal){
+		if(meal.pictures && meal.pictures[2] && meal.pictures[2].url){
+			return meal.pictures[2].url; 
+		}else{
+			return home_url+"img/not_available_icon.jpg";
+		}
+		
+	};
+	
+	Meal.getMealRating = function(meal){
+		return new Array(meal.rating);
+	};
+	
+	
+	Meal.goToRecipe = function(meal){
+		$window.location.href = "http://www.marmiton.org/recettes/recette_"+(meal.title.replace(" ","-"))+"_"+meal.id+".aspx";
+	};
+	
+
+	Meal.goToWines = function(meal){
+		$window.location.href = home_url+"wines.jsp?name="+encodeURIComponent(meal.title)+"&id="+meal.id;
+	};
+	
+	return Meal;
+	
+})
+
 
 .filter('slice', function() {
    return function(arr, start, end) {
@@ -39,9 +123,11 @@ var app = angular.module("BestWinesApp", ["ngResource"])
 
   
   
-.controller("WinesCtrl", ["$scope", "$location", "$http", function($scope, $location, $http) {
+.controller("WinesCtrl", ["$scope",  "$window", "$location", "$http", "translationService", "Meals",
+                          function($scope, $window, $location, $http, translationService, Meals) {	
 	 
-
+	$scope.Meals = Meals;
+	
 	$scope.nom_marmiton = $location.search().name;
 	$scope.id_marmiton = $location.search().id;
 	
@@ -79,12 +165,7 @@ var app = angular.module("BestWinesApp", ["ngResource"])
   
   
   
-  
-  
-  
-  
-  
-  
+ 
   
   
 
@@ -95,125 +176,57 @@ var app = angular.module("BestWinesApp", ["ngResource"])
 
 
 
+.controller("MealCarrouselCtrl1", ["$scope",  "$http", "translationService", "Meals", "carrouselService",
+                                  function($scope, $http, translationService, Meals, carrouselService) {	
+	translationService.getTranslation($scope, lang);
 
-
-
-
-
-.controller("LoginCtrl", ["$scope", "$window", "translationService", function($scope, $window, translationService) {
-		
-	translationService.getTranslation($scope, lang); 
-
-	$scope.indexPaneShown = 1;
-	$scope.setPaneShown = function(index){
-		$scope.indexPaneShown = index;
-	};
-	$scope.isPaneShown = function(index){
-		return index == $scope.indexPaneShown;
-	};
+	$scope.Meals = Meals;
 	
+	carrouselService.getCarrouselUtils($scope);
 	
-	$scope.onLogin = function(){
-		$window.location.href = home_url+"meals.jsp";
-	};
+	$scope.carrouselSearch = "thon";
+	$scope.carrousel_request = $scope.carrousel_url+$scope.carrouselSearch;
+	$scope.getCarrouselFrom($scope.carrousel_request);
+
+
 }])
 
 
-.controller("MealsCtrl", ["$scope", "$window", "$location", "$http", "translationService", function($scope, $window, $location, $http, translationService) {	
+.controller("MealCarrouselCtrl2", ["$scope",  "$http", "$location", "translationService", "Meals", "carrouselService",
+                                  function($scope, $http, $location, translationService, Meals, carrouselService) {	
+	translationService.getTranslation($scope, lang);
+
+	$scope.Meals = Meals;
+	
+	carrouselService.getCarrouselUtils($scope);
+	
+	$scope.nom_marmiton = $location.search().name;
+	
+	$scope.carrouselSearch = $scope.nom_marmiton;
+
+	$scope.doCarrouselSearch = function(){
+		var carrousel_request =  $scope.carrousel_url+$scope.carrouselSearch;
+		$scope.getCarrouselFrom(carrousel_request);
+	};
+	
+
+
+}])
+
+
+
+
+
+
+
+
+
+.controller("MealsCtrl", ["$scope",  "$window", "$location", "$http", "translationService", "Meals",
+                          function($scope, $window, $location, $http, translationService, Meals) {	
 	
 	translationService.getTranslation($scope, lang);
-	
-	$scope.exemples = [
-		        		{title:"Lasagnes � la cr�me",desc:"Lasagnes classiques avec une pointe de creme",url:"http://www.marmiton.org/lasagnes_a_la_creme"},
-		        		{title:"Lasagnes aux champignons",desc:"Lasagnes de ouf avec des champis",url:"http://www.marmiton.org/lasagnes_aux_champignons"},
-		        		{title:"Lasagnes aux �pinards",desc:"Une recette de lasagne pour vos enfants",url:"http://www.marmiton.org/lasagnes_aux_epinards"},	
-		        		{title:"Lasagnes cr�meuses",desc:"Lasagnes � la cr�me avec plus de creme",url:"http://www.marmiton.org/lasagnes_cremeuses"},
-		        		{title:"Lasagnes champ�tres",desc:"Lasagnes de champis magiques",url:"http://www.marmiton.org/lasagnes_champetres"},
-		        		{title:"Lasagnes aux �pines",desc:"Une recette de lasagne pour vos masos",url:"http://www.marmiton.org/lasagnes_aux_epines"},	
-		        		{title:"Lasagnes Tagada",desc:"Parce que Haribo quoi",url:"http://www.marmiton.org/lasagnes_tagada"}
-		        	];
-	
-	
-	
-	
-	/* Meal Functions */
-	
-	$scope.getMealDifficulty = function(meal){
-		return new Array(meal.difficulty);
-	};
-	
-	$scope.getMealPrice = function(meal){
-		return new Array(meal.cost);
-	};
-	
-	$scope.getMealIcon = function(meal){
-		if(meal.pictures && meal.pictures[2] && meal.pictures[2].url){
-			return meal.pictures[2].url; 
-		}else{
-			return home_url+"img/not_available_icon.jpg";
-		}
-		
-	};
-	
-	$scope.getMealRating = function(meal){
-		return new Array(meal.rating);
-	};
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/* Meal Carrousel */
-	
-	
-	$scope.mealCarrouselSearch = home_url+"rest/recipe/find/thon";
-	
-	$scope.mealCarrousel = [];
-	
-	$scope.mealCarrouselStart = 0;
-	
-	$scope.mealCarrouselEnd = 8;
-	
-	$scope.getMealCarrouselFrom = function(url){
-		$http.get(url).success(function(data){
-			$scope.mealCarrousel = data.data.items;
-		}).error(function (data){
-			
-		});
-	};
-		
-	$scope.loadMoreMealCarrouselIsDisabled = function(){
-		return ($scope.mealCarrouselEnd + 1)>$scope.mealCarrousel.length;
-	};
-	
-	$scope.loadLessMealCarrouselIsDisabled = function(){
-		return ($scope.mealCarrouselStart - 1)<0;
-	};
-	
-	$scope.loadMoreMealCarrousel = function(){
-		$scope.mealCarrouselStart += 1;
-		$scope.mealCarrouselEnd += 1;
-	};
-	
-	$scope.loadLessMealCarrousel = function(){
-		$scope.mealCarrouselStart -= 1;
-		$scope.mealCarrouselEnd -= 1;
-	};
-		
-	$scope.getMealCarrouselFrom($scope.mealCarrouselSearch);
-	
-	
-	
-	
-		
-	
-	
-	
-	
+	$scope.Meals = Meals;
+
 	/* My meal search result */
 	
 	$scope.mealSearch = "";
@@ -256,101 +269,25 @@ var app = angular.module("BestWinesApp", ["ngResource"])
 	$scope.getMealSearchResultFrom(home_url+"rest/recipe/find/thon");
 	
 	
-	
-	
-	
-	
-	
-	/*
-	$scope.rowsIdeas = 2;
-	$scope.mealsByRowIdeas = 4;
-	$scope.mealsIdeasLength = 8;
-	$scope.ideas = [];
-	$scope.getIdeasMealsFrom(home_url+"rest/recipe/find/thon");
-	
-	*/
-	
+}])
 
-	$scope.getHighListMealsFrom = function(url){
-		$http.get(url).success(function(data){
-			$scope.highlist = data.data.items;
-		}).error(function (data){
-			
-		});
-	};
-	$scope.rowsHighlist = 2;
-	$scope.mealsByRowHighlist = 4;
-	$scope.highlist = [];
-	$scope.getHighListMealsFrom(home_url+"rest/recipe/find/rouge");
-	
-	 
-	
-	$scope.showMealResult = function(){
-		return $scope.ideas.length != 0;
-	};
-	
-	//$scope.mymeal = $location.search().search;
-	
-	
-	
-	
-	
 
-	   //encodeURIComponent($scope.mymeal));
-		
-	
-	
-	
-	
-	
-	
-	$scope.goToRecipe = function(meal){
-		$window.location.href = "http://www.marmiton.org/recettes/recette_"+(meal.title.replace(" ","-"))+"_"+meal.id+".aspx";
-	};
-	
-	
-	
-	
-	
-	$scope.goToWines = function(meal){
-		$window.location.href = home_url+"wines.jsp?name="+encodeURIComponent(meal.title)+"&id="+meal.id;
-	};
-	
-	
 
-		
-	$scope.loadMoreIdeas = function(){
-		$scope.mealsIdeasLength+=4;
-	};
-	
-	$scope.loadMoreIdeasIsDisabled = function(){
-		return $scope.mealsIdeasLength>=$scope.ideas.length;
-	};
-	
-	
-	
 
+.controller("LoginCtrl", ["$scope", "$window", "translationService", function($scope, $window, translationService) {
 	
-	$scope.highlistStart = 0;
-	$scope.highlistEnd = 4;
-	
-	$scope.loadMoreHighlistIsDisabled = function(){
-		return ($scope.highlistEnd + 1)>$scope.highlist.length;
+	translationService.getTranslation($scope, lang); 
+
+	$scope.indexPaneShown = 1;
+	$scope.setPaneShown = function(index){
+		$scope.indexPaneShown = index;
+	};
+	$scope.isPaneShown = function(index){
+		return index == $scope.indexPaneShown;
 	};
 	
-	$scope.loadLessHighlistIsDisabled = function(){
-		return ($scope.highlistStart - 1)<0;
-	};
 	
-	$scope.loadMoreHighlist = function(){
-		$scope.highlistStart += 1;
-		$scope.highlistEnd += 1;
+	$scope.onLogin = function(){
+		$window.location.href = home_url+"meals.jsp";
 	};
-	
-	$scope.loadLessHighlist = function(){
-		$scope.highlistStart -= 1;
-		$scope.highlistEnd -= 1;
-	};
-	
 }]);
-

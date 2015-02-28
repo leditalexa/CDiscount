@@ -1,78 +1,124 @@
-body{
-	background-color: white;
-	heigth : 100%;
-	width : 100%;
+
+.ico-button{
+	border-radius: 50%;
 }
 
-/*
-form .text{
-	width: 49%;
-	float: right;
+.ico-button .fa:hover{
+	font-height: 30px;
 }
 
-form .buttons{
-	width : 100%;
-	padding : auto;
-	margin : auto; 
-	display : inline-block;
-	text-align : center;
-}
-*/
 
-
-.mealCarrouselRow{
-	width:1500px;
-	margin:1% auto;	
+.rounded-input{
+	border-radius: 40px;
 }
 
-.navCarrouselButtons{
-	width:73px;
-	height:150px;
-	background-color : white;
+
+.cutlery{
+	margin: 2px;
+	display:inline !important;
 }
 
-.navCarrouselButtons img{
-	height:100%;
+
+
+
+
+
+#appnavbar{
+	background-color:#E4184B;
+	
 }
 
-.productCarrouselGrid{
-	margin: 0 auto;
-	width : 90%;
-	overflow: hidden;
+#appnavbar .active{
+	background-color:#EA3965;
 }
 
-.productCarrousel{
-	display:block;
-	margin : 1%;
-	margin-top : 0px;
-	margin-bottom : 0px;
-	width: 10%;
-	height: 150px;
-	text-align: center;
-	float: left;
-	position:relative;
+#appnavbar a{
+	color:white;
+	font-weight:bold;
 }
+
+#appnavbar a:hover{
+	background-color:#EA3965;
+	color:white;
+	font-weight:bold;
+}
+
+
+
+
+
+#mealtoolbar{
+	margin-bottom:2%;
+	background-color:#E4184B;
+	text-align:center;	
+}
+
+#mealtoolbar img{
+	height:125px;
+}
+
+#mealtoolbar .inputSearch{
+	margin-top:8%;
+}
+
+
+
+#winetoolbar{
+	margin-bottom:2%;
+	background-color:#E4184B;
+	text-align:center;	
+}
+
+#winetoolbar img{
+	height:125px;
+}
+
+#winetoolbar .inputSearch{
+	margin-top:8%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#myCarousel{
+	margin-bottom:2%;
+}
+
+.carousel-control {
+  padding-top:5%;
+  width:5%;
+  background:rgba(1,1,1,0.8);
+  z-index:100;
+}
+
 
 .productCarrouselCenter{
-	height:70%;
 	position:relative;
+	height:115px;
 }
 
 .productCarrouselExtras{
 	display:none;
+	color: white;
+	position:absolute;
+
+	top:0px;
+	left:0px;
+	height:100%;
+	width:100%;
 }
 
 .productCarrousel:hover .productCarrouselExtras{
- 	background:rgba(0,0,0,0.8);
-	top: 0px;
-	left: 0px;
-	color: white;
+	background:rgba(0,0,0,0.8);
 	display: block;
-	height:100%;
-	position:absolute;
-	font-weight:bold;
-	height:100%;
-	width:100%;
 }
 
 .productCarrouselIcon{
@@ -86,26 +132,15 @@ form .buttons{
 }
 
 .productCarrouselTitle{
-  	width: 100%;   
-	height:30%;
-	
 	font-weight:bold;
-	
-	
-	padding-left:5%;
-	padding-right:5%;
-	padding-top:5%;
-	
-	
+	text-align:center;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow:ellipsis;
 }
 
 .productCarrouselInfos{
-	width:100%;
-	height:70%;
-	
+
 	text-align:center;
 		
 	white-space: nowrap;
@@ -114,76 +149,58 @@ form .buttons{
 }
 
 .productCarrouselFooter{
-	height:30%;
+	height:30px;
+	line-height:30px;
 	background-color:#E4184B;
+	border-bottom-left-radius:10px;
+	border-bottom-right-radius:10px;
 
 }
 
-.productCarrouselFooter a{
-	text-decoration:none;
-	color:black;
+#productCarrouselLinks{
+	width:100%;
+	text-align:center;
+}
+
+#productCarrouselLinks td:hover{
+	border : 1px dotted white;
 	cursor:pointer;
 }
 
-.productCarrouselRating{
-	height:15%;
-	text-align: center;
-	color:#FFDE26;
-	
-}
-
-
-
-
-
-
-
-
-
-
-
-.productGrid{
-	margin: 0 auto;
-	width : 1090px;
-	overflow: hidden;
-}
-
-
-.product{
-	display:block;
-	margin : 1%;
-	width: 250px;
-	height: 300px;
-	text-align: center;
-	float: left;
-	position:relative;
-	border:1px solid blue;
-}
-
-.productHeader{
-	height:50%;
-}
-
-.productCenter{
-	height:35%;
-}
-
-.productFooter{
-	height:15%;
-	background-color:#E4184B;
-}
-
-.productTitle{
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow:ellipsis;
-	
-	height:30%;
+.productCarrouselLink{
+	text-decoration:none;
+	color:white;
 	font-weight:bold;
 }
 
+.productCarrouselLink:hover{
+	text-decoration:none;
+	color:white;
+}
+
+
+
+
+.product{
+	margin-bottom:1%;
+}
+
+
+.productHeader{
+
+	height:195px;
+}
+
+
+.productCenter{
+	border-right:1px solid black;
+	border-left:1px solid black;
+
+	height:115px;
+}
+
+
 .productIcon{
-	text-align: left;
 	width:100%;
 	height:100%;
 }
@@ -193,12 +210,44 @@ form .buttons{
 	height:100%;
 }
 
+.productTitle{
+	font-weight:bold;
+	text-align:center;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow:ellipsis;
+
+}
+
 .productInfos{
 
+
+	text-align:center;
+		
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow:ellipsis;
 }
 
-.productRating{
-	color:#FFDE26;
+.productFooter{
+	height:30px;
+	background-color:#E4184B;
+	
+	text-align:center;
+	line-height:30px;
+	border-right:1px solid black;
+	border-left:1px solid black;
+	border-bottom:1px solid black;
+	border-bottom-left-radius:10px;
+	border-bottom-right-radius:10px;
+}
+
+.productFooter a{
+	
+	text-decoration:none;
+	color:white;
+	font-weight:bold;
+	cursor:pointer;
 	
 }
 
@@ -209,109 +258,11 @@ form .buttons{
 
 
 
-.title{
-	text-align: center;
-}
-
-
-.img-ico{
-	
-	position :relative;
-	/* -webkit-filter: blur(1px);
-           -moz-filter: blur(1px);
-            -ms-filter: blur(1px);
-             -o-filter: blur(1px);
-                filter: blur(1px); */
-    width: 195px;
-}
-
-.img-ico img{
-	width: 195px;
-	height: 145px;
-}
-
-.description{
-	display: none;
-}
-
-.img-ico:hover .description{
-  background:rgba(0,0,0,0.8);
- 
-  
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	color: white;
-	display: block;
-}
-
-.desc{
-	padding: 5px;
-	text-align: center;
-}
-
-.cutlery{
-	margin: 2px;
-	display:inline !important;
-}
-
-.block{
-	display: inline-block;
-}
-
-.no-padding{
-	padding: 0px !important;
-}
-
-.head{
-	padding-bottom: 10px;
-}
-
-.content{
-	padding-top: 5%;
-}
 
 
 
 
 
-#login_layout{
-	width:300px;
-	
-	margin-top : 10%;
-	margin-left: 15%;
-	
-	padding : 2%;
-
-	border: 1px solid black;
-	
-}
-
-#signup_layout{
-	width:400px;
-	
-	margin-top : 10%;
-	margin-left: 15%;
-	
-	padding : 1%;
-
-	border: 1px solid black;
-	
-}
-
-.ico-button{
-	border-radius: 50%;
-}
-
-.ico-button .fa:hover{
-	font-height: 30px;
-}
-
-
-
-.rounded-input{
-	border-radius: 40px;
-}
 
 
 
