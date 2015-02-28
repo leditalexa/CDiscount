@@ -42,7 +42,8 @@ var app = angular.module("BestWinesApp", ["ngResource"])
     	
     	$scope.getCarrouselFrom = function(url){
     		$http.get(url).success(function(data){
-    			$scope.carrousel = data.data.items;
+    			
+    			$scope.carrousel = data.content;
     		}).error(function (data){
     			
     		});
@@ -245,7 +246,7 @@ var app = angular.module("BestWinesApp", ["ngResource"])
 	
 	$scope.getMealSearchResultFrom = function(url){
 		$http.get(url).success(function(data){
-			$scope.mealSearchResult = data.data.items;
+			$scope.mealSearchResult = data.content;
 		}).error(function (data){
 			
 		});
@@ -266,7 +267,7 @@ var app = angular.module("BestWinesApp", ["ngResource"])
 		return ($scope.mealSearchNumber < $scope.mealSearchResult.length);	
 	};
 	
-	$scope.getMealSearchResultFrom(home_url+"rest/recipe/find/thon");
+	$scope.getMealSearchResultFrom(home_url+"rest/recipe/find/choucroute");
 	
 	
 }])
