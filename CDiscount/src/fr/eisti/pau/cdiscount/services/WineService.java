@@ -6,23 +6,45 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.ws.rs.core.MediaType;
+
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.JDOMException;
+import org.jdom.input.SAXBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.config.ClientConfig;
+import com.sun.jersey.api.client.config.DefaultClientConfig;
 
+import fr.eisti.pau.cdiscount.domain.Recipe;
 import fr.eisti.pau.cdiscount.domain.Wine;
 
 public class WineService {
-	
+
+	private final Logger log = LoggerFactory.getLogger(getClass());
+
+	public List<Wine> find(Wine wine){
+		return find(wine.getName());
+	}
+
 	public List<Wine> find(String keyword){
 		JSONObject data = getSearchJSON();
 
@@ -52,10 +74,16 @@ public class WineService {
 				Gson gson = new Gson();
 				if(res != null){
 					JsonObject elt = gson.fromJson(res, JsonObject.class);
-					JsonArray products = elt.getAsJsonArray("Products");
+					JsonArray products = new JsonArray();
+					if(elt.get("Products") instanceof JsonArray){
+						products = elt.getAsJsonArray("Products");
+					}
 					List<Wine> wines = new LinkedList<Wine>();
-					for (JsonElement jsonElement : products) {
-						wines.add(gson.fromJson(jsonElement, Wine.class));
+					if(products != null){
+						for (JsonElement jsonElement : products) {
+							wines.add(gson.fromJson(jsonElement, Wine.class));
+						}
+
 					}
 					return wines;
 				}
@@ -70,9 +98,48 @@ public class WineService {
 		}
 		return null;
 	}
-	
-	
-	
+
+	public List<Wine> findAssociated(Recipe recipe){
+		List<Wine> res = new LinkedList<Wine>();
+		ClientConfig config = new DefaultClientConfig();
+		Client client = Client.create(config);
+		WebResource service;
+		String response = "";
+		try {
+			service = client.resource(
+					"http://www.platsnetvins.com/api-xml/eisti-tcv.5vh4e7-accords-plat-xml.php?nomplat=" 
+							+ URLEncoder.encode(recipe.getTitle(), "UTF-8"));
+			response = service.accept(MediaType.TEXT_PLAIN).get(String.class);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		res = fromPlatsNetVinXML(response);
+		log.info("For recipe '"+recipe.getTitle()+"', "+res.size()+" wine found");
+		return res;
+	}
+
+	private List<Wine> fromPlatsNetVinXML(String xml){
+		SAXBuilder sxb = new SAXBuilder();
+		List<Wine> res = new LinkedList<Wine>();
+		try {
+			Document document = sxb.build(new StringReader(xml));
+			Element root = document.getRootElement();
+			Element accords = root.getChild("accords");
+			List<Element> xmlWines = accords.getChildren();
+			for (Element wine : xmlWines) {
+				List<Wine> test = find(wine.getChild("nom-vin").getValue()+" vin "+wine.getChild("type-vin").getValue());
+				log.info(wine.getChild("nom-vin").getValue()+" -> found :"+test.size());
+				res.addAll(test);
+			}
+			
+		} catch (JDOMException | IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+
+		return res;
+	}
+
 	private JSONObject getSearchJSON(){
 		String string = "";
 		InputStream is;
@@ -80,7 +147,7 @@ public class WineService {
 		try {
 			is = getClass().getResourceAsStream("/SearchRequest.json");
 			InputStreamReader reader = new InputStreamReader(is);
-			
+
 			BufferedReader br = new BufferedReader(reader);
 			String line;
 			while ((line = br.readLine()) != null) {

@@ -7,6 +7,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import fr.eisti.pau.cdiscount.domain.Recipe;
 import fr.eisti.pau.cdiscount.services.WineService;
 import fr.eisti.pau.cdiscount.util.CDiscountResponse;
 
@@ -22,4 +23,12 @@ public class WineRestService {
 		return CDiscountResponse.build("wines", wineService.find(keyword), 0);
 	}
 
+	@GET
+	@Path("/associated/{keyword}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response findAssociated(@PathParam("keyword") String keyword){
+		Recipe test = new Recipe();
+		test.setTitle(keyword);
+		return  CDiscountResponse.build("ok", wineService.findAssociated(test), 0);//CDiscountResponse.build("", wineService.findAssociated(test), 0);
+	}
 }
