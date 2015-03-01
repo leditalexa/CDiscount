@@ -5,7 +5,7 @@ var home_url = "http://localhost:8080/CDiscount/";
 var lang_dir = "locale/";
 var lang = "fr-FR";
 
-var app = angular.module("BestWinesApp", ["ngResource"])
+var app = angular.module("BestWinesApp", ["ngResource","ui-rangeSlider"])
 
  .config(function($locationProvider) {
     $locationProvider.html5Mode(true); 
@@ -21,10 +21,9 @@ var app = angular.module("BestWinesApp", ["ngResource"])
     };
 })
 
- 
+
   
-  
- .service("carrouselService", function ($http) {  
+.service("carrouselService", function ($http) {  
     this.getCarrouselUtils = function($scope) {
     	
     	
@@ -111,6 +110,36 @@ var app = angular.module("BestWinesApp", ["ngResource"])
 	
 })
 
+.factory("Wines", function ($http, $window) {  
+	/* Wine Functions */
+	var Wine = {};
+	
+	Wine.getWineDifficulty = function(wine){
+		return new Array(wine.difficulty);
+	};
+	
+	Wine.getWinePrice = function(wine){
+		return new Array(wine.cost);
+	};
+	
+	Wine.getWineIcon = function(wine){
+		if(wine.mainImageUrl){
+			return wine.mainImageUrl; 
+		}else{
+			return home_url+"img/not_available_icon.jpg";
+		}
+		
+	};
+	
+	Wine.getWineRating = function(wine){
+		return new Array(wine.rating);
+	};
+	
+	
+	
+	return Wine;
+	
+})
 
 .filter('slice', function() {
    return function(arr, start, end) {
@@ -124,105 +153,90 @@ var app = angular.module("BestWinesApp", ["ngResource"])
 
   
   
-.controller("WinesCtrl", ["$scope",  "$window", "$location", "$http", "translationService", "Meals",
-                          function($scope, $window, $location, $http, translationService, Meals) {	
+.controller("WinesCtrl", ["$scope",  "$window", "$location", "$http", "translationService", "Meals", "Wines", "carrouselService",
+                          function($scope, $window, $location, $http, translationService, Meals, Wines, carrouselService) {	
 	 
+
+	
+	translationService.getTranslation($scope, lang);
+
+	
 	$scope.Meals = Meals;
+	$scope.Wines = Wines;
 	
-	$scope.nom_marmiton = $location.search().name;
-	$scope.id_marmiton = $location.search().id;
-	
-	$scope.request = home_url+"rest/wine/find/"+$scope.nom_marmiton+"_"+$scope.id_marmiton;
-	
-	$scope.result = [];	
-	$scope.error = "";
-	
-	$scope.sendRequest = function(request){
-		$http.get(request).success(function(data){
-			$scope.result = data;
+	/* Requests */
+	$scope.getWineFrom = function(url){
+		$scope.wineSearchNumber = 4;
+		$http.get(url).success(function(data){
+			$scope.wines = data.content;
 		}).error(function (data){
 			$scope.error = data;
 		});
 	};
-
 	
-	$scope.onclickSendRequest = function(){
-		$scope.result = [];
-		$scope.error = "";
-		$scope.sendRequest($scope.request);
+	$scope.doMealCarrouselSearch = function(){
+		$scope.getCarrouselFrom(home_url+"rest/recipe/find/"+$scope.mealSearch);
 	};
 	
-}])
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
- 
-  
-  
-
-
-
-
-
-
-
-
-.controller("MealCarrouselCtrl1", ["$scope",  "$http", "translationService", "Meals", "carrouselService",
-                                  function($scope, $http, translationService, Meals, carrouselService) {	
-	translationService.getTranslation($scope, lang);
-
-	$scope.Meals = Meals;
-	
-	carrouselService.getCarrouselUtils($scope);
-	
-	$scope.carrouselSearch = "thon";
-	$scope.carrousel_request = $scope.carrousel_url+$scope.carrouselSearch;
-	$scope.getCarrouselFrom($scope.carrousel_request);
-
-
-}])
-
-
-.controller("MealCarrouselCtrl2", ["$scope",  "$http", "$location", "translationService", "Meals", "carrouselService",
-                                  function($scope, $http, $location, translationService, Meals, carrouselService) {	
-	translationService.getTranslation($scope, lang);
-
-	$scope.Meals = Meals;
-	
-	carrouselService.getCarrouselUtils($scope);
-	
-	$scope.nom_marmiton = $location.search().name;
-	
-	$scope.carrouselSearch = $scope.nom_marmiton;
-
-	$scope.doCarrouselSearch = function(){
-		var carrousel_request =  $scope.carrousel_url+$scope.carrouselSearch;
-		$scope.getCarrouselFrom(carrousel_request);
+	$scope.doWineKeywordSearch = function(){
+		$scope.getWineFrom(home_url+"rest/wine/find/"+$scope.wineSearch);
 	};
 	
-
-
+	$scope.doWineFromMealSearch = function(){
+		$scope.getWineFrom(home_url+"rest/wine/associated/"+$scope.mealSearch);
+	};
+	/* Requests */
+	
+	
+	/* Meal form */
+	$scope.mealSearch = $location.search().name;
+	/* Meal form */
+	
+	/* carrousel for meal search */
+	carrouselService.getCarrouselUtils($scope);
+	/* carrousel for meal search */
+	
+	/* wine form */
+	$scope.wineSearch = "";
+	
+	$scope.wine_price = {
+			min:15,
+			max:200
+	};
+	/* wine form */
+	
+	
+	/* wine output */
+	$scope.wines = [];
+	
+	$scope.wineSearchNumber = 4;
+	
+	$scope.wineSearchNumberIncrement = 4;
+	
+	$scope.loadMoreWineSearchResult = function(){
+		$scope.wineSearchNumber += $scope.wineSearchNumberIncrement;
+	};
+	
+	$scope.showWineSearchResult = function(){
+		return ($scope.wines.length!=0);	
+	};
+	
+	
+	$scope.showLoadMoreWineSearchResult = function(){
+		return ($scope.wineSearchNumber < $scope.wines.length);	
+	};
+	/* wine output */
+	
+	
+	if($scope.mealSearch != ""){
+		$scope.doWineFromMealSearch();
+	}
+	
+	
 }])
-
-
-
-
-
-
-
-
-
-.controller("MealsCtrl", ["$scope",  "$window", "$location", "$http", "translationService", "Meals",
+  
+  
+.controller("MealsCtrl", ["$scope",  "$window", "$location", "$http", "translationService", "Meals", 
                           function($scope, $window, $location, $http, translationService, Meals) {	
 	
 	translationService.getTranslation($scope, lang);
@@ -270,7 +284,77 @@ var app = angular.module("BestWinesApp", ["ngResource"])
 	$scope.getMealSearchResultFrom(home_url+"rest/recipe/find/choucroute");
 	
 	
+}])  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+ 
+  
+  
+
+
+
+
+
+
+
+
+.controller("RandomMealCarrouselCtrl", ["$scope",  "$http", "translationService", "Meals", "carrouselService",
+                                  function($scope, $http, translationService, Meals, carrouselService) {	
+	translationService.getTranslation($scope, lang);
+
+	$scope.Meals = Meals;
+	
+	carrouselService.getCarrouselUtils($scope);
+	
+	$scope.carrouselSearch = "thon";
+	$scope.carrousel_request = $scope.carrousel_url+$scope.carrouselSearch;
+	$scope.getCarrouselFrom($scope.carrousel_request);
+
+
 }])
+
+
+
+.controller("KeywordMealCarrouselCtrl", ["$scope",  "$http", "$location", "translationService", "Meals", "carrouselService", "globalVarService",
+                                  function($scope, $http, $location, translationService, Meals, carrouselService, globalVarService) {	
+	translationService.getTranslation($scope, lang);
+
+	$scope.Meals = Meals;
+	
+	carrouselService.getCarrouselUtils($scope);
+	
+	$scope.nom_marmiton = $location.search().name;
+	if($scope.nom_marmiton!=""){
+		 globalVarService.setMealSearchValue($scope.nom_marmiton);
+	}
+	$scope.carrouselSearch = globalVarService.getMealSearchValue;
+
+	$scope.doCarrouselSearch = function(){
+		var carrousel_request =  $scope.carrousel_url+$scope.carrouselSearch;
+		$scope.getCarrouselFrom(carrousel_request);
+	};
+	
+
+
+}])
+
+
+
+
+
+
+
+
+
+
 
 
 

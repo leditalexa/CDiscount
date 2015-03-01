@@ -38,6 +38,10 @@
 					<script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
 					<script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular-resource.min.js"></script>
 				-->
+				<!-- AngularJS RangeSlider Local Integration -->
+				<link rel="stylesheet" href="js/libs/angularJS/rangeSlider/rangeSlider.css" >
+				<script type="text/javascript" src="js/libs/angularJS/rangeSlider/rangeSlider.js"></script>
+			
 			
 			<!-- Main script files -->
 			<script type="text/javascript" src="js/main_app.js"></script>
@@ -73,7 +77,7 @@
 		<!-- BEGIN Meal Carroussel -->
           
   
-		  <div ng-controller="MealCarrouselCtrl1">
+		  <div ng-controller="RandomMealCarrouselCtrl">
 			<!-- BEGIN Block of Products -->			
 			<div id="myCarousel"  
 				class="productCarrouselGrid slide carousel row">
@@ -161,23 +165,34 @@
 	
 
 		<div ng-controller="MealsCtrl" >
-		<!-- BEGIN My Meal Search Toolbar -->
-		<div id="mealtoolbar" class="row">
-	
-				<!-- BEGIN My Meal Search Toolbar - Image-->
-				<div class="col-md-2 col-md-offset-2" >
-					<img src="img/icone-repas.jpg" class="img-circle" />
-				</div><!-- END My Meal Search Toolbar - Image-->
-				<!-- BEGIN My Meal Search Toolbar - Form part -->
-				<div class="col-md-6">
-					<form role="form" ng-submit="doMealSearch()" novalidate>
-						<p class="input-group inputSearch">	
-						 	<input type="text" class="form-control rounded-input input-group-lg" id="Meal" name="Meal" ng-model="mealSearch" placeholder="Trouver un plat, une recette, une idée de repas..."/>			
-						    <span class="input-group-addon rounded-input" ng-click="doMealSearch()"><i class="fa fa-search"></i></span>
-						</p>
-					 </form>
-				 </div><!-- END My Meal Search Toolbar - Form part -->			
-		</div><!-- END My Meal Search Toolbar -->
+		
+	  	  		<!-- BEGIN My Meal Search Toolbar -->
+				<div class="producttoolbar row">
+			
+						<!-- BEGIN My Meal Search Toolbar - Image-->
+						<div class="mealToolbarIcon col-md-2 col-md-offset-1" >
+							<img src="img/icone-repas.jpg" class="img-circle" />
+						</div><!-- END My Meal Search Toolbar - Image-->
+						<!-- BEGIN My Meal Search Toolbar - Form part -->
+						<div class="mealForm col-md-6 col-md-offset-1">
+						
+						
+							<div class="row">
+								
+								<form role="form" ng-submit="doMealSearch()" novalidate>
+												
+										<div class="mealToolbarInput  input-group">								
+										 	<input type="text" class="form-control rounded-input input-group-lg"  ng-model="mealSearch" placeholder="Trouver un plat, une recette, une idée de repas..."/>			
+										    <span class="input-group-addon rounded-input" ng-click="doMealSearch()"><i class="fa fa-search"></i></span>
+										</div>
+										
+								</form>
+										
+							</div>
+						</div>
+									
+ 		
+				</div><!-- END My Meal Search Toolbar -->
 		
 	
 		

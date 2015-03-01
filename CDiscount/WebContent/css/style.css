@@ -47,41 +47,50 @@
 
 
 
-#mealtoolbar{
+
+.producttoolbar{
 	margin-bottom:2%;
 	background-color:#E4184B;
+	color:white;
 	text-align:center;	
 }
 
-#mealtoolbar img{
+.producttoolbar img{
+	
 	height:125px;
+	width:125px;
 }
 
-#mealtoolbar .inputSearch{
-	margin-top:8%;
+.mealToolbarIcon{
+	margin-top:1%;
+	margin-bottom:1%;
 }
 
-
-
-#winetoolbar{
-	margin-bottom:2%;
-	background-color:#E4184B;
-	text-align:center;	
+.mealToolbarInput{
+	margin-top:10%;
+	margin-bottom:3%;
 }
 
-#winetoolbar img{
-	height:125px;
+.wineToolbarIcon{
+	margin-top:5%;
+	
 }
 
-#winetoolbar .inputSearch{
-	margin-top:8%;
+.wineInputGroup{
+	margin-top:3%;
 }
 
+#wineRangeSlider{
+	border-radius:15px;
+}
 
+#wineRangeSlider .ngrs-handle{
+	border-radius:15px;
+}
 
+#winetoolbar .radio{
 
-
-
+}
 
 
 
