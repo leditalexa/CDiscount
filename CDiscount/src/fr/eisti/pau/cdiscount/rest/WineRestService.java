@@ -21,7 +21,7 @@ import fr.eisti.pau.cdiscount.util.CDiscountResponse;
 
 @Path("/wine")
 public class WineRestService {
-	private final static String[] banWords = {"facile", "rapide", "aux", ",", "[?'*]"};
+	private final static String[] banWords = {"facile", "rapide", "aux", ",", "[?'*]\\s"};
 	private final WineService wineService = new WineService(); 
 
 	@GET
@@ -29,7 +29,7 @@ public class WineRestService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response find(@PathParam("keyword") String keyword){
 		List<Wine> tmp = wineService.find(formatKeywords(keyword, 10));
-		//List<WineDto> ttmp = WineDto.setTransport(tmp);
+	//	List<WineDto> ttmp = WineDto.setTransport(tmp);
 		return CDiscountResponse.build("wines", tmp, 0);
 	}
 
@@ -40,8 +40,9 @@ public class WineRestService {
 		Recipe test = new Recipe();
 		test.setTitle(keyword);
 		test.setKeyword(formatKeywords(keyword, 3));
-		List<Wine> tmp = wineService.findAssociated(test); //WineDto.setTransport(tmp)
-		return  CDiscountResponse.build("ok", tmp, 0);//CDiscountResponse.build("", wineService.findAssociated(test), 0);
+		List<Wine> tmp = wineService.findAssociated(test);
+	//	List<WineDto> ttmp = WineDto.setTransport(tmp);
+		return  CDiscountResponse.build("ok", tmp, 0); //CDiscountResponse.build("", wineService.findAssociated(test), 0);
 	}
 
 	
