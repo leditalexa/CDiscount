@@ -21,7 +21,7 @@ import fr.eisti.pau.cdiscount.util.CDiscountResponse;
 
 @Path("/wine")
 public class WineRestService {
-	private final static String[] banWords = {"facile", "rapide", "aux", ","};
+	private final static String[] banWords = {"facile", "rapide", "aux", ",", "[?'*]"};
 	private final WineService wineService = new WineService(); 
 
 	@GET
@@ -29,7 +29,8 @@ public class WineRestService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response find(@PathParam("keyword") String keyword){
 		List<Wine> tmp = wineService.find(formatKeywords(keyword, 10));
-		return CDiscountResponse.build("wines", WineDto.setTransport(tmp), 0);
+		//List<WineDto> ttmp = WineDto.setTransport(tmp);
+		return CDiscountResponse.build("wines", tmp, 0);
 	}
 
 	@GET
@@ -39,11 +40,12 @@ public class WineRestService {
 		Recipe test = new Recipe();
 		test.setTitle(keyword);
 		test.setKeyword(formatKeywords(keyword, 3));
-		return  CDiscountResponse.build("ok", wineService.findAssociated(test), 0);//CDiscountResponse.build("", wineService.findAssociated(test), 0);
+		List<Wine> tmp = wineService.findAssociated(test); //WineDto.setTransport(tmp)
+		return  CDiscountResponse.build("ok", tmp, 0);//CDiscountResponse.build("", wineService.findAssociated(test), 0);
 	}
+
 	
-	
-	private static String formatKeywords(String str, int nbKeyword){
+	private static String formatKeywords(String str, int nbKeywordMax){
 		String[] copy = str.split(" ");;
 		ArrayList<String> tmp = new ArrayList(Arrays.asList(copy));
 		String retour = "";
@@ -51,13 +53,13 @@ public class WineRestService {
 		
 		// elevement des mots < 3 lettres
 		while(j<tmp.size()){
-			if(tmp.get(j).length() < 3){
+			if(tmp.get(j).length() < 4){
 				tmp.remove(j);
 			}else ++j;	
 		}
 		
 		// met sous forme de string
-		int indice = (tmp.size() < nbKeyword) ? tmp.size() : nbKeyword;
+		int indice = (tmp.size() < nbKeywordMax) ? tmp.size() : nbKeywordMax;
 		for(int i=0;i<indice;++i){ retour += tmp.get(i)+" ";}
 		
 		// enleve les mots ban
@@ -67,7 +69,7 @@ public class WineRestService {
 			Matcher m = p.matcher(s);
 			s = m.replaceAll("");
 		}
-		System.out.println("keywords : "+s+"   ("+str+")");
+		System.out.println("keywords : "+s+" ("+str+")");
 		return s;
 	}
 }

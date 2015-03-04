@@ -1,7 +1,10 @@
 package fr.eisti.pau.cdiscount.dto;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import fr.eisti.pau.cdiscount.domain.Wine;
 
@@ -12,7 +15,6 @@ public class WineDto {
 	private String price;
 	private String rating;
 	private String description;
-	
 	
 	
 	public WineDto() {
@@ -37,6 +39,7 @@ public class WineDto {
 		this.price = vin.getBestOffer().getSalePrice();
 		this.rating = vin.getRating();
 		this.description = vin.getDescription();
+	
 	}
 
 	public static List<WineDto> setTransport(List<Wine> in){
@@ -44,7 +47,15 @@ public class WineDto {
 		for(Wine w : in){ out.add(new WineDto(w));}
 		return out;
 	}
-	
+
+	public static List<Wine> eraseDoublon(List<Wine> in){
+		Set<Wine> tmp = new HashSet<>();
+		tmp.addAll(in);
+		List<Wine> out = new ArrayList<>(tmp);
+		return out;
+	}
+
+
 	public String getTitle() {return title;}
 	public void setTitle(String title) {this.title = title;}
 

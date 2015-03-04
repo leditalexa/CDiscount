@@ -46,7 +46,7 @@ public class WineService {
 	}
 
 	public List<Wine> find(String keyword){		
-		JSONObject search;
+		JSONObject search, search1;
 		List<Wine> res = new LinkedList<>();
 		JSONObject data = getSearchJSON();
 		
@@ -59,26 +59,28 @@ public class WineService {
 			// Autres pages
 			int nbPages = 0;
 			try {
-				nbPages = setStringToJSON(tmp).getInt("PageNumber");
+				nbPages = setStringToJSON(tmp).getInt("PageCount");
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
-			
-			for(int i=0;i<nbPages;++i){
-				search = setParams(data, keyword, i);
-				res.addAll(setListeVin(getCDiscountReponse(data, search)));
+
+			for(int i=1;i<nbPages;++i){
+				JSONObject data1 = getSearchJSON();
+				search1 = setParams(data1, keyword, i);
+				res.addAll(setListeVin(getCDiscountReponse(data1, search1)));
 			}
 			return res;
 		}
 		return null;
 	}
 	
+	
 	private JSONObject setParams(JSONObject data, String keyword, int page){
 		JSONObject search = null;
 		try {
 			search = data.getJSONObject("SearchRequest");
 			search.put("Keyword", keyword);
-			search.put("PageNumber", page);
+			JSONObject tmp = search.optJSONObject("Pagination").put("PageNumber", page);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
