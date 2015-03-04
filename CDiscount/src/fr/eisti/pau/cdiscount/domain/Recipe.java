@@ -14,6 +14,7 @@ public class Recipe {
 	private int rating;
 	private int ratingCount;
 	private String title;
+	private String keyword;
 	private Set<RecipePicture> pictures;
 
 	
@@ -24,7 +25,7 @@ public class Recipe {
 
 	public Recipe(String author, int cost, int difficulty, String guid, int id,
 			Boolean isTested, Boolean isVegetarian, int rating,
-			int ratingCount, String title, Set<RecipePicture> pictures) {
+			int ratingCount, String title, String keyword, Set<RecipePicture> pictures) {
 		super();
 		this.author = author;
 		this.cost = cost;
@@ -36,6 +37,7 @@ public class Recipe {
 		this.rating = rating;
 		this.ratingCount = ratingCount;
 		this.title = title;
+		this.keyword = keyword;
 		this.pictures = pictures;
 	}
 
@@ -149,7 +151,14 @@ public class Recipe {
 		this.pictures = pictures;
 	}
 
+	public String getKeyword() {
+		return keyword;
+	}
 
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 	@Override
 	public String toString() {
 		return "Recipe [author=" + author + ", cost=" + cost + ", difficulty="
