@@ -9,7 +9,7 @@
 
 
 .rounded-input{
-	border-radius: 40px;
+	border-radius: 15px;
 }
 
 
@@ -20,6 +20,8 @@
 
 
 
+
+/* Navigation bar */
 
 
 
@@ -42,6 +44,48 @@
 	color:white;
 	font-weight:bold;
 }
+
+
+
+
+
+
+
+#home_text{
+	background-color:#E4184B;
+	color:white;
+	font-weight:bold;
+	text-align:center;
+	height:100px;
+	vertical-align:middle;
+}
+
+
+#home_layout{
+	margin-top:5%;
+	text-align:center;
+}
+
+#home_layout input{
+	margin-bottom:1%;
+}
+
+#home_layout .button{
+	margin-top:2%;
+	display:inline;
+	width:49%;
+	background-color:#E4184B;
+	color:white;
+	font-weight:bold;
+}
+
+
+
+
+
+
+
+
 
 
 
