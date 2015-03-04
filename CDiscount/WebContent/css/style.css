@@ -101,8 +101,8 @@
 
 .producttoolbar img{
 	
-	height:125px;
-	width:125px;
+	height:120px;
+	width:120px;
 }
 
 .mealToolbarIcon{
@@ -240,7 +240,6 @@
 
 
 .productHeader{
-
 	height:195px;
 }
 
@@ -248,12 +247,15 @@
 .productCenter{
 	border-right:1px solid black;
 	border-left:1px solid black;
-
-	height:115px;
+	padding-top:3px;
+	height:90px;
 }
 
 
-.productIcon{
+.productIcon {
+	margin-left:auto;
+	margin-right:auto;
+	padding: 5px;
 	width:100%;
 	height:100%;
 }
@@ -270,6 +272,11 @@
 	overflow: hidden;
 	text-overflow:ellipsis;
 
+}
+
+.productPrice{
+	font-weight:bold;
+	font-size: 18pt;
 }
 
 .productInfos{

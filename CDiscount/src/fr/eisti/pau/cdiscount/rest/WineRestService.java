@@ -29,8 +29,8 @@ public class WineRestService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response find(@PathParam("keyword") String keyword){
 		List<Wine> tmp = wineService.find(formatKeywords(keyword, 10));
-	//	List<WineDto> ttmp = WineDto.setTransport(tmp);
-		return CDiscountResponse.build("wines", tmp, 0);
+		List<WineDto> ttmp = WineDto.setTransport(tmp);
+		return CDiscountResponse.build("wines", ttmp, 0);
 	}
 
 	@GET
@@ -41,8 +41,8 @@ public class WineRestService {
 		test.setTitle(keyword);
 		test.setKeyword(formatKeywords(keyword, 3));
 		List<Wine> tmp = wineService.findAssociated(test);
-	//	List<WineDto> ttmp = WineDto.setTransport(tmp);
-		return  CDiscountResponse.build("ok", tmp, 0); //CDiscountResponse.build("", wineService.findAssociated(test), 0);
+		List<WineDto> ttmp = WineDto.setTransport(tmp);
+		return  CDiscountResponse.build("ok", ttmp, 0); //CDiscountResponse.build("", wineService.findAssociated(test), 0);
 	}
 
 	

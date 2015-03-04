@@ -238,16 +238,16 @@
 								
 							
 									<!-- BEGIN product Element infos - for meals -->
-									<div class="productInfos">
-									
+									<div class="productInfos">									
+											<i title="{{product.title}}">{{product.title}}</i>
+												
+											<br/>									
 
 											<i class="cutlery fa fa-star productRating" ng-repeat="t in Wines.getWineRating(product) track by $index"></i>
 											
 											<br/>	
 									
-											
-											<i class="fa fa-eur cutlery" title="{{locale_string.MEAL_PRICE}}"
-												ng-repeat="t in Wines.getWinePrice(product) track by $index"></i>
+											<i class="productPrice">{{product.price}} <i class="fa fa-eur cutlery"></i></i>
 												
 											<br/>	
 											
@@ -263,7 +263,7 @@
 								
 								
 								<a ng-click="Meals.goToWines(product)">
-								Ajouter au panier
+								Consulter
 									<i class="fa fa-shopping-cart cutlery" title="{{locale_string.SEE_WINES}}"></i>
 								</a>	
 									

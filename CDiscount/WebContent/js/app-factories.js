@@ -11,28 +11,30 @@ var app = angular.module("BestWinesApp")
 	
 	var Wine = {};
 	
-
-	Wine.getWineDifficulty = function(wine){
-		return new Array(wine.difficulty);
-	};
-	
-	Wine.getWinePrice = function(wine){
-		return new Array(wine.cost);
+	Wine.getWineTitle = function(wine){
+		return new Array(wine.title);
 	};
 	
 	Wine.getWineIcon = function(wine){
-		if(wine.mainImageUrl){
-			return wine.mainImageUrl; 
+		if(wine.url_icon){
+			return wine.url_icon; 
 		}else{
 			return home_url+"img/not_available_icon.jpg";
 		}
 		
+	};
+		
+	Wine.getWinePrice = function(wine){
+		return new Array(wine.price);
 	};
 	
 	Wine.getWineRating = function(wine){
 		return new Array(wine.rating);
 	};
 	
+	Wine.getWineDescription = function(wine){
+		return new Array(wine.description);
+	};	
 	
 	
 	return Wine;

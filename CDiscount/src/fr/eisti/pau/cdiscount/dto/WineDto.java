@@ -34,6 +34,7 @@ public class WineDto {
 	public WineDto(Wine vin) {
 		super();
 		this.title = vin.getName();
+		System.out.println(title);
 		this.url_icon = vin.getMainImageUrl();
 		this.priceTop = vin.getBestOffer().getPriceDetails().getReferencePrice();
 		this.price = vin.getBestOffer().getSalePrice();

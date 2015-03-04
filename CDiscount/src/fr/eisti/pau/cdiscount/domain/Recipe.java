@@ -116,14 +116,6 @@ public class Recipe {
 		this.keyword = keyword;
 	}
 
-	public String getKeyword() {
-		return keyword;
-	}
-
-
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
-	}
 	@Override
 	public String toString() {
 		return "Recipe [author=" + author + ", cost=" + cost + ", difficulty="

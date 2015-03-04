@@ -101,7 +101,7 @@ public class WineService {
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			String res = in.readLine();
-			
+			System.out.println(res);
 			if(res != null){return res;}
 
 			System.out.println("\nREST Service Invoked Successfully..");
@@ -137,7 +137,7 @@ public class WineService {
 				return new JSONObject(str);
 			} catch (JSONException e) {e.printStackTrace();}
 		}
-		return null;	
+		return null;
 	}
 		
 

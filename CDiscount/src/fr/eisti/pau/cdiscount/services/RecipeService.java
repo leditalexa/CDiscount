@@ -43,7 +43,6 @@ public class RecipeService {
 	private URI getMarmitonURI(String keyword){
 		try{
 			keyword = URLEncoder.encode(keyword, "UTF-8");
-			System.out.println(keyword);
 			return UriBuilder.fromUri("http://m.marmiton.org/webservices/json.svc/GetRecipeSearch?SiteId=1&KeyWord="+keyword+"&SearchType=0&ItemsPerPage=30&StartIndex=1").build();
 		}catch(UnsupportedEncodingException e){
 			return null;
