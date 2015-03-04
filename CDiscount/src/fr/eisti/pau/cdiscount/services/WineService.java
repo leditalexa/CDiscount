@@ -45,60 +45,127 @@ public class WineService {
 		return find(wine.getName());
 	}
 
-	public List<Wine> find(String keyword){
+	public List<Wine> find(String keyword){		
+		JSONObject search;
+		List<Wine> res = new LinkedList<>();
 		JSONObject data = getSearchJSON();
-
-		if(data!=null){
+		
+		if(data != null){
+			// Page 0
+			search = setParams(data, keyword, 0);
+			String tmp = getCDiscountReponse(data, search);
+			res.addAll(setListeVin(tmp));
+			
+			// Autres pages
+			int nbPages = 0;
 			try {
-				JSONObject search = data.getJSONObject("SearchRequest");
-				search.put("Keyword", keyword);
-			} catch (JSONException e1) {
-				e1.printStackTrace();
-			}
-
-			try{
-				URL url = new URL("http://api.cdiscount.com/OpenApi/json/search");
-				URLConnection connection = url.openConnection();
-				connection.setDoOutput(true);
-				connection.setRequestProperty("Content-Type", "application/json");
-				connection.setConnectTimeout(5000);
-				connection.setReadTimeout(5000);
-				OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
-				out.write(data.toString());
-				out.close();
-
-				BufferedReader in = new BufferedReader(new InputStreamReader(
-						connection.getInputStream()));
-
-				String res = in.readLine();
-				Gson gson = new Gson();
-				if(res != null){
-					JsonObject elt = gson.fromJson(res, JsonObject.class);
-					JsonArray products = new JsonArray();
-					if(elt.get("Products") instanceof JsonArray){
-						products = elt.getAsJsonArray("Products");
-					}
-					List<Wine> wines = new LinkedList<Wine>();
-					if(products != null){
-						for (JsonElement jsonElement : products) {
-							wines.add(gson.fromJson(jsonElement, Wine.class));
-						}
-
-					}
-					return wines;
-				}
-
-				System.out.println("\nREST Service Invoked Successfully..");
-				in.close();
-
-			}catch(IOException e){
-				System.out.println("Error with CDiscount REST service");
+				nbPages = setStringToJSON(tmp).getInt("PageNumber");
+			} catch (JSONException e) {
 				e.printStackTrace();
 			}
+			
+			for(int i=0;i<nbPages;++i){
+				search = setParams(data, keyword, i);
+				res.addAll(setListeVin(getCDiscountReponse(data, search)));
+			}
+			return res;
 		}
 		return null;
 	}
+	
+	private JSONObject setParams(JSONObject data, String keyword, int page){
+		JSONObject search = null;
+		try {
+			search = data.getJSONObject("SearchRequest");
+			search.put("Keyword", keyword);
+			search.put("PageNumber", page);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return search;
+	}
+	
+	private String getCDiscountReponse(JSONObject data, JSONObject search){
+		try{
+			URL url = new URL("http://api.cdiscount.com/OpenApi/json/search");
+			URLConnection connection = url.openConnection();
+			connection.setDoOutput(true);
+			connection.setRequestProperty("Content-Type", "application/json");
+			connection.setConnectTimeout(5000);
+			connection.setReadTimeout(5000);
+			OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
+			out.write(data.toString());
+			out.close();
 
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			String res = in.readLine();
+			
+			if(res != null){return res;}
+
+			System.out.println("\nREST Service Invoked Successfully..");
+			in.close();
+
+		}catch(IOException e){
+			System.out.println("Error with CDiscount REST service");
+			e.printStackTrace();
+		}		
+		return null;
+	}
+
+	private List<Wine> setListeVin(String in){
+		Gson gson = new Gson();
+		JsonObject elt = gson.fromJson(in, JsonObject.class);
+		JsonArray products = new JsonArray();
+		if(elt.get("Products") instanceof JsonArray){
+			products = elt.getAsJsonArray("Products");
+		}
+		
+		List<Wine> wines = new LinkedList<Wine>();
+		if(products != null){
+			for (JsonElement jsonElement : products) {
+				wines.add(gson.fromJson(jsonElement, Wine.class));
+			}
+		}
+		return wines;
+	}
+	
+	private static JSONObject setStringToJSON(String str){
+		if(str != ""){
+			try {
+				return new JSONObject(str);
+			} catch (JSONException e) {e.printStackTrace();}
+		}
+		return null;	
+	}
+		
+
+	private JSONObject getSearchJSON(){
+		String string = "";
+		InputStream is;
+
+		try {
+			is = getClass().getResourceAsStream("/SearchRequest.json");
+			InputStreamReader reader = new InputStreamReader(is);
+
+			BufferedReader br = new BufferedReader(reader);
+			String line;
+			while ((line = br.readLine()) != null) {
+				string += line + "\n";
+			}
+			br.close();
+			reader.close();
+			is.close();
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		JSONObject json;
+		return setStringToJSON(string);
+	}
+	
+	
 	public List<Wine> findAssociated(Recipe recipe){
 		List<Wine> res = new LinkedList<Wine>();
 		ClientConfig config = new DefaultClientConfig();
@@ -108,7 +175,7 @@ public class WineService {
 		try {
 			service = client.resource(
 					"http://www.platsnetvins.com/api-xml/eisti-tcv.5vh4e7-accords-plat-xml.php?nomplat=" 
-							+ URLEncoder.encode(recipe.getTitle(), "UTF-8"));
+							+ URLEncoder.encode(recipe.getKeyword(), "UTF-8"));
 			response = service.accept(MediaType.TEXT_PLAIN).get(String.class);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
@@ -138,40 +205,6 @@ public class WineService {
 		}
 
 		return res;
-	}
-
-	private JSONObject getSearchJSON(){
-		String string = "";
-		InputStream is;
-
-		try {
-			is = getClass().getResourceAsStream("/SearchRequest.json");
-			InputStreamReader reader = new InputStreamReader(is);
-
-			BufferedReader br = new BufferedReader(reader);
-			String line;
-			while ((line = br.readLine()) != null) {
-				string += line + "\n";
-			}
-			br.close();
-			reader.close();
-			is.close();
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		JSONObject json;
-		if(string != ""){
-			try {
-				json = new JSONObject(string);
-				return json;
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-		}
-		return null;
 	}
 
 }

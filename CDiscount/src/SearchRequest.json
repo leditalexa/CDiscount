@@ -17,7 +17,7 @@
 		"Keyword": "",
 		"Pagination":
 		{
-			"ItemsPerPage": 50,
+			"ItemsPerPage": 20,
 			"PageNumber": 0
 		},
 		"SortBy": "relevance"
