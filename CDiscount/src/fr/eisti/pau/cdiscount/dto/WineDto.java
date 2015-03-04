@@ -15,13 +15,14 @@ public class WineDto {
 	private String price;
 	private String rating;
 	private String description;
+	private String url;
 	
 	
 	public WineDto() {
 		super();
 	}
 
-	public WineDto(String title, String url_icon, String priceTop, String price, String rating, String description) {
+	public WineDto(String title, String url_icon, String priceTop, String price, String rating, String description, String url) {
 		super();
 		this.title = title;
 		this.url_icon = url_icon;
@@ -29,6 +30,7 @@ public class WineDto {
 		this.price = price;
 		this.rating = rating;
 		this.description = description;
+		this.url = url;
 	}
 
 	public WineDto(Wine vin) {
@@ -40,6 +42,7 @@ public class WineDto {
 		this.price = vin.getBestOffer().getSalePrice();
 		this.rating = vin.getRating();
 		this.description = vin.getDescription();
+		this.url = vin.getBestOffer().getProductURL();
 	
 	}
 
@@ -74,4 +77,9 @@ public class WineDto {
 
 	public String getDescription() {return description;}
 	public void setDescription(String description) {this.description = description;}
+
+	public String getUrl() {return url;}
+	public void setUrl(String url) {this.url = url;}
+	
+	
 }

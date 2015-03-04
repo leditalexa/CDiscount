@@ -36,7 +36,11 @@ var app = angular.module("BestWinesApp")
 		return new Array(wine.description);
 	};	
 	
-	
+
+	Wine.goToWines = function(wine){
+		$window.location.href = wine.url;
+	};
+		
 	return Wine;
 	
 })
@@ -76,10 +80,6 @@ var app = angular.module("BestWinesApp")
 	};
 	
 
-	Meal.goToWines = function(meal){
-		$window.location.href = home_url+"wines.jsp?name="+encodeURIComponent(meal.title);
-	};
-	
 	return Meal;
 	
 });
