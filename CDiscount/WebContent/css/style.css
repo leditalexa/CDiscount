@@ -45,16 +45,20 @@
 	font-weight:bold;
 }
 
+#navtool{
+	float : right;
+	
+	margin-top : 1%;
+}
 #navName{
 	color : white;
 	font-weight: bold;
-	float : right;
-	margin-top : 1%;
+	
 }
 
-
-
-
+#navBorder{
+	border-right: 1px solid white;
+}
 
 #home_text{
 	background-color:#E4184B;

@@ -36,7 +36,13 @@
        			 <li ng-class="{ active: isActive('/wines')}"><a ng-click="loadWines()">Les vins</a></li>
        		
 	          </ul>
-	          <span id="navName" ng-show="User.isLogged">Bienvenue {{User.datas.identifiant}}</span>
+			  <div id="navtool">
+				  <span id="navName" ng-show="User.isLogged">Bienvenue {{User.datas.identifiant}} |</span> 
+				  <span id="navFlag">
+				  	<img src="img/flags/fr.png" >
+				  	<img src="img/flags/gb.png">
+				  </span>
+			  </div>
 	        </div>
 	     </nav><!-- END Navigation bar -->
 		
