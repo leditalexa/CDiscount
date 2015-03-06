@@ -16,47 +16,8 @@ var app = angular.module("BestWinesApp")
 .service("UrlProvider", function($location){
 	return {
 		HOME : "/",
-		WINES : "/wines"
+		WINES : "/wines.jsp"
 	};
-})
-
-
-.service("User", function($http){
-	
-	this.isConnected = false;
-	
-	this.url = "http://localhost:8080/CDiscount/rest/user";
-	
-	this.datas = {
-		identifiant : "",
-		password : "",
-		firstname : "",
-		lastname : "",
-		age : 0,
-		zip : ""
-	};
-	
-	this.login = function(){
-		$http.post(this.url,this.datas).success(function(data){
-			
-		});
-	};
-	
-	this.signup = function(){
-
-		$http.put(this.url,this.datas).error(function(){
-			User.isConnected = true;
-		});
-		
-		
-	};
-	
-	this.retrieve = function(user){
-		$http.get(this.url).success(function(data){
-			
-		});
-	};
-	
 })
 
 
@@ -79,6 +40,11 @@ var app = angular.module("BestWinesApp")
     	
     	
     	$scope.getCarrouselFrom = function(url){
+    		$scope.carrousel = [];
+        	
+        	$scope.carrouselStart = 0;
+        	
+        	$scope.carrouselEnd = 6;
     		$http.get(url).success(function(data){
     			
     			$scope.carrousel = data.content;

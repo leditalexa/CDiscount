@@ -27,7 +27,6 @@
 
 	<div id="central" class="container" ng-controller="NavCtrl">
 	
-		<div id="hautdepage"></div>
 	
 		<!-- Navigation bar -->
 		<nav id="appnavbar" class="navbar row">
@@ -35,8 +34,9 @@
 	          <ul class="nav navbar-nav">
 	             <li ng-class="{ active: isActive('/') }"><a ng-click="loadHome()">Home</a></li>
        			 <li ng-class="{ active: isActive('/wines')}"><a ng-click="loadWines()">Les vins</a></li>
-       			 <li ng-show="User.isConnected">Bienvenue {{User.datas.identifiant}}</li>
+       		
 	          </ul>
+	          <span id="navName" ng-show="User.isLogged">Bienvenue {{User.datas.identifiant}}</span>
 	        </div>
 	     </nav><!-- END Navigation bar -->
 		
@@ -45,13 +45,7 @@
 		<!-- The view -->	
 		<div ng-view=""></div>
 			
-			
-			
-		<!-- Go Up Button -->					
-		<div class="row" style="position:fixed;bottom:0px;background-color:black">
-			<a href="#hautdepage" style="font-weight:bold;color:white" title="Remonter">Remonter</a>			
-		</div>	
-		
+
 	</div>
 	
 	

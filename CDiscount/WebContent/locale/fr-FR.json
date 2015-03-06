@@ -13,22 +13,20 @@
 	"SEARCH_ACTION"    : "Rechercher",
 	"GO_TO_RECIPE"     : "Voir la recette sur Marmiton.org",
 	"SEE_WINES"        : "Voir les vins pour cette recette.",
-	"SEE_CDISCOUNT"    : "Voir le vin selectionné sur CDiscount.",
+	"SEE_CDISCOUNT"    : "Voir le vin selectionn&eacute; sur CDiscount.",
 	
-	"MEAL_RESULT"      : "Vous avez un plat en tête ?",
+	"MEAL_RESULT"      : "Vous avez un plat en t&ecirc;te ?",
 	"MEALS_IDEAS"      : "Votre plat",
-	"MEALS_HIGHLISTS"  : "Avez-vous essayé ces plats ?",
+	"MEALS_HIGHLISTS"  : "Avez-vous essay&eacute; ces plats ?",
 	
-	"MEAL_DIFFICULTY"  : "Difficult� de la recette",
+	"MEAL_DIFFICULTY"  : "Difficult&eacute; de la recette",
 	"MEAL_PRICE"       : "Prix de la recette",
 	
-	"HAVE_INTEREST"    : "vous intéressé ?",
+	"HAVE_INTEREST"    : "vous int&eacute;ress&eacute; ?",
 	
 	"LOAD_MORE_MEALS"  : "Afficher plus de plats",
 	
-	"GO_UP"            : "Retour en haut"
-	
-	
-	
-	
+	"GO_UP"            : "Retour en haut",
+	"CONSULT"          : "Consulter",
+	"NO_RESULTS"       : "Aucun r&eacute;sultat"
 }

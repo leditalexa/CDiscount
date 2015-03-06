@@ -7,10 +7,10 @@
 			"Brands": [],
 			"Condition": null,
 			"IncludeMarketPlace": false,
-			"Navigation": "",
+			"Navigation": "wines-spirits",
 			"Price":
 			{
-				"Max": 0,
+				"Max": 1000,
 				"Min": 0
 			}
 		},

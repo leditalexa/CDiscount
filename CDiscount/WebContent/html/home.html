@@ -1,45 +1,94 @@
 <div class="row">
 	<div id="home_text" class="col-md-8 col-md-offset-2">
 		
-			Accompagnez vos plats des meilleurs vin de CDiscount, avec BestWines
+			Accompagnez vos plats des meilleurs vins de CDiscount, avec BestWines
 	
 	</div>
 </div>
 
 <div id="home_layout" class="row">
 	<!-- BEGIN LOGIN LAYOUT -->
-	<div id="login_layout" class="col-md-6 col-md-offset-3" ng-show="isPaneShown(1)">
+	<div id="login_layout" class="col-md-6 col-md-offset-3" ng-show="!User.isLogged && !isSubscribing">
 	
 		<form name="loginForm" ng-submit="onLogin()" novalidate>
 			
 			<div class="row">
 				<label for="loginLogin" >{{locale_string.LOGIN}} :</label>
 				<input type="text" class="form-control rounded-input"
-					ng-model="User.datas.login" required/>
+					ng-model="userDatas.identifiant" required/>
 			</div>
 			
 			<div class="row">
 				<label for="loginPass">{{locale_string.PASSWORD}} :</label>
 				<input type="password" class="form-control rounded-input"
-					ng-model="User.datas.pass" required/>
+					ng-model="userDatas.password" required/>
 			</div>
 			
 			<div class="row">
 				<input class="form-control button rounded-input" type="submit" value="{{locale_string.TO_LOG_IN}}" 
 					ng-disabled="loginForm.$invalid" />
 				<input class="form-control button rounded-input" type="button" value="{{locale_string.TO_SIGN_UP}}"
-					 ng-click="setPaneShown(2)" />
+					 ng-click="subscribe(true)" />
 			</div>		
 		</form>
 		
 	</div><!-- END LOGIN LAYOUT -->
 		
 	<!-- BEGIN SIGNUP LAYOUT -->	
-	<div id="signup_layout" class="col-md-6 col-md-offset-3" ng-show="isPaneShown(2)">
+	<div id="signup_layout" class="col-md-6 col-md-offset-3" ng-show="isSubscribing">
 		<form id="signup_form" ng-submit="onSignup()">
 			<div class="row">
 				<label for="signup_login">{{locale_string.LOGIN}} :</label>
 				<input type="text" class="form-control rounded-input" id="signup_login" name="signup_login"
+					 ng-model="userDatas.identifiant"/>
+			</div>
+		
+			
+			<div class="row">
+				<label for="signup_pass">{{locale_string.PASSWORD}} :</label>
+				<input type="password" class="form-control rounded-input" id="signup_pass" name="signup_pass"
+					 ng-model="userDatas.password"/>
+			</div>
+
+			<div class="row">
+				<label for="signup_firstname">Firstname :</label>
+				<input type="text" class="form-control rounded-input" id="signup_firstname" name="signup_firstname"
+					 ng-model="userDatas.firstname"/>
+			</div>
+			<div class="row">
+				<label for="signup_lastname">Lastname :</label>
+				<input type="text" class="form-control rounded-input" id="signup_lastname" name="signup_lastname"
+					 ng-model="userDatas.lastname"/>
+			</div>
+			
+
+			<div class="row">
+				<label for="signup_age">{{locale_string.YOUR_AGE}} :</label>
+				<input type="number" class="form-control rounded-input" id="signup_age" name="signup_age"
+					 ng-model="userDatas.age"/>
+			</div>
+			
+			<div class="row">
+				<label for="signup_cp">{{locale_string.ZIP_CODE}} :</label>
+				<input type="text" class="form-control rounded-input" id="signup_cp" name="signup_cp"
+				 ng-model="userDatas.zip"/>
+			</div>
+			
+			<div class="row">
+				<input type="submit"  value="{{locale_string.TO_SIGN_UP}}" class="form-control button rounded-input" />
+				<input type="button" class="form-control button rounded-input"
+				  ng-click="subscribe(false)"
+				  value="{{locale_string.CANCEL}}"/>
+			</div>		
+		</form>
+	</div><!-- END SIGNUP LAYOUT -->
+	<!-- BEGIN ACCOUNT LAYOUT -->	
+	<div id="account_layout" class="col-md-6 col-md-offset-3" ng-show="User.isLogged">
+		<form id="account_form">
+		
+			<div class="row">
+				<label for="account_login">{{locale_string.LOGIN}} :</label>
+				<input type="text" class="form-control rounded-input" id="account_login" name="account_login"
 					 ng-model="User.datas.identifiant"/>
 			</div>
 			
@@ -50,61 +99,32 @@
 			</div>
 			
 			<div class="row">
-				<label for="signup_pass_confirm">{{locale_string.PASSWORD_CONFIRM}} :</label>
-				<input type="password" class="form-control rounded-input" id="signup_pass" name="signup_pass"/>
+				<label for="signup_firstname">Firstname :</label>
+				<input type="text" class="form-control rounded-input" id="signup_firstname" name="signup_firstname"
+					 ng-model="User.datas.firstname"/>
 			</div>
-			
+			<div class="row">
+				<label for="signup_lastname">Lastname :</label>
+				<input type="text" class="form-control rounded-input" id="signup_lastname" name="signup_lastname"
+					 ng-model="User.datas.lastname"/>
+			</div>
+
 			<div class="row">
 				<label for="signup_age">{{locale_string.YOUR_AGE}} :</label>
-				<input type="number" class="form-control rounded-input" id="signup_age" name="signup_age" ng-model="User.datas.age"/>
+				<input type="number" class="form-control rounded-input" id="signup_age" name="signup_age"
+					 ng-model="User.datas.age" />
 			</div>
 			
 			<div class="row">
 				<label for="signup_cp">{{locale_string.ZIP_CODE}} :</label>
-				<input type="text" class="form-control rounded-input" id="signup_cp" name="signup_cp" ng-model="User.datas.zip"/>
+				<input type="text" class="form-control rounded-input" id="signup_cp" name="signup_cp"
+				 ng-model="User.datas.zip"/>
 			</div>
 			
 			<div class="row">
-				<input type="submit"  value="{{locale_string.TO_SIGN_UP}}" class="form-control button rounded-input" />
 				<input type="button" class="form-control button rounded-input"
-				  ng-click=setPaneShown(1);
-				  value="{{locale_string.CANCEL}}"/>
-			</div>		
-		</form>
-	</div><!-- END SIGNUP LAYOUT -->
-	<!-- BEGIN ACCOUNT LAYOUT -->	
-	<div id="account_layout" class="col-md-6 col-md-offset-3" ng-show="isPaneShown(3)">
-		<form id="account_form">
-			<div class="row">
-				<label for="account_login">{{locale_string.LOGIN}} :</label>
-				<input type="text" class="form-control rounded-input" id="account_login" name="account_login"/>
-			</div>
-			
-			<div class="row">
-				<label for="account_pass">{{locale_string.PASSWORD}} :</label>
-				<input type="password" class="form-control rounded-input" id="account_pass" name="account_pass"/>
-			</div>
-			
-			<div class="row">
-				<label for="account_pass_confirm">{{locale_string.PASSWORD_CONFIRM}} :</label>
-				<input type="password" class="form-control rounded-input" id="account_pass" name="account_pass"/>
-			</div>
-			
-			<div class="row">
-				<label for="account_age">{{locale_string.YOUR_AGE}} :</label>
-				<input type="number" class="form-control rounded-input" id="account_age" name="account_age"/>
-			</div>
-			
-			<div class="row">
-				<label for="account_cp">{{locale_string.ZIP_CODE}} :</label>
-				<input type="text" class="form-control rounded-input" id="account_cp" name="account_cp"/>
-			</div>
-			
-			<div class="row">
-				<input type="submit"  value="{{locale_string.TO_SIGN_UP}}" class="form-control button rounded-input" />
-				<input type="button" class="form-control button rounded-input"
-				  ng-click=setPaneShown(1);
-				  value="{{locale_string.CANCEL}}"/>
+				  ng-click="onLogout()"
+				  value="Se deconnecter"/>
 			</div>		
 		</form>
 	</div><!-- END ACCOUNT LAYOUT -->

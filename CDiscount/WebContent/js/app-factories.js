@@ -3,6 +3,23 @@
 var app = angular.module("BestWinesApp")
 
 
+.factory('UserService', [function() {
+  var sdo = {
+	  datas : {
+		  	identifiant : "",
+		  	password : "",
+		  	age : 0,
+		  	firstname : "",
+		  	lastname : "",
+		  	zip : ""
+	  		},
+      isLogged : false
+  };
+  return sdo;
+  
+}])
+
+
 
 
 
@@ -38,7 +55,7 @@ var app = angular.module("BestWinesApp")
 	
 
 	Wine.goToWines = function(wine){
-		$window.location.href = wine.url;
+		$window.open(wine.url);
 	};
 		
 	return Wine;

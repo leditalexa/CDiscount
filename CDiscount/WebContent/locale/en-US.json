@@ -1,4 +1,32 @@
 {
 	"APP_NAME" : "BestWines",
 	"HOME" : "Home"
+	"LOGIN"            : "Login",
+	"PASSWORD"         : "Password",
+	"PASSWORD_CONFIRM" : "Confirm password",
+	"TO_LOG_IN"        : "Connect",
+	"TO_SIGN_UP"       : "Subscribe",
+	"CANCEL"           : "Cancel",
+	"YOUR_AGE"         : "Your age",
+	"ZIP_CODE"         : "ZIP code",
+	"SEARCH_MEAL"      : "Which meal would you find ?",
+	"SEARCH_ACTION"    : "Search",
+	"GO_TO_RECIPE"     : "See recipe on Marmiton.org",
+	"SEE_WINES"        : "See all wines for these recipe.",
+	"SEE_CDISCOUNT"    : "See the selected wine on CDiscount.",
+	
+	"MEAL_RESULT"      : "Have you a meal in mind ?",
+	"MEALS_IDEAS"      : "Your meal",
+	"MEALS_HIGHLISTS"  : "Try these meals ?",
+	
+	"MEAL_DIFFICULTY"  : "Difficulty of recipe",
+	"MEAL_PRICE"       : "Price of the recipe",
+	
+	"HAVE_INTEREST"    : "Your are interrested ?",
+	
+	"LOAD_MORE_MEALS"  : "Show more meals",
+	
+	"GO_UP"            : "top",
+	"CONSULT"          : "Consult",
+	"NO_RESULTS"       : "No results"
 }

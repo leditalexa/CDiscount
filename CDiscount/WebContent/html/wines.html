@@ -1,7 +1,11 @@
 
-
-
-
+	
+	
+	
+	<div ng-hide="User.isLogged" style="text-align:center">
+		Il faut vous connecter pour accéder à cette partie
+	</div>
+	<div ng-show="User.isLogged">
 
 
 		  
@@ -23,7 +27,7 @@
 								<form role="form" ng-submit="doMealCarrouselSearch()" novalidate>
 												
 									<div class="mealToolbarInput  input-group">								
-									 	<input type="text" class="form-control rounded-input input-group-lg"  value="{{mealSearch}}" ng-model="mealSearch" placeholder="Trouver un plat, une recette, une idÃ©e de repas..."/>			
+									 	<input type="text" class="form-control rounded-input input-group-lg"  value="{{mealSearch}}" ng-model="mealSearch" placeholder="Trouver un plat, une recette, une idée de repas..."/>			
 									    <span class="input-group-addon rounded-input" ng-click="doMealCarrouselSearch()"><i class="fa fa-search"></i></span>
 									</div>
 										
@@ -41,9 +45,9 @@
 					class="productCarrouselGrid slide carousel row">
 					
 					       
-	           		<a class="left carousel-control" ng-click="loadLessCarrousel()">â€¹</a>
+	           		<a class="left carousel-control" ng-click="loadLessCarrousel()">‹</a>
 	
-	               	<a class="right carousel-control" ng-click="loadMoreCarrousel()">â€º</a>
+	               	<a class="right carousel-control" ng-click="loadMoreCarrousel()">›</a>
 				
 			
 					
@@ -101,8 +105,8 @@
 													<i class="fa fa-file-text-o cutlery" title="{{locale_string.GO_TO_RECIPE}}"></i>
 												</a>
 											</td>
-											<td ng-click="Meals.goToWines(product)" title="{{locale_string.SEE_WINES}}">
-												<a class="productCarrouselLink" ng-click="Meals.goToWines(product)">
+											<td ng-click="doWineFromMealCarrousel(product)" title="{{locale_string.SEE_WINES}}">
+												<a class="productCarrouselLink" ng-click="doWineFromMealCarrousel(product)">
 													<i class="fa fa-glass cutlery" title="{{locale_string.SEE_WINES}}"></i>
 												 </a>
 											</td>
@@ -147,13 +151,13 @@
 							<form role="form" ng-submit="doWineKeywordSearch()" novalidate>
 							
 								<div class="wineInputGroup row">
-									<label for="wineSearchInput">Recherche par mots clÃ©s :</label>
+									<label for="wineSearchInput">Recherche par mots clés :</label>
 								</div>
 									
 								<div class="row">
 								
 									<div class="input-group">								
-									 	<input id="wineSearchInput" type="text" class="form-control rounded-input input-group-lg" id="Wine" ng-model="wineSearch" placeholder="Trouver un vin par nom, appellation, mÃ©daille..."/>			
+									 	<input id="wineSearchInput" type="text" class="form-control rounded-input input-group-lg" id="Wine" ng-model="wineSearch" placeholder="Trouver un vin par nom, appellation, médaille..."/>			
 									    <span class="input-group-addon rounded-input" ng-click="doWineKeywordSearch()"><i class="fa fa-search"></i></span>
 									</div>
 									
@@ -163,45 +167,46 @@
 								
 								
 								<div class="wineInputGroup row">
-									<label for="slider-range">Les vins entre {{wine_price.min}}â‚¬ et {{wine_price.max}}â‚¬</label>
+									<label for="slider-range">Les vins entre {{wine_price.min}}€ et {{wine_price.max}}€</label>
 								</div>	
 								<div class="row">
 									<div id="wineRangeSlider" range-slider min="0" max="300" model-min="wine_price.min" model-max="wine_price.max"></div>
 								</div>
-								
-							
-							
-								
-								 	<!-- Multiple Radios -->
+							</form>
+							 
 							 	
+								 	<!-- Multiple Radios -->
+							 	<div >
 								<div class="row">
 								  <label class="" for="radios">Trier par : </label>
 								</div>
-								<div class="row">
+								<div class="row"  >
 								  <div class=" col-md-6">
 								    <label class="radio" for="radios-0">
-								      <input name="radios-criterion" id="radios-0" value="Option one" type="radio">
+								      <input name="radios-criterion" ng-model="wineCriterion"  id="radios-0" value="price" type="radio">
 								      Prix
 								    </label>
 								    <label class="radio" for="radios-1">
-								      <input name="radios-criterion" id="radios-1" value="Option two" type="radio">
+								      <input name="radios-criterion" ng-model="wineCriterion" id="radios-1" value="rating" type="radio">
 								      Avis
 								    </label>
 								  </div>
 								   <div class=" col-md-6">
 								    <label class="radio" for="radios-2">
-								      <input name="radios-order-by" id="radios-2" value="Option three" type="radio">
+								      <input name="radios-order-by" ng-model="wineOrdering" id="radios-2" value="" type="radio">
 								      Croissant
 								    </label>
 								    <label class="radio" for="radios-3">
-								      <input name="radios-order-by" id="radios-3" value="Option four" checked="checked" type="radio">
+								      <input name="radios-order-by" ng-model="wineOrdering" id="radios-3" value="reverse" type="radio" >
 								      DÃ©croissant
 								    </label>
 								  </div>
 								</div>
-							
-								
-							</form>
+							 </div>
+						</div><!-- END Wine Toolbar - Form part -->	 
+							 	 
+				 </div><!-- END Wine Toolbar -->	
+							 
 							 
 						</div><!-- END Wine Toolbar - Form part -->	 
 							 	 
@@ -209,12 +214,12 @@
 				 
 				 
 				<!-- BEGIN Results Wine -->			
-				<div class="productGrid row" >
+				<div class="productGrid row">
 							
 				
-					<!-- BEGIN product Element -->
+				<!-- BEGIN product Element -->
 					<div class="product col-lg-3 col-md-4 col-sm-6 col-xs-12" 
-						ng-repeat="product in wines| limitTo:wineSearchNumber" >
+						ng-repeat="product in wines | wineOrder:wine_price.min:wine_price.max | orderBy:wineCriterion:wineOrdering  | limitTo:wineSearchNumber" >
 												
 												
 							<!-- BEGIN product Element - header -->
@@ -246,7 +251,7 @@
 											<i class="cutlery fa fa-star productRating" ng-repeat="t in Wines.getWineRating(product) track by $index"></i>
 											
 											<br/>	
-									
+											
 											<i class="productPrice">{{product.price}} <i class="fa fa-eur cutlery"></i></i>
 												
 											<br/>	
@@ -258,12 +263,13 @@
 									
 							</div><!-- END product Element - center -->
 							
+							
 							<!-- BEGIN product Element - footer -->
 							<div class="productFooter">
 								
 								
 								<a ng-click="Wines.goToWines(product)">
-								Consulter
+								{{locale_string.CONSULT}}
 									<i title="{{locale_string.SEE_CDISCOUNT}}"></i>
 								</a>	
 									
@@ -283,16 +289,21 @@
 				</div><!-- BEGIN Results Wine -->	
 		
 				
-				<div class="mealNoResults" style="text-align:center" ng-show="!showWineSearchResult()">
-					Aucun résultat
+				<div class="mealNoResults" style="text-align:center" ng-show="!init && !showGIF && noWineSearchResult()">
+					{{locale_string.NO_RESULTS}}
+				</div>
+				 
+				<div ng-show="showGIF" style="text-align:center">
+					<span>
+						<img src="img/loader.gif" />
+					</span>
 				</div>
 				 
 				 
 				 
 				 
 				 
-				 
-				 
+	</div>			 
 				 
 				 
 				 
