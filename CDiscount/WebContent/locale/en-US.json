@@ -1,32 +1,58 @@
 {
-	"APP_NAME" : "BestWines",
-	"HOME" : "Home"
+	"APP_NAME"         : "BestWines",
+	
+	"WELCOME"          : "Welcome",
+	"HOME"             : "Home",
+	"THE_WINES"        : "Wines",
+	
+	"HOME_TEXT"        : "Serve your meals with CDiscount's best wines, with BESTWINES",
+	
 	"LOGIN"            : "Login",
 	"PASSWORD"         : "Password",
-	"PASSWORD_CONFIRM" : "Confirm password",
-	"TO_LOG_IN"        : "Connect",
-	"TO_SIGN_UP"       : "Subscribe",
-	"CANCEL"           : "Cancel",
+	"FIRSTNAME"        : "Firstname",
+	"LASTNAME"         : "Lastname",
 	"YOUR_AGE"         : "Your age",
 	"ZIP_CODE"         : "ZIP code",
-	"SEARCH_MEAL"      : "Which meal would you find ?",
-	"SEARCH_ACTION"    : "Search",
-	"GO_TO_RECIPE"     : "See recipe on Marmiton.org",
-	"SEE_WINES"        : "See all wines for these recipe.",
-	"SEE_CDISCOUNT"    : "See the selected wine on CDiscount.",
 	
-	"MEAL_RESULT"      : "Have you a meal in mind ?",
-	"MEALS_IDEAS"      : "Your meal",
-	"MEALS_HIGHLISTS"  : "Try these meals ?",
+
+	"TO_LOG_IN"        : "Connect",
+	"TO_LOG_OUT"       : "Log out",
+	"TO_SIGN_UP"       : "Subscribe",
+	"CANCEL"           : "Cancel",
 	
+	
+	"LOGIN_NEEDED"     : "You must be logged in to see this part",
+	
+	
+	"MEAL_PLACEHOLDER" : "Find a meal, a recipe, a meal idea...",
+	
+	"MEAL_RATING"      : "Rating of recipe",
 	"MEAL_DIFFICULTY"  : "Difficulty of recipe",
 	"MEAL_PRICE"       : "Price of the recipe",
 	
-	"HAVE_INTEREST"    : "Your are interrested ?",
+	"GO_TO_RECIPE"     : "See recipe on Marmiton.org",
+	"ASSOCIATED_WINES" : "See wines for this recipe.",
 	
-	"LOAD_MORE_MEALS"  : "Show more meals",
 	
-	"GO_UP"            : "top",
-	"CONSULT"          : "Consult",
-	"NO_RESULTS"       : "No results"
+	"KEYWORD_SEARCH"   : "Keyword search",
+	
+	"WINE_PLACEHOLDER" : "Find a wine by name, appellation, medal...",
+	
+	"WINES_BETWEEN"    : "Wines between",
+	"AND"              : "and",
+	
+	"ORDER_BY"         : "Order by",
+	"PRICE"            : "Price",
+	"RATING"           : "Rating",
+	"ASCENDING"        : "Ascending",
+	"DESCENDING"       : "Descending",
+	
+	
+	"CONSULT"          : "Consult on CDiscount",
+	
+	"NO_RESULTS"       : "No result found",
+	
+	"LOAD_MORE_WINES"  : "Show more wines",
+	
+	"GO_UP"            : "Go back up"
 }

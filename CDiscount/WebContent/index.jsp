@@ -32,15 +32,15 @@
 		<nav id="appnavbar" class="navbar row">
 	        <div class="container-fluid">
 	          <ul class="nav navbar-nav">
-	             <li ng-class="{ active: isActive('/') }"><a ng-click="loadHome()">Home</a></li>
-       			 <li ng-class="{ active: isActive('/wines')}"><a ng-click="loadWines()">Les vins</a></li>
+	             <li ng-class="{ active: isActive('/') }"><a ng-click="loadHome()">{{locale_string.HOME}}</a></li>
+       			 <li ng-class="{ active: isActive('/wines')}"><a ng-click="loadWines()">{{locale_string.THE_WINES}}</a></li>
        		
 	          </ul>
 			  <div id="navtool">
-				  <span id="navName" ng-show="User.isLogged">Bienvenue {{User.datas.identifiant}} |</span> 
+				  <span id="navName" ng-show="User.isLogged">{{locale_string.WELCOME}} {{User.datas.identifiant}} |</span> 
 				  <span id="navFlag">
-				  	<img src="img/flags/fr.png" >
-				  	<img src="img/flags/gb.png">
+				  	<img src="img/flags/fr.png" ng-click="setLang('fr-FR')" >
+				  	<img src="img/flags/gb.png" ng-click="setLang('en-US')">
 				  </span>
 			  </div>
 	        </div>

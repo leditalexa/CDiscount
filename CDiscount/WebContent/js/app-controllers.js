@@ -9,7 +9,11 @@ var app = angular.module("BestWinesApp")
 	
 
 	
-	translationService.getTranslation($scope, lang); 
+	translationService.getTranslation($scope, translationService.lang); 
+	$scope.$watch(function(){return translationService.lang;}, function(newValue, oldValue) {
+		translationService.getTranslation($scope, translationService.lang); 
+		
+	}, true);
 
 	$scope.isSubscribing = false;
 	
@@ -25,15 +29,15 @@ var app = angular.module("BestWinesApp")
 	  	age : 0,
 	  	firstname : "",
 	  	lastname : "",
-	  	zip : ""
+	  	zip : "",
+	  	lang : translationService.lang
+	  	
   	};
 	
 	
 	
 	$scope.onLogin = function(){
-		console.log("Login");
-		console.log($scope.userDatas);
-		$http.post("http://localhost:8080/CDiscount/rest/user",$scope.userDatas).success(function(data){
+		$http.post(UrlProvider.SERVICE_USER,$scope.userDatas).success(function(data){
 			if(data.code==0){
 				$scope.User.isLogged = true;
 				$scope.User.datas = data.content;
@@ -45,10 +49,27 @@ var app = angular.module("BestWinesApp")
 		});
 	};
 	
+	$scope.loginByCookie = function(){
+		var cookie = $cookieStore.get("UserCookie");
+		if(cookie){
+			$http.post(UrlProvider.SERVICE_USER,cookie).success(function(data){
+				if(data.code==0){
+				
+					$scope.User.isLogged = true;
+					$scope.User.datas = cookie;
+					$scope.userDatas = cookie;
+					translationService.lang = cookie.lang;
+
+				}else{
+					alert(data.message);
+				}
+			});
+			
+		}
+	};
+	
 	$scope.onSignup = function(){
-		console.log("Signup");
-		console.log($scope.userDatas);
-		$http.put("http://localhost:8080/CDiscount/rest/user",$scope.userDatas).success(function(data){
+		$http.put(UrlProvider.SERVICE_USER,$scope.userDatas).success(function(data){
 			if(data.code==0){
 				$scope.User.isLogged = true;
 				$scope.User.datas = $scope.userDatas;
@@ -61,14 +82,14 @@ var app = angular.module("BestWinesApp")
 	};
 	
 	$scope.onLogout = function(){
-		console.log("Logout");
 		$scope.userDatas = {
 			  	identifiant : "",
 			  	password : "",
 			  	age : 0,
 			  	firstname : "",
 			  	lastname : "",
-			  	zip : ""
+			  	zip : "",
+			  	lang : translationService.lang
 		  	};
 		$scope.User.isLogged = false;
 		$scope.rmUserCookies();
@@ -79,41 +100,36 @@ var app = angular.module("BestWinesApp")
 
 	
 	
-	$scope.getUserCookies = function(){
-		console.log("Retrieving cookie");
-		var cookie = $cookieStore.get("UserCookie");
-		console.log(cookie);
-		if(cookie){
-			$scope.User.isLogged = true;
-			$scope.User.datas = cookie;
-			$scope.userDatas = cookie;
-		}
-	};
 	
 	
 	$scope.setUserCookies = function(){
-		console.log("Putting cookie");
 		$cookieStore.put("UserCookie",$scope.User.datas);
 	};
 	
 	$scope.rmUserCookies = function(){
-		console.log("Removing cookie");
 		$cookieStore.remove("UserCookie");
 	};
 	
-	$scope.getUserCookies();
+	$scope.loginByCookie();
 }])
 
 
     
-.controller("WinesCtrl", ["$scope",  "$window", "$location", "$http", "translationService", 
-                          "Meals", "Wines", "carrouselService", "UserService", 
-                          function($scope, $window, $location, $http, translationService,
-                        		  Meals, Wines, carrouselService, User) {	
-	 
+.controller("WinesCtrl", ["$scope",  "$window", "$location", "$http", "$anchorScroll", "translationService", 
+                          "Meals", "Wines", "carrouselService", "UserService", "UrlProvider",
+                          function($scope, $window, $location, $http, $anchorScroll, translationService,
+                        		  Meals, Wines, carrouselService, User, UrlProvider) {
+	
+	$scope.scrollTo = function(id) {
+	    $location.hash(id);
+	    $anchorScroll();
+	  };
 
 	
-	translationService.getTranslation($scope, lang);
+	translationService.getTranslation($scope, translationService.lang); 
+	$scope.$watch(function(){return translationService.lang;}, function(newValue, oldValue) {
+		translationService.getTranslation($scope, translationService.lang); 
+	}, true);
 
 	
 	$scope.Meals = Meals;
@@ -136,17 +152,19 @@ var app = angular.module("BestWinesApp")
 	};
 	
 	$scope.doMealCarrouselSearch = function(){
-		$scope.getCarrouselFrom(home_url+"rest/recipe/find/"+$scope.mealSearch);
+		$scope.getCarrouselFrom(UrlProvider.SERVICE_FIND_RECIPE+$scope.mealSearch);
 	};
 	
 	$scope.doWineKeywordSearch = function(){
-		$scope.getWineFrom(home_url+"rest/wine/find/"+$scope.wineSearch);
+		$scope.getWineFrom(UrlProvider.SERVICE_FIND_WINE+$scope.wineSearch);
+		$scope.scrollTo("winemarker");
 		
 	};
 	
 	$scope.doWineFromMealCarrousel = function(meal){
 		$scope.mealSearch = meal.title;
-		$scope.getWineFrom(home_url+"rest/wine/associated/"+$scope.mealSearch);
+		$scope.getWineFrom(UrlProvider.SERVICE_ASSOCIATE_WINE+$scope.mealSearch);
+		$scope.scrollTo("winemarker");
 	};
 	
 	/* Requests */
@@ -225,7 +243,21 @@ var app = angular.module("BestWinesApp")
 
 
 
-.controller("NavCtrl", ["$scope", "$location", "UrlProvider", "UserService", function($scope,$location,UrlProvider , User) {	
+.controller("NavCtrl", ["$scope", "$location","$cookieStore", "UrlProvider","translationService", "UserService",
+                        function($scope,$location,$cookieStore, UrlProvider , translationService, User) {	
+	
+	translationService.getTranslation($scope, translationService.lang); 
+	$scope.$watch(function(){return translationService.lang;}, function(newValue, oldValue) {
+		translationService.getTranslation($scope, translationService.lang); 
+	}, true);
+
+	
+	$scope.setLang = function(lang){
+		translationService.lang = lang;
+		$scope.User.datas.lang = lang;
+		$cookieStore.put("UserCookie",$scope.User.datas);
+	};
+	
 	
 	$scope.User = User;
 	

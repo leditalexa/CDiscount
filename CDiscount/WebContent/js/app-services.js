@@ -1,33 +1,46 @@
 'use strict';
-var app = angular.module("BestWinesApp")
+var app = angular.module("BestWinesApp");
 
 
+app.service("UrlProvider", function(){
+	
+	this.base = document.getElementById("home_url").href;
+	
+	this.HOME        = "/";
+	this.WINES       = "/wines.jsp";
+	this.LANG_DIR	 = this.base + "locale/";
+		
+	this.SERVICE_FIND_RECIPE     = this.base+"rest/recipe/find/";
+	this.SERVICE_USER            = this.base+"rest/user";
+	this.SERVICE_FIND_WINE       = this.base+"rest/wine/find/";
+	this.SERVICE_ASSOCIATE_WINE  = this.base+"rest/wine/associated/";
 
-.service("translationService", function ($http) {  
+});
+
+ 
+
+
+app.service("translationService", ["$http", "UrlProvider", function ($http, UrlProvider) {  
+	
+	this.lang = "fr-FR";
+	this.lang_dir = UrlProvider.LANG_DIR;
+	
     this.getTranslation = function($scope, language) {
-        var languageFilePath = lang_dir + language + '.json';
-        $http.get(home_url+languageFilePath).success(function(data) {
+        $http.get(this.lang_dir+language+'.json').success(function(data) {
             $scope.locale_string = data;     
         });
     };
-})
-
-
-.service("UrlProvider", function($location){
-	return {
-		HOME : "/",
-		WINES : "/wines.jsp"
-	};
-})
+}]);
 
 
 
   
-.service("carrouselService", function ($http) {  
+app.service("carrouselService", ["$http","UrlProvider", function ($http, UrlProvider) {  
+	
     this.getCarrouselUtils = function($scope) {
     	
     	
-    	$scope.carrousel_url = home_url+"rest/recipe/find/";
+    	$scope.carrousel_url = UrlProvider.SERVICE_FIND_RECIPE;
     	$scope.carrouselSearch = "";
     	$scope.carrousel_request = $scope.carrousel_url+$scope.carrouselSearch;
     	
@@ -72,6 +85,6 @@ var app = angular.module("BestWinesApp")
     	};  	
 
     };
-});
+}]);
   
   

@@ -1,32 +1,65 @@
 {
 	"APP_NAME"         : "BestWines",
+		
+	"WELCOME"          : "Bienvenue",
 	"HOME"             : "Accueil",
+	"THE_WINES"        : "Les vins",
+	
+	"HOME_TEXT"        : "Accompagnez vos plats des meilleurs vins de CDiscount, avec BestWines",
+		
 	"LOGIN"            : "Identifiant",
 	"PASSWORD"         : "Mot de passe",
-	"PASSWORD_CONFIRM" : "Confirmer le mot de passe",
-	"TO_LOG_IN"        : "Se connecter",
-	"TO_SIGN_UP"       : "S'inscrire",
-	"CANCEL"           : "Annuler",
+	"FIRSTNAME"        : "Prénom",
+	"LASTNAME"         : "Nom",
 	"YOUR_AGE"         : "Votre age",
 	"ZIP_CODE"         : "Code postal",
-	"SEARCH_MEAL"      : "Quel plat recherchez-vous ?",
-	"SEARCH_ACTION"    : "Rechercher",
-	"GO_TO_RECIPE"     : "Voir la recette sur Marmiton.org",
-	"SEE_WINES"        : "Voir les vins pour cette recette.",
-	"SEE_CDISCOUNT"    : "Voir le vin selectionn&eacute; sur CDiscount.",
 	
-	"MEAL_RESULT"      : "Vous avez un plat en t&ecirc;te ?",
-	"MEALS_IDEAS"      : "Votre plat",
-	"MEALS_HIGHLISTS"  : "Avez-vous essay&eacute; ces plats ?",
 	
-	"MEAL_DIFFICULTY"  : "Difficult&eacute; de la recette",
+	"TO_LOG_IN"        : "Se connecter",
+	"TO_LOG_OUT"       : "Se déconnecter",
+	"TO_SIGN_UP"       : "S'inscrire",
+	"CANCEL"           : "Annuler",
+	
+	
+	"LOGIN_NEEDED"     : "Il faut vous connecter pour accéder à cette partie",
+	
+	
+	"MEAL_PLACEHOLDER" : "Trouver un plat, une recette, une idée de repas...",
+	
+	"MEAL_RATING"      : "Avis de la recette",
+	"MEAL_DIFFICULTY"  : "Difficulté de la recette",
 	"MEAL_PRICE"       : "Prix de la recette",
 	
-	"HAVE_INTEREST"    : "vous int&eacute;ress&eacute; ?",
+	"GO_TO_RECIPE"     : "Voir la recette sur Marmiton.org",
+	"ASSOCIATED_WINES" : "Voir les vins pour cette recette.",
 	
-	"LOAD_MORE_MEALS"  : "Afficher plus de plats",
 	
-	"GO_UP"            : "Retour en haut",
-	"CONSULT"          : "Consulter",
-	"NO_RESULTS"       : "Aucun r&eacute;sultat"
+	"KEYWORD_SEARCH"   : "Recherche par mots clés",
+	
+	"WINE_PLACEHOLDER" : "Trouver un vin par nom, appellation, médaille...",
+	
+	"WINES_BETWEEN"    : "Les vins entre",
+	"AND"              : "et",
+	
+	
+	
+	"ORDER_BY"         : "Trier par",
+	"PRICE"            : "Prix",
+	"RATING"           : "Avis",
+	"ASCENDING"        : "Croissant",
+	"DESCENDING"       : "Décroissant",
+	
+	"CONSULT"          : "Consulter sur CDiscount",
+	
+	"NO_RESULTS"       : "Aucun r&eacute;sultat",
+	
+	"LOAD_MORE_WINES"  : "Afficher plus de vins",
+	
+	"GO_UP"            : "Retour en haut"
+	
+	
+	
+	
+	
+
 }

@@ -1,9 +1,5 @@
 'use strict';
 
-var home_url = document.getElementById("home_url").href;
-
-var lang_dir = "locale/";
-var lang = "fr-FR";
 
 var app = angular.module("BestWinesApp", ["ngRoute","ngResource", "ngCookies", "ui-rangeSlider"])
 

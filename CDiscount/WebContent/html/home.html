@@ -1,7 +1,7 @@
 <div class="row">
 	<div id="home_text" class="col-md-8 col-md-offset-2">
 		
-			Accompagnez vos plats des meilleurs vins de CDiscount, avec BestWines
+			{{locale_string.HOME_TEXT}}
 	
 	</div>
 </div>
@@ -51,12 +51,12 @@
 			</div>
 
 			<div class="row">
-				<label for="signup_firstname">Firstname :</label>
+				<label for="signup_firstname">{{locale_string.FIRSTNAME}} :</label>
 				<input type="text" class="form-control rounded-input" id="signup_firstname" name="signup_firstname"
 					 ng-model="userDatas.firstname"/>
 			</div>
 			<div class="row">
-				<label for="signup_lastname">Lastname :</label>
+				<label for="signup_lastname">{{locale_string.LASTNAME}} :</label>
 				<input type="text" class="form-control rounded-input" id="signup_lastname" name="signup_lastname"
 					 ng-model="userDatas.lastname"/>
 			</div>
@@ -99,12 +99,12 @@
 			</div>
 			
 			<div class="row">
-				<label for="signup_firstname">Firstname :</label>
+				<label for="signup_firstname">{{locale_string.FIRSTNAME}} :</label>
 				<input type="text" class="form-control rounded-input" id="signup_firstname" name="signup_firstname"
 					 ng-model="User.datas.firstname"/>
 			</div>
 			<div class="row">
-				<label for="signup_lastname">Lastname :</label>
+				<label for="signup_lastname">{{locale_string.LASTNAME}} :</label>
 				<input type="text" class="form-control rounded-input" id="signup_lastname" name="signup_lastname"
 					 ng-model="User.datas.lastname"/>
 			</div>
@@ -124,7 +124,7 @@
 			<div class="row">
 				<input type="button" class="form-control button rounded-input"
 				  ng-click="onLogout()"
-				  value="Se deconnecter"/>
+				  value="{{locale_string.TO_LOG_OUT}}"/>
 			</div>		
 		</form>
 	</div><!-- END ACCOUNT LAYOUT -->
