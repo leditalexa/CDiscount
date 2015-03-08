@@ -41,6 +41,7 @@ import fr.eisti.pau.cdiscount.domain.Wine;
 public class WineService {
 
 	private final Logger log = LoggerFactory.getLogger(getClass());
+	private final static String cdiscountKey = "353d5767-ead3-415d-81ee-d4bb5454bc5f";
 
 	public List<Wine> find(Wine wine){
 		return find(wine.getName());
@@ -79,7 +80,9 @@ public class WineService {
 	private JSONObject setParams(JSONObject data, String keyword, int page){
 		JSONObject search = null;
 		try {
+			data.put("ApiKey", cdiscountKey);
 			search = data.getJSONObject("SearchRequest");
+			
 			search.put("Keyword", keyword);
 			JSONObject tmp = search.optJSONObject("Pagination").put("PageNumber", page);
 		} catch (JSONException e) {
