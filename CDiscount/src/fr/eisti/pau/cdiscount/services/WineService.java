@@ -11,6 +11,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -99,7 +100,7 @@ public class WineService {
 			out.write(data.toString());
 			out.close();
 
-			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream(), Charset.forName("UTF-8")));
 			String res = in.readLine();
 			if(res != null){return res;}
 
@@ -144,8 +145,10 @@ public class WineService {
 		String string = "";
 		InputStream	 is;
 
+		
+		
 		try {
-			is = getClass().getResourceAsStream("/SearchRequest.json");
+			is = new URL("http://localhost:8080/CDiscount/SearchRequest.json").openStream();
 			InputStreamReader reader = new InputStreamReader(is);
 
 			BufferedReader br = new BufferedReader(reader);

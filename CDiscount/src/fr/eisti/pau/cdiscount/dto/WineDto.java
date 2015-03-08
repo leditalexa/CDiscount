@@ -6,8 +6,8 @@ import fr.eisti.pau.cdiscount.domain.Wine;
 public class WineDto {
 	private String title;
 	private String url_icon;
-	private String priceTop;
-	private String price;
+	private Double priceTop;
+	private Double price;
 	private int rating;
 	private String description;
 	private String url;
@@ -20,8 +20,8 @@ public class WineDto {
 		super();
 		this.title = title;
 		this.url_icon = url_icon;
-		this.priceTop = priceTop;
-		this.price = price;
+		this.priceTop = Double.valueOf(priceTop);
+		this.price = Double.valueOf(price);
 		this.rating = rating;
 		this.description = description;
 		this.url = url;
@@ -41,9 +41,9 @@ public class WineDto {
 
 	public String getUrl_icon() {return url_icon;}
 
-	public String getPriceTop() {return priceTop;}
+	public Double getPriceTop() {return priceTop;}
 
-	public String getPrice() {return price;}
+	public Double getPrice() {return price;}
 
 	public int getRating() {return rating;}
 
@@ -52,13 +52,13 @@ public class WineDto {
 	public String getUrl() {return url;}
 	
 	public static WineDto build(Wine w){
-		Float tmp = Float.valueOf(w.getRating());
+		Double tmp = Double.valueOf(w.getRating());
 		
 		return new WineDto.Builder()
 				.title(w.getName())
 				.url_icon(w.getMainImageUrl())
-				.priceTop(w.getBestOffer().getPriceDetails().getReferencePrice())
-				.price(w.getBestOffer().getSalePrice())
+				.priceTop(Double.valueOf(w.getBestOffer().getPriceDetails().getReferencePrice()))
+				.price(Double.valueOf(w.getBestOffer().getSalePrice()))
 				.rating(tmp.intValue())
 				.description(w.getDescription())
 				.url(w.getBestOffer().getProductURL())
@@ -70,8 +70,8 @@ public class WineDto {
 	public static class Builder{
 		private String title;
 		private String url_icon;
-		private String priceTop;
-		private String price;
+		private Double priceTop;
+		private Double price;
 		private int rating;
 		private String description;
 		private String url;
@@ -88,12 +88,12 @@ public class WineDto {
 			return this;
 			
 		}
-		public Builder priceTop(String priceTop){
+		public Builder priceTop(Double priceTop){
 			this.priceTop = priceTop;
 			return this;
 			
 		}
-		public Builder price(String price){
+		public Builder price(Double price){
 			this.price = price;
 			return this;
 			
