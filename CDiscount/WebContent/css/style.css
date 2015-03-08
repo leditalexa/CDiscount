@@ -48,7 +48,7 @@ body{
 }
 
 #appnavbar a{
-	color:white;
+	color : black;
 	font-weight:bold;
 	height:100px;
 	background:none;
@@ -61,7 +61,7 @@ body{
 	margin-top : 0%;
 }
 #navName{
-	color : white;
+	color : black;
 	font-weight: bold;
 	
 }
