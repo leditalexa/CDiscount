@@ -45,9 +45,9 @@
 					class="productCarrouselGrid slide carousel row">
 					
 					       
-	           		<a class="left carousel-control" ng-click="loadLessCarrousel()">‹</a>
+	           		<a class="left carousel-control" ng-click="loadLessCarrousel()">ï¿½</a>
 	
-	               	<a class="right carousel-control" ng-click="loadMoreCarrousel()">›</a>
+	               	<a class="right carousel-control" ng-click="loadMoreCarrousel()">ï¿½</a>
 				
 			
 					
@@ -163,8 +163,7 @@
 									
 								</div>
 								
-								
-								
+							</form>								
 								
 								<div class="wineInputGroup row">
 									<label for="slider-range">
@@ -180,7 +179,6 @@
 								<div class="row">
 									<div id="wineRangeSlider" range-slider min="0" max="300" model-min="wine_price.min" model-max="wine_price.max"></div>
 								</div>
-							</form>
 							
 							 
 							 	
@@ -214,6 +212,14 @@
 							 </div>
 						</div><!-- END Wine Toolbar - Form part -->	 
 							 	 
+							 	 
+							 	 
+							 	 
+							 	 
+							 	 
+							 	 
+							 	 
+							 	 
 				 </div><!-- END Wine Toolbar -->	
 							 
 							 
@@ -246,7 +252,7 @@
 									</div>	
 									
 								
-							
+								
 									<!-- BEGIN product Element infos - for meals -->
 									<div class="productInfos">									
 											<i title="{{product.title}}">{{product.title}}</i>
@@ -257,7 +263,7 @@
 											
 											<br/>	
 											
-											<i class="productPrice">{{product.price}} <i class="fa fa-eur cutlery"></i></i>
+											<i class="productPrice"><s ng-if="product.priceTop > 0">{{product.priceTop}}</s> <i class="fa fa-eur cutlery"></i>  {{product.price}} <i class="fa fa-eur cutlery"></i></i>
 												
 											<br/>	
 											
@@ -297,7 +303,7 @@
 				
 		
 				<!-- BEGIN NO Results Wine -->
-				<div class="mealNoResults" style="text-align:center" ng-show="!init && !showGIF && noWineSearchResult()">
+				<div class="mealNoResults" style="text-align:center" ng-show="showNoResult">
 					{{locale_string.NO_RESULTS}}
 				</div><!-- END NO Results Wine -->
 				
@@ -307,6 +313,7 @@
 						<img src="img/loader.gif" />
 					</span>
 				</div> <!-- END LOADER Results Wine -->
+				
 				
 				<div><a ng-click="scrollTo('winemarker')">{{locale_string.GO_UP}}</a></div> 
 			</div>	 

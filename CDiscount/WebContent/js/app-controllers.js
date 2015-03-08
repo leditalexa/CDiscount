@@ -60,8 +60,6 @@ var app = angular.module("BestWinesApp")
 					$scope.userDatas = cookie;
 					translationService.lang = cookie.lang;
 
-				}else{
-					alert(data.message);
 				}
 			});
 			
@@ -139,13 +137,17 @@ var app = angular.module("BestWinesApp")
 	/* Requests */
 	$scope.getWineFrom = function(url){
 		$scope.wines = [];
-		$scope.init = false;
-		$scope.showGIF = true;	
+		$scope.showNoResult = false;
+		$scope.showGIF = true;
 		$scope.wineSearchNumber = $scope.WINESEARCHNUMBER;
 		$http.get(url).success(function(data){
 			$scope.wines = data.content;
+			if($scope.wines.length==0){
+				$scope.showNoResult = true;
+			}
 			$scope.showGIF = false;
 		}).error(function (data){
+console.log(data);
 			$scope.error = data;
 			$scope.showGIF = false;
 		});
@@ -194,8 +196,9 @@ var app = angular.module("BestWinesApp")
 	
 	
 	/* wine output */
-	$scope.init = true;
+
 	
+	$scope.showNoResult = false;
 	$scope.showGIF = false;
 	
 	$scope.wines = [];

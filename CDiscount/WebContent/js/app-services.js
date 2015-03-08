@@ -7,7 +7,7 @@ app.service("UrlProvider", function(){
 	this.base = document.getElementById("home_url").href;
 	
 	this.HOME        = "/";
-	this.WINES       = "/wines.jsp";
+	this.WINES       = "/wines.jsp#winemarker";
 	this.LANG_DIR	 = this.base + "locale/";
 		
 	this.SERVICE_FIND_RECIPE     = this.base+"rest/recipe/find/";

@@ -142,7 +142,7 @@ public class WineService {
 
 	private JSONObject getSearchJSON(){
 		String string = "";
-		InputStream is;
+		InputStream	 is;
 
 		try {
 			is = getClass().getResourceAsStream("/SearchRequest.json");
