@@ -20,6 +20,6 @@
 			"ItemsPerPage": 20,
 			"PageNumber": 0
 		},
-		"SortBy": "pricemax"
+		"SortBy": "relevance"
 	}
 }
