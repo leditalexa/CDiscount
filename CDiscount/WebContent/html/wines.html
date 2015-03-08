@@ -62,9 +62,9 @@
 					class="productCarrouselGrid slide carousel row">
 					
 					       
-	           		<a class="left carousel-control" ng-click="loadLessCarrousel()">‹</a>
+	           		<a class="left carousel-control" ng-click="loadLessCarrousel()">ï¿½</a>
 	
-	               	<a class="right carousel-control" ng-click="loadMoreCarrousel()">›</a>
+	               	<a class="right carousel-control" ng-click="loadMoreCarrousel()">ï¿½</a>
 				
 			
 					
@@ -258,7 +258,7 @@
 											
 											<br/>	
 											
-											<i class="productPrice">{{product.price}} <i class="fa fa-eur cutlery"></i></i>
+											<i class="productPrice"><s ng-if="product.priceTop > 0">{{product.priceTop}} <i class="fa fa-eur cutlery"></i></s>  {{product.price}} <i class="fa fa-eur cutlery"></i></i>
 												
 											<br/>	
 											

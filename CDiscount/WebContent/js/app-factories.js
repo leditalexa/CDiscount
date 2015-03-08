@@ -25,7 +25,7 @@ var app = angular.module("BestWinesApp")
 
 
 /* Wine Functions */
-.factory("Wines", ["UrlProvider", function ($window,UrlProvider) {  
+.factory("Wines", ["$window","UrlProvider", function ($window,UrlProvider) {  
 	
 	var Wine = {};
 	
@@ -94,7 +94,7 @@ var app = angular.module("BestWinesApp")
 	
 	
 	Meal.goToRecipe = function(meal){
-		$window.location.href = "http://www.marmiton.org/recettes/recette_"+(meal.title.replace(" ","-"))+"_"+meal.id+".aspx";
+		$window.open("http://www.marmiton.org/recettes/recette_"+(meal.title.replace(" ","-"))+"_"+meal.id+".aspx");
 	};
 	
 
