@@ -1,12 +1,7 @@
 package fr.eisti.pau.cdiscount.dto;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-
 import fr.eisti.pau.cdiscount.domain.Wine;
+
 
 public class WineDto {
 	private String title;
@@ -16,7 +11,6 @@ public class WineDto {
 	private int rating;
 	private String description;
 	private String url;
-	
 	
 	public WineDto() {
 		super();
@@ -32,55 +26,98 @@ public class WineDto {
 		this.description = description;
 		this.url = url;
 	}
-
-	public WineDto(Wine vin) {
-		super();
-		this.title = vin.getName();
-		System.out.println(title);
-		this.url_icon = vin.getMainImageUrl();
-		this.priceTop = vin.getBestOffer().getPriceDetails().getReferencePrice();
-		this.price = vin.getBestOffer().getSalePrice();
-		Float tmp = Float.valueOf(vin.getRating());
-		this.rating = tmp.intValue();
-		this.description = vin.getDescription();
-		this.url = vin.getBestOffer().getProductURL();
 	
+	public WineDto(Builder b){
+		this.title = b.title;
+		this.url_icon = b.url_icon;
+		this.priceTop = b.priceTop;
+		this.price = b.price;
+		this.rating = b.rating;
+		this.description = b.description;
+		this.url = b.url;		
 	}
-
-	public static List<WineDto> setTransport(List<Wine> in){
-		List<WineDto> out = new LinkedList<>();
-		for(Wine w : in){ out.add(new WineDto(w));}
-		return out;
-	}
-
-	public static List<Wine> eraseDoublon(List<Wine> in){
-		Set<Wine> tmp = new HashSet<>();
-		tmp.addAll(in);
-		List<Wine> out = new ArrayList<>(tmp);
-		return out;
-	}
-
-
+	
 	public String getTitle() {return title;}
-	public void setTitle(String title) {this.title = title;}
 
 	public String getUrl_icon() {return url_icon;}
-	public void setUrl_icon(String url_icon) {this.url_icon = url_icon;}
 
 	public String getPriceTop() {return priceTop;}
-	public void setPriceTop(String priceTop) {this.priceTop = priceTop;}
 
 	public String getPrice() {return price;}
-	public void setPrice(String price) {this.price = price;}
 
 	public int getRating() {return rating;}
-	public void setRating(int rating) {this.rating = rating;}
 
 	public String getDescription() {return description;}
-	public void setDescription(String description) {this.description = description;}
 
 	public String getUrl() {return url;}
-	public void setUrl(String url) {this.url = url;}
 	
+	public static WineDto build(Wine w){
+		Float tmp = Float.valueOf(w.getRating());
+		
+		return new WineDto.Builder()
+				.title(w.getName())
+				.url_icon(w.getMainImageUrl())
+				.priceTop(w.getBestOffer().getPriceDetails().getReferencePrice())
+				.price(w.getBestOffer().getSalePrice())
+				.rating(tmp.intValue())
+				.description(w.getDescription())
+				.url(w.getBestOffer().getProductURL())
+				.build();
+	}
 	
+	// ************** Class Builder de transformation d'un Wine en WineDto  ************
+	
+	public static class Builder{
+		private String title;
+		private String url_icon;
+		private String priceTop;
+		private String price;
+		private int rating;
+		private String description;
+		private String url;
+		
+		public Builder(){}
+		
+		public Builder title(String title){
+			this.title = title;
+			return this;
+		}
+		
+		public Builder url_icon(String url_icon){
+			this.url_icon = url_icon;
+			return this;
+			
+		}
+		public Builder priceTop(String priceTop){
+			this.priceTop = priceTop;
+			return this;
+			
+		}
+		public Builder price(String price){
+			this.price = price;
+			return this;
+			
+		}
+		public Builder rating(int rating){
+			this.rating = rating;
+			return this;
+			
+		}
+		public Builder description(String description){
+			this.description = description;
+			return this;
+			
+		}
+		public Builder url(String url){
+			this.url = url;
+			return this;
+			
+		}
+		
+		
+		
+		public WineDto build(){
+			return new WineDto(this);
+		}
+	}
 }
