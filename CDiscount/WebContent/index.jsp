@@ -25,19 +25,19 @@
 
 <body ng-app="BestWinesApp">
 
-	<div id="central" class="container" ng-controller="NavCtrl">
-	
-	
+	<div  ng-controller="NavCtrl">
 		<!-- Navigation bar -->
 		<nav id="appnavbar" class="navbar row">
 	        <div class="container-fluid">
-	          <ul class="nav navbar-nav">
-	             <li ng-class="{ active: isActive('/') }"><a ng-click="loadHome()">{{locale_string.HOME}}</a></li>
-       			 <li ng-class="{ active: isActive('/wines')}"><a ng-click="loadWines()">{{locale_string.THE_WINES}}</a></li>
-       		
-	          </ul>
+	        
+	        <a ng-click="loadWines()">
+	        	<img id="mainImage" src="img/main.png"/>
+	       	</a>
+
+	          
 			  <div id="navtool">
-				  <span id="navName" ng-show="User.isLogged">{{locale_string.WELCOME}} {{User.datas.identifiant}} |</span> 
+				  <span id="navName" ng-show="User.isLogged">
+				  {{locale_string.WELCOME}} {{User.datas.identifiant}} (<a ng-click="loadHome()">{{locale_string.MY_ACCOUNT}}</a>) |</span> 
 				  <span id="navFlag">
 				  	<img src="img/flags/fr.png" ng-click="setLang('fr-FR')" >
 				  	<img src="img/flags/gb.png" ng-click="setLang('en-US')">
@@ -46,6 +46,12 @@
 	        </div>
 	     </nav><!-- END Navigation bar -->
 		
+	</div>
+	
+	<div id="central" class="container">
+	
+	
+
 		
 			
 		<!-- The view -->	

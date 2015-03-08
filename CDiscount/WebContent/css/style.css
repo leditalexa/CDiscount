@@ -9,7 +9,7 @@
 
 
 .rounded-input{
-	border-radius: 15px;
+	border-radius: 3px;
 }
 
 
@@ -23,32 +23,42 @@
 
 /* Navigation bar */
 
-
+body{
+	background-color:#F0F0F0;
+}
 
 #appnavbar{
-	background-color:#E4184B;
+	background-color:#DDDDDD;
+	height:100px;
+}
+
+#appnavbar li {
+	height:100%;
 	
 }
 
+#mainImage{
+	margin-top:10px;
+	margin-left:20%;
+	height:80px;
+}
+
 #appnavbar .active{
-	background-color:#EA3965;
+	background:none;
 }
 
 #appnavbar a{
 	color:white;
 	font-weight:bold;
+	height:100px;
+	background:none;
 }
 
-#appnavbar a:hover{
-	background-color:#EA3965;
-	color:white;
-	font-weight:bold;
-}
 
 #navtool{
 	float : right;
 	
-	margin-top : 1%;
+	margin-top : 0%;
 }
 #navName{
 	color : white;
@@ -60,14 +70,16 @@
 	border-right: 1px solid white;
 }
 
+
 #home_text{
-	background-color:#E4184B;
-	color:white;
+
+	color:#2D2D2D;
+	font-size:150%;
 	font-weight:bold;
 	text-align:center;
 	height:100px;
 	vertical-align:middle;
-	padding-top:3%;
+	padding-top:1%;
 }
 
 
@@ -82,9 +94,11 @@
 
 #home_layout .button{
 	margin-top:2%;
+	border:none;
+	border-radius:3px;
 	display:inline;
 	width:49%;
-	background-color:#E4184B;
+	background-color:#C5092C;
 	color:white;
 	font-weight:bold;
 }
@@ -97,15 +111,58 @@
 
 
 
+#KeywordToolbar{
+	
+}
 
+.buttonFind{
+	
 
+}
+
+ 
+
+.buttonFind {
+		margin-top:3%;
+	margin-bottom:3%;
+  background: #cc062e;
+  background-image: -webkit-linear-gradient(top, #cc062e, #970721);
+  background-image: -moz-linear-gradient(top, #cc062e, #970721);
+  background-image: -ms-linear-gradient(top, #cc062e, #970721);
+  background-image: -o-linear-gradient(top, #cc062e, #970721);
+  background-image: linear-gradient(to bottom, #cc062e, #970721);
+  -webkit-border-radius: 4;
+  -moz-border-radius: 4;
+  border-radius: 4px;
+  text-shadow: 1px 1px 3px #666666;
+  -webkit-box-shadow: 0px 1px 1px #666666;
+  -moz-box-shadow: 0px 1px 1px #666666;
+  box-shadow: 0px 1px 1px #666666;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.buttonFind:hover {
+  background: #eb123a;
+  background-image: -webkit-linear-gradient(top, #eb123a, #bf0b2c);
+  background-image: -moz-linear-gradient(top, #eb123a, #bf0b2c);
+  background-image: -ms-linear-gradient(top, #eb123a, #bf0b2c);
+  background-image: -o-linear-gradient(top, #eb123a, #bf0b2c);
+  background-image: linear-gradient(to bottom, #eb123a, #bf0b2c);
+  text-decoration: none;
+}
 
 
 
 .producttoolbar{
+	border-radius:3px;
+	border:1px solid #DDDDDD;
 	margin-bottom:2%;
-	background-color:#E4184B;
-	color:white;
+	background-color:#E8E8E8;
+	color:black;
 	text-align:center;	
 }
 
@@ -140,6 +197,10 @@
 
 #wineRangeSlider .ngrs-handle{
 	border-radius:15px;
+}
+
+#wineRangeSlider .ngrs-join{
+	background-image:linear-gradient(#C5092C,#C5092C);
 }
 
 #winetoolbar .radio{
@@ -245,20 +306,31 @@
 
 
 .product{
-	margin-bottom:1%;
+	margin-bottom:6%;
+	border : #DDDDDD;
+	-moz-box-shadow: 0px 2px 2px 0px #c0c0c0;
+	-webkit-box-shadow: 0px 2px 2px 0px #c0c0c0;
+	-o-box-shadow: 0px 2px 2px 0px #c0c0c0;
+	box-shadow: 0px 2px 2px 0px #c0c0c0;
+	filter:progid:DXImageTransform.Microsoft.Shadow(color=#c0c0c0, Direction=180, Strength=2);
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
 }
 
 
 .productHeader{
 	height:195px;
+
 }
 
 
 .productCenter{
-	border-right:1px solid black;
-	border-left:1px solid black;
+	border-right:1px solid #DDDDDD;
+	border-left:1px solid #DDDDDD;
 	padding-top:3px;
 	height:90px;
+	background-color:white;
 }
 
 
@@ -268,6 +340,10 @@
 	padding: 5px;
 	width:100%;
 	height:100%;
+		background-color:white;
+		border-right:1px solid #DDDDDD;
+	border-left:1px solid #DDDDDD;
+	border-top:1px solid #DDDDDD;
 }
 
 .productIcon img{
@@ -281,7 +357,8 @@
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow:ellipsis;
-
+	padding-left:5px;
+	padding-right:5px;
 }
 
 .productPrice{
@@ -299,15 +376,15 @@
 
 .productFooter{
 	height:30px;
-	background-color:#E4184B;
+	background-color:#cc062e;
 	
 	text-align:center;
 	line-height:30px;
-	border-right:1px solid black;
-	border-left:1px solid black;
-	border-bottom:1px solid black;
-	border-bottom-left-radius:10px;
-	border-bottom-right-radius:10px;
+	border-right:1px solid #DDDDDD;
+	border-left:1px solid #DDDDDD;
+	border-bottom:1px solid #DDDDDD;
+	border-bottom-left-radius:3px;
+	border-bottom-right-radius:3px;
 }
 
 .productFooter a{
@@ -325,6 +402,39 @@
 
 
 
+.buttonLoad {
+	text-align:center;
+		margin-top:3%;
+	margin-bottom:3%;
+  background: #cc062e;
+  background-image: -webkit-linear-gradient(top, #cc062e, #970721);
+  background-image: -moz-linear-gradient(top, #cc062e, #970721);
+  background-image: -ms-linear-gradient(top, #cc062e, #970721);
+  background-image: -o-linear-gradient(top, #cc062e, #970721);
+  background-image: linear-gradient(to bottom, #cc062e, #970721);
+  -webkit-border-radius: 4;
+  -moz-border-radius: 4;
+  border-radius: 4px;
+  text-shadow: 1px 1px 3px #666666;
+  -webkit-box-shadow: 0px 1px 1px #666666;
+  -moz-box-shadow: 0px 1px 1px #666666;
+  box-shadow: 0px 1px 1px #666666;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.buttonLoad :hover {
+  background: #eb123a;
+  background-image: -webkit-linear-gradient(top, #eb123a, #bf0b2c);
+  background-image: -moz-linear-gradient(top, #eb123a, #bf0b2c);
+  background-image: -ms-linear-gradient(top, #eb123a, #bf0b2c);
+  background-image: -o-linear-gradient(top, #eb123a, #bf0b2c);
+  background-image: linear-gradient(to bottom, #eb123a, #bf0b2c);
+  text-decoration: none;
+}
 
 
 

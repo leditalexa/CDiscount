@@ -8,34 +8,51 @@
 	<!-- BEGIN SECURED PAGE - Is logged -->
 	<div ng-show="User.isLogged">
 
+		  <div id="winemarker"></div>
 		  
 		  	  	<!-- BEGIN  Meal Toolbar -->
-				<div class="producttoolbar row">
-			
-						<!-- BEGIN  Meal Toolbar - Image-->
-						<div class="mealToolbarIcon col-md-2 col-md-offset-1" >
-							<img src="img/icone-repas.jpg" class="img-circle" />
-						</div><!-- END  Meal Toolbar - Image-->
-						
-						
-						<!-- BEGIN Meal Toolbar - Form part -->
-						<div class="mealForm col-md-6 col-md-offset-1">
-						
-						
-							<div class="row">
-								
-								<form role="form" ng-submit="doMealCarrouselSearch()" novalidate>
-												
-									<div class="mealToolbarInput  input-group">								
-									 	<input type="text" class="form-control rounded-input input-group-lg"  value="{{mealSearch}}" ng-model="mealSearch" placeholder="{{locale_string.MEAL_PLACEHOLDER}}"/>			
-									    <span class="input-group-addon rounded-input" ng-click="doMealCarrouselSearch()"><i class="fa fa-search"></i></span>
-									</div>
-										
-								</form>
-										
-							</div>
-						</div><!-- END Meal Toolbar - Form part -->
+				<div id="KeywordToolbar" class="container">
+
+					<div class="row">
+								<div class="col-md-5">
+							
+									<form role="form" ng-submit="doMealCarrouselSearch()" novalidate>								
+									 	<input type="text" class="form-control rounded-input"  value="{{mealSearch}}" ng-model="mealSearch" placeholder="{{locale_string.MEAL_PLACEHOLDER}}"/>						
+									</form>
 									
+								</div>	
+								
+								<div class=" col-md-5 col-md-offset-2">	
+									<form role="form" ng-submit="doWineKeywordSearch()" novalidate>							
+									 	<input type="text" class="form-control rounded-input " id="Wine" ng-model="wineSearch" placeholder="{{locale_string.WINE_PLACEHOLDER}}"/>			   
+										
+									</form>		
+								</div>	
+					</div>
+					
+					<div class="row" style="text-align:center">
+						
+						<div class=" col-md-5 " >	
+						
+							<div class="buttonFind col-md-8 col-md-offset-2" ng-click="doMealCarrouselSearch()">
+							
+								{{locale_string.FIND_MEAL}}
+							
+							</div>
+						</div>
+						
+						<div class=" col-md-5 col-md-offset-2" " >	
+						
+							<div class="buttonFind col-md-8 col-md-offset-2" ng-click="doWineKeywordSearch()">
+							
+								{{locale_string.FIND_WINE}}
+							
+							</div>
+						</div>
+						
+							
+								
+					</div>											
 			  	 </div><!-- END  Meal Toolbar -->				
 		  
 		  
@@ -45,9 +62,9 @@
 					class="productCarrouselGrid slide carousel row">
 					
 					       
-	           		<a class="left carousel-control" ng-click="loadLessCarrousel()">ï¿½</a>
+	           		<a class="left carousel-control" ng-click="loadLessCarrousel()">‹</a>
 	
-	               	<a class="right carousel-control" ng-click="loadMoreCarrousel()">ï¿½</a>
+	               	<a class="right carousel-control" ng-click="loadMoreCarrousel()">›</a>
 				
 			
 					
@@ -131,40 +148,18 @@
 
 
 
-			<div id="winemarker">
+			
 		
 		
 		  		<!-- BEGIN Wine Toolbar -->
 				<div class="producttoolbar row">
 			
-						<!-- BEGIN Wine Toolbar - Image-->
-						<div class="wineToolbarIcon col-md-2 col-md-offset-1" >
-							<img src="img/icone-vin.jpg" class="img-circle" />
-						</div><!-- END Wine Toolbar - Image-->
-						
 						
 						<!-- BEGIN Wine Toolbar - Form part -->
-						<div class="wineForm col-md-6 col-md-offset-1">
+						<div class="wineForm col-md-6">
 						
 						
-						
-							<form role="form" ng-submit="doWineKeywordSearch()" novalidate>
-							
-								<div class="wineInputGroup row">
-									<label for="wineSearchInput">{{locale_string.KEYWORD_SEARCH}} :</label>
-								</div>
-									
-								<div class="row">
-								
-									<div class="input-group">								
-									 	<input id="wineSearchInput" type="text" class="form-control rounded-input input-group-lg" id="Wine" ng-model="wineSearch" placeholder="{{locale_string.WINE_PLACEHOLDER}}"/>			
-									    <span class="input-group-addon rounded-input" ng-click="doWineKeywordSearch()"><i class="fa fa-search"></i></span>
-									</div>
-									
-								</div>
-								
-							</form>								
-								
+	
 								<div class="wineInputGroup row">
 									<label for="slider-range">
 										{{locale_string.WINES_BETWEEN}}
@@ -177,16 +172,21 @@
 								</div>	
 								
 								<div class="row">
-									<div id="wineRangeSlider" range-slider min="0" max="300" model-min="wine_price.min" model-max="wine_price.max"></div>
+								
+									<div class="col-md-10 col-md-offset-1" id="wineRangeSlider" range-slider min="0" max="300" model-min="wine_price.min" model-max="wine_price.max"></div>
 								</div>
+								
+						</div>
+						
 							
-							 
+						<div class="wineForm col-md-6 ">	 
 							 	
 								 	<!-- Multiple Radios -->
-							 	<div >
-								<div class="row">
+							 	
+								<div class="wineInputGroup row">
 								  <label class="" for="radios">{{locale_string.ORDER_BY}} : </label>
 								</div>
+								
 								<div class="row"  >
 								  <div class=" col-md-6">
 								    <label class="radio" for="radios-0">
@@ -209,16 +209,8 @@
 								    </label>
 								  </div>
 								</div>
-							 </div>
+							
 						</div><!-- END Wine Toolbar - Form part -->	 
-							 	 
-							 	 
-							 	 
-							 	 
-							 	 
-							 	 
-							 	 
-							 	 
 							 	 
 				 </div><!-- END Wine Toolbar -->	
 							 
@@ -229,9 +221,11 @@
 							
 				
 				<!-- BEGIN product Element -->
-					<div class="product col-lg-3 col-md-4 col-sm-6 col-xs-12" 
+					<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" 
 						ng-repeat="product in wines | wineOrder:wine_price.min:wine_price.max | orderBy:wineCriterion:wineOrdering  | limitTo:wineSearchNumber" >
 												
+							
+							<div class="product">
 												
 							<!-- BEGIN product Element - header -->
 							<div class="productHeader">
@@ -252,10 +246,11 @@
 									</div>	
 									
 								
-								
+							
 									<!-- BEGIN product Element infos - for meals -->
-									<div class="productInfos">									
-											<i title="{{product.title}}">{{product.title}}</i>
+									<div class="productInfos">	
+																	
+											<span class="productTitle" title="{{product.title}}">{{product.title}}</span>
 												
 											<br/>									
 
@@ -263,7 +258,7 @@
 											
 											<br/>	
 											
-											<i class="productPrice"><s ng-if="product.priceTop > 0">{{product.priceTop}} <i class="fa fa-eur cutlery"></i></s>  {{product.price}} <i class="fa fa-eur cutlery"></i></i>
+											<i class="productPrice">{{product.price}} <i class="fa fa-eur cutlery"></i></i>
 												
 											<br/>	
 											
@@ -287,23 +282,26 @@
 			
 							</div><!-- END product Element - footer -->
 							
-							
+							</div>
 						
 					</div><!-- END product Element -->		
 					
-					<footer class="col-md-12">
-						<input type="button"  style="width:100%; margin-top:3%;margin-bottom:3%;"
-							value="{{locale_string.LOAD_MORE_WINES}}"
+					<div class="col-md-12 buttonLoad"
 							ng-show="showLoadMoreWineSearchResult()"
-							ng-click="loadMoreWineSearchResult()" />
-					</footer>		
+							ng-click="loadMoreWineSearchResult()">
+					
+							{{locale_string.LOAD_MORE_WINES}}
+							
+					</div>	
+					
+					<div ng-show="showGoUp()"><a ng-click="scrollTo('winemarker')">{{locale_string.GO_UP}}</a></div> 	
 						
 				</div><!-- END Results Wine -->	
 				
 				
 		
 				<!-- BEGIN NO Results Wine -->
-				<div class="mealNoResults" style="text-align:center" ng-show="showNoResult">
+				<div class="mealNoResults" style="text-align:center" ng-show="showNoResult ">
 					{{locale_string.NO_RESULTS}}
 				</div><!-- END NO Results Wine -->
 				
@@ -315,8 +313,7 @@
 				</div> <!-- END LOADER Results Wine -->
 				
 				
-				<div><a ng-click="scrollTo('winemarker')">{{locale_string.GO_UP}}</a></div> 
-			</div>	 
+			 
 				 
 				 
 				 

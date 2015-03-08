@@ -12,18 +12,22 @@ public class User {
 	private String lastname;
 	private String password;
 	private int age;
+	private String lang;
+	private String zipCode;
 	
 	public User(){
 		super();
 	}
 	
 	public User(String firstname, String lastname, String identifiant,
-			String password, int age) {
+			String password, int age, String lang, String zipCode) {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.identifiant = identifiant;
 		this.password = password;
 		this.age = age;
+		this.lang = lang;
+		this.zipCode = zipCode;
 	}
 
 
@@ -76,6 +80,22 @@ public class User {
 		this.age = age;
 	}
 	
+	public String getLang() {
+		return lang;
+	}
+
+	public void setLang(String lang) {
+		this.lang = lang;
+	}
+
+	public String getZipCode() {
+		return zipCode;
+	}
+
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
+
 	public boolean checkUser(){
 		return this.firstname!=null &&
 				this.identifiant!=null &&

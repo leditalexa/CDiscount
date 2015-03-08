@@ -8,7 +8,7 @@ var app = angular.module("BestWinesApp")
 	  datas : {
 		  	identifiant : "",
 		  	password : "",
-		  	age : 0,
+		  	age : "",
 		  	firstname : "",
 		  	lastname : "",
 		  	zip : "",
@@ -25,7 +25,7 @@ var app = angular.module("BestWinesApp")
 
 
 /* Wine Functions */
-.factory("Wines", function ($window) {  
+.factory("Wines", ["UrlProvider", function ($window,UrlProvider) {  
 	
 	var Wine = {};
 	
@@ -37,7 +37,7 @@ var app = angular.module("BestWinesApp")
 		if(wine.url_icon){
 			return wine.url_icon; 
 		}else{
-			return home_url+"img/not_available_icon.jpg";
+			return UrlProvider.base+"/TITI/img/not_available_icon.jpg";
 		}
 		
 	};
@@ -61,11 +61,11 @@ var app = angular.module("BestWinesApp")
 		
 	return Wine;
 	
-})
+}])
 
 
 /* Meal Functions */
-.factory("Meals", function ($window) {  
+.factory("Meals",  ["$window", "UrlProvider", function ($window, UrlProvider) {  
 	
 	var Meal = {};
 	
@@ -83,7 +83,7 @@ var app = angular.module("BestWinesApp")
 		if(meal.pictures && meal.pictures[2] && meal.pictures[2].url){
 			return meal.pictures[2].url; 
 		}else{
-			return home_url+"img/not_available_icon.jpg";
+			return UrlProvider.base+"img/not_available_icon.jpg";
 		}
 		
 	};
@@ -100,4 +100,4 @@ var app = angular.module("BestWinesApp")
 
 	return Meal;
 	
-});
+}]);

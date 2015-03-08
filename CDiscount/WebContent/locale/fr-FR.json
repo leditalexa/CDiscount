@@ -4,8 +4,11 @@
 	"WELCOME"          : "Bienvenue",
 	"HOME"             : "Accueil",
 	"THE_WINES"        : "Les vins",
+	"MY_ACCOUNT"       : "Mon compte",
+	"FIND_WINE"        : "Trouver un vin",
+	"FIND_MEAL"        : "Trouver une recette",
 	
-	"HOME_TEXT"        : "Accompagnez vos plats des meilleurs vins de CDiscount, avec BestWines",
+	"HOME_TEXT"        : "Accompagnez vos plats des meilleurs vins de CDiscount avec BestWines. BestWines vous permet de trouver les vins qui s'accorderont le mieux avec vos plats, pour être certain de réussir au mieux vos repas. ",
 		
 	"LOGIN"            : "Identifiant",
 	"PASSWORD"         : "Mot de passe",

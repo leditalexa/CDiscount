@@ -5,6 +5,10 @@
 	"HOME"             : "Home",
 	"THE_WINES"        : "Wines",
 	
+	"MY_ACCOUNT"       : "My Account",
+	"FIND_WINE"        : "Find a wine",
+	"FIND_MEAL"        : "Find a meal",
+	
 	"HOME_TEXT"        : "Serve your meals with CDiscount's best wines, with BESTWINES",
 	
 	"LOGIN"            : "Login",

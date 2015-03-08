@@ -146,6 +146,7 @@ var app = angular.module("BestWinesApp")
 				$scope.showNoResult = true;
 			}
 			$scope.showGIF = false;
+			$scope.scrollTo("winemarker");
 		}).error(function (data){
 console.log(data);
 			$scope.error = data;
@@ -159,14 +160,14 @@ console.log(data);
 	
 	$scope.doWineKeywordSearch = function(){
 		$scope.getWineFrom(UrlProvider.SERVICE_FIND_WINE+$scope.wineSearch);
-		$scope.scrollTo("winemarker");
+
 		
 	};
 	
 	$scope.doWineFromMealCarrousel = function(meal){
 		$scope.mealSearch = meal.title;
 		$scope.getWineFrom(UrlProvider.SERVICE_ASSOCIATE_WINE+$scope.mealSearch);
-		$scope.scrollTo("winemarker");
+		
 	};
 	
 	/* Requests */
@@ -212,17 +213,16 @@ console.log(data);
 		$scope.wineSearchNumber += $scope.wineSearchNumberIncrement;
 	};
 	
-	$scope.noWineSearchResult = function(){
-		return ($scope.wines.length==0);	
-	};
-	
+
 	
 	$scope.showLoadMoreWineSearchResult = function(){
 		return ($scope.wineSearchNumber < $scope.wines.length);	
 	};
 	/* wine output */
 	
-
+	$scope.showGoUp = function(){
+		return $scope.wineSearchNumber > 12;
+	};
 	
 }])
 

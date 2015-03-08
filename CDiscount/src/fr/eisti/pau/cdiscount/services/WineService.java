@@ -134,7 +134,7 @@ public class WineService {
 		return wines;
 	}
 	
-	private static JSONObject setStringToJSON(String str){
+	public static JSONObject setStringToJSON(String str){
 		if(str != ""){
 			try {
 				return new JSONObject(str);
