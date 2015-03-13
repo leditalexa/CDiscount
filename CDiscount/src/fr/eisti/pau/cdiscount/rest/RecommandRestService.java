@@ -1,68 +1,77 @@
 package fr.eisti.pau.cdiscount.rest;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.URL;
-import java.net.URLConnection;
-import java.nio.charset.Charset;
-
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
-import fr.eisti.pau.cdiscount.services.WineService;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.config.ClientConfig;
+import com.sun.jersey.api.client.config.DefaultClientConfig;
 
+@Path("/recommend")
 public class RecommandRestService {
-	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public JSONObject getCnx(String userId, String itemId, float rate){
-		return WineService.setStringToJSON(getCnxReponse(userId, itemId, rate));
-	}
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public JSONObject get(String userId, String itemId, float rate){
-		return WineService.setStringToJSON(getCnxReponse(userId, itemId, rate));
+	public String recommand(String req){
+		JSONObject t = new JSONObject();
+		try{
+			JSONObject reqJson = new JSONObject(req);
+			String userId = reqJson.getString("userId");
+			int num = reqJson.getInt("num");
+			t.put("userId", userId);
+			t.put("num", num);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return getCnxReponse(t, "POST");
+	}
+
+	@PUT
+	@Produces(MediaType.APPLICATION_JSON)
+	public String addSelectedWine(String req){
+		JSONObject t = new JSONObject();
+		try{
+			JSONObject reqJson = new JSONObject(req);
+			String userId = reqJson.getString("userId");
+			JSONObject vin = reqJson.getJSONObject("wine");
+			System.out.println(vin);
+			t.put("userId", userId);
+			t.put("wine", vin);
+			t.put("rate", 2);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return getCnxReponse(t, "PUT");
 	}
 
 
-	private static String getCnxReponse(String userId, String itemId, float rate){
-		try{
-			JSONObject t = new JSONObject();
-			t.put("userId", userId);
-			t.put("itemId", itemId);
-			t.put("rate", rate);
-			URL url = new URL("http://localhost:8080/Recommender/recommendation");
-			URLConnection connection = url.openConnection();
-			connection.setDoOutput(true);
-			connection.setRequestProperty("Content-Type", "application/json");
-			connection.setConnectTimeout(5000);
-			connection.setReadTimeout(5000);
-			OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
-			out.write(t.toString());
-			out.close();
+	private static String getCnxReponse(JSONObject o,String method){
 
-			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream(), Charset.forName("UTF-8")));
-			String res = in.readLine();
-			if(res != null){return res;}
-
-			System.out.println("\nREST Service Invoked Successfully..");
-			in.close();
-
-		}catch(IOException e){
-			System.out.println("Error with CDiscount REST service");
-			e.printStackTrace();
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}		
-		return null;
+		ClientConfig config = new DefaultClientConfig();
+		Client client = Client.create(config);
+		WebResource service;
+		System.out.println("first layer:"+ o .toString());
+		service = client.resource("http://localhost:8080/Recommender/recommendation");
+		String response ="";
+		switch (method) {
+		case "PUT":
+			response = service.accept(MediaType.APPLICATION_JSON).put(String.class, o.toString());
+			break;
+		case "POST":
+			response = service.accept(MediaType.APPLICATION_JSON).post(String.class, o.toString());
+			break;
+		default:
+			break;
+		}
+		return response;
 	}
 
 }

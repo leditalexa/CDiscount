@@ -37,6 +37,7 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 import fr.eisti.pau.cdiscount.domain.Recipe;
 import fr.eisti.pau.cdiscount.domain.Wine;
+import fr.eisti.pau.cdiscount.dto.WineDto;
 
 public class WineService {
 
@@ -61,7 +62,7 @@ public class WineService {
 			// Autres pages
 			int nbPages = 0;
 			try {
-				nbPages = setStringToJSON(tmp).getInt("PageCount");
+				nbPages = WineDto.setStringToJSON(tmp).getInt("PageCount");
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -134,14 +135,7 @@ public class WineService {
 		return wines;
 	}
 	
-	public static JSONObject setStringToJSON(String str){
-		if(str != ""){
-			try {
-				return new JSONObject(str);
-			} catch (JSONException e) {e.printStackTrace();}
-		}
-		return null;
-	}
+
 		
 
 	private JSONObject getSearchJSON(){
@@ -169,7 +163,7 @@ public class WineService {
 		}
 
 		JSONObject json;
-		return setStringToJSON(string);
+		return WineDto.setStringToJSON(string);
 	}
 	
 	

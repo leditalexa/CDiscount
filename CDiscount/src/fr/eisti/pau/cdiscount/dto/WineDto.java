@@ -1,5 +1,8 @@
 package fr.eisti.pau.cdiscount.dto;
 
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
 import fr.eisti.pau.cdiscount.domain.Wine;
 
 
@@ -35,6 +38,15 @@ public class WineDto {
 		this.rating = b.rating;
 		this.description = b.description;
 		this.url = b.url;		
+	}
+
+	public static JSONObject setStringToJSON(String str){
+		if(str != ""){
+			try {
+				return new JSONObject(str);
+			} catch (JSONException e) {e.printStackTrace();}
+		}
+		return null;
 	}
 	
 	public String getTitle() {return title;}
