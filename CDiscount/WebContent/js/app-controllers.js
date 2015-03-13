@@ -230,7 +230,7 @@ console.log(data);
 
 		$scope.wineSearchNumber = 6;
 				
-		$http.post(UrlProvider.SERVICE_RECOMMEND_WINE,{userId:$scope.User.identifiant,num:$scope.wineSearchNumber}).success(function(data){
+		$http.post(UrlProvider.SERVICE_RECOMMEND_WINE,{userId:$scope.User.datas.identifiant,num:$scope.wineSearchNumber}).success(function(data){
 			$scope.wines = data.content;
 
 		}).error(function (data){
