@@ -11,7 +11,7 @@ var app = angular.module("BestWinesApp")
 		  	age : "",
 		  	firstname : "",
 		  	lastname : "",
-		  	zip : "",
+		  	zipCode : "",
 		  	lang : ""
 	  		},
       isLogged : false

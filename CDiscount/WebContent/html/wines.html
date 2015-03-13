@@ -11,48 +11,35 @@
 		  <div id="winemarker"></div>
 		  
 		  	  	<!-- BEGIN  Meal Toolbar -->
-				<div id="KeywordToolbar" class="container">
-
-					<div class="row">
-								<div class="col-md-5">
+				<div id="KeywordToolbar" class="row">
+				
+				
+		
+					<div class="col-md-6">
+					
+							<form role="form" ng-submit="doMealCarrouselSearch()" novalidate>								
+							 	<input type="text" class="form-control rounded-input"  value="{{mealSearch}}" ng-model="mealSearch" placeholder="{{locale_string.MEAL_PLACEHOLDER}}"/>						
+							</form>
 							
-									<form role="form" ng-submit="doMealCarrouselSearch()" novalidate>								
-									 	<input type="text" class="form-control rounded-input"  value="{{mealSearch}}" ng-model="mealSearch" placeholder="{{locale_string.MEAL_PLACEHOLDER}}"/>						
-									</form>
-									
-								</div>	
-								
-								<div class=" col-md-5 col-md-offset-2">	
-									<form role="form" ng-submit="doWineKeywordSearch()" novalidate>							
-									 	<input type="text" class="form-control rounded-input " id="Wine" ng-model="wineSearch" placeholder="{{locale_string.WINE_PLACEHOLDER}}"/>			   
-										
-									</form>		
-								</div>	
+							<div class="buttonFind" ng-click="doMealCarrouselSearch()">
+								{{locale_string.FIND_MEAL}}
+							</div>		
+					</div>
+					<div class="col-md-6">
+					
+							<form role="form" ng-submit="doWineKeywordSearch()" novalidate>							
+							 	<input type="text" class="form-control rounded-input " id="Wine" ng-model="wineSearch" placeholder="{{locale_string.WINE_PLACEHOLDER}}"/>			   
+							</form>	
+							
+							<div class="buttonFind" ng-click="doWineKeywordSearch()">
+								{{locale_string.FIND_WINE}}
+							</div>
 					</div>
 					
-					<div class="row" style="text-align:center">
-						
-						<div class=" col-md-5 " >	
-						
-							<div class="buttonFind col-md-8 col-md-offset-2" ng-click="doMealCarrouselSearch()">
-							
-								{{locale_string.FIND_MEAL}}
-							
-							</div>
-						</div>
-						
-						<div class=" col-md-5 col-md-offset-2" " >	
-						
-							<div class="buttonFind col-md-8 col-md-offset-2" ng-click="doWineKeywordSearch()">
-							
-								{{locale_string.FIND_WINE}}
-							
-							</div>
-						</div>
-						
-							
-								
-					</div>											
+				</div>
+				
+			
+															
 			  	 </div><!-- END  Meal Toolbar -->				
 		  
 		  
@@ -70,7 +57,7 @@
 					
 				
 					<!-- BEGIN product Element col-lg-2 col-md-4 col-sm-6 col-xs-12 -->
-					<div class="productCarrousel col-md-2" 
+					<div class="productCarrousel col-md-2 col-sm-4 col-xs-6" 
 						ng-repeat="product in carrousel | slice:carrouselStart:carrouselEnd" >
 												
 												
@@ -286,6 +273,10 @@
 						
 					</div><!-- END product Element -->		
 					
+				
+						
+				</div><!-- END Results Wine -->	
+				
 					<div class="col-md-12 buttonLoad"
 							ng-show="showLoadMoreWineSearchResult()"
 							ng-click="loadMoreWineSearchResult()">
@@ -295,10 +286,6 @@
 					</div>	
 					
 					<div ng-show="showGoUp()"><a ng-click="scrollTo('winemarker')">{{locale_string.GO_UP}}</a></div> 	
-						
-				</div><!-- END Results Wine -->	
-				
-				
 		
 				<!-- BEGIN NO Results Wine -->
 				<div class="mealNoResults" style="text-align:center" ng-show="showNoResult ">

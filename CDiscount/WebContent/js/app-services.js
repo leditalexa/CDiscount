@@ -14,6 +14,7 @@ app.service("UrlProvider", function(){
 	this.SERVICE_USER            = this.base+"rest/user";
 	this.SERVICE_FIND_WINE       = this.base+"rest/wine/find/";
 	this.SERVICE_ASSOCIATE_WINE  = this.base+"rest/wine/associated/";
+	this.SERVICE_RECOMMEND_WINE  = this.base+"rest/recommend/";
 
 });
 

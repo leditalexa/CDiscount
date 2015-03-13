@@ -26,10 +26,10 @@ var app = angular.module("BestWinesApp")
 	$scope.userDatas = {
 	  	identifiant : "",
 	  	password : "",
-	  	age : 0,
+	  	age : "",
 	  	firstname : "",
 	  	lastname : "",
-	  	zip : "",
+	  	zipCode : "",
 	  	lang : translationService.lang
 	  	
   	};
@@ -41,6 +41,7 @@ var app = angular.module("BestWinesApp")
 			if(data.code==0){
 				$scope.User.isLogged = true;
 				$scope.User.datas = data.content;
+				$scope.User.datas.password = $scope.userDatas.password;
 				$scope.setUserCookies();
 				$location.url(UrlProvider.WINES);
 			}else{
@@ -83,10 +84,10 @@ var app = angular.module("BestWinesApp")
 		$scope.userDatas = {
 			  	identifiant : "",
 			  	password : "",
-			  	age : 0,
+			  	age : "",
 			  	firstname : "",
 			  	lastname : "",
-			  	zip : "",
+			  	zipCode : "",
 			  	lang : translationService.lang
 		  	};
 		$scope.User.isLogged = false;
@@ -224,6 +225,24 @@ console.log(data);
 		return $scope.wineSearchNumber > 12;
 	};
 	
+	$scope.getRecommended = function(){
+		$scope.wines = [];
+
+		$scope.wineSearchNumber = 6;
+				
+		$http.post(UrlProvider.SERVICE_RECOMMEND_WINE,{userId:$scope.User.identifiant,num:$scope.wineSearchNumber}).success(function(data){
+			$scope.wines = data.content;
+
+		}).error(function (data){
+console.log(data);
+			$scope.error = data;
+	
+		});
+		
+	};
+	
+	
+	$scope.getRecommended();
 }])
 
 
